@@ -1,0 +1,68 @@
+pluginManagement {
+    repositories {
+        **ARTIFACTORYREPOSITORY**
+        maven { 
+            allowInsecureProtocol = true
+            url "https://jitpack.io" 
+        }
+        maven {
+            allowInsecureProtocol = true
+            url 'https://maven.aliyun.com/repository/releases' }
+        maven {
+            allowInsecureProtocol = true 
+            url 'https://maven.aliyun.com/repository/jcenter' }
+        maven {
+            allowInsecureProtocol = true 
+            url 'https://maven.aliyun.com/repository/google' }
+        maven {
+            allowInsecureProtocol = true 
+            url 'https://maven.aliyun.com/repository/central' }
+        maven {
+            allowInsecureProtocol = true 
+            url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        maven {
+            allowInsecureProtocol = true 
+            url 'https://maven.aliyun.com/repository/public' }
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+
+include ':launcher', ':unityLibrary'
+**INCLUDES**
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositories {
+        **ARTIFACTORYREPOSITORY**
+        maven 
+        { 
+            allowInsecureProtocol = true
+            url "https://jitpack.io" 
+        }
+        maven {
+            allowInsecureProtocol = true
+            url 'https://maven.aliyun.com/repository/releases' }
+        maven {
+            allowInsecureProtocol = true 
+            url 'https://maven.aliyun.com/repository/jcenter' }
+        maven {
+            allowInsecureProtocol = true 
+            url 'https://maven.aliyun.com/repository/google' }
+        maven {
+            allowInsecureProtocol = true 
+            url 'https://maven.aliyun.com/repository/central' }
+        maven {
+            allowInsecureProtocol = true 
+            url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        maven {
+            allowInsecureProtocol = true 
+            url 'https://maven.aliyun.com/repository/public' }
+        google()
+        mavenCentral()
+        flatDir {
+            dirs "${project(':unityLibrary').projectDir}/libs"
+        }
+    }
+}
