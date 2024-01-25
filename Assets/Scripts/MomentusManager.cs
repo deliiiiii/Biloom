@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,7 +20,8 @@ public class MomentusManager : MonoBehaviour
     public Transform pMomentus;
     //TODO 1 various judgement
     public Vector2 benignTime = new(-100, 100);
-    public Vector2 betrayTime = new(-300, -100);
+    public Vector2 bareTime = new(-114514, 11451);
+    public Vector2 badTime = new(-300, -100);
     private void Awake()
     {
         instance = this;
@@ -37,14 +39,14 @@ public class MomentusManager : MonoBehaviour
     public void Temp_GenerateStab(int x)
     {
         GameObject t = Instantiate(stab.gameObject, popper.position, stab.transform.rotation, pMomentus.transform);
-        float ranX = Random.Range(-5, 5);
+        float ranX = UnityEngine.Random.Range(-5, 5);
         t.transform.position = new(x, t.transform.position.y + 0.5f, t.transform.position.z + offset);
         t.SetActive(true);
     }
     public void Temp_GenerateLinger()
     {
-        GameObject t = Instantiate(stab.gameObject, popper.position, stab.transform.rotation, pMomentus.transform);
-        float ranX = Random.Range(-5, 5);
+        GameObject t = Instantiate(linger.gameObject, popper.position, stab.transform.rotation, pMomentus.transform);
+        float ranX = UnityEngine.Random.Range(-5, 5);
         t.transform.position = new(ranX, t.transform.position.y + 0.5f, t.transform.position.z + offset);
         t.SetActive(true);
     }

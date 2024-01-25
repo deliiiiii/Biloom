@@ -1,0 +1,34 @@
+{
+    "name": "MyTouch",
+    "maps": [
+        {
+            "name": "New action map",
+            "id": "a50093de-c125-42dd-8837-6373748ef6ff",
+            "actions": [
+                {
+                    "name": "UniTouch",
+                    "type": "PassThrough",
+                    "id": "e4e8084d-aaca-4336-b5e4-eec9891d99e6",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "05c19618-e54e-493a-a028-c23dc1e5d1e9",
+                    "path": "<Touchscreen>/primaryTouch/startPosition",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UniTouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
