@@ -20,25 +20,21 @@ public class Momentus : MonoBehaviour
 
     public List<int> sweeper = new();//valid finger
     public GameObject sweepEffect;
-    private Rigidbody rb;
     private MomentusManager mmi;
 
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
     private void Start()
     {
         mmi = MomentusManager.instance;
     }
-    private void Update()
+    private void FixedUpdate()
     {
         //TowardsThreshold
         Move();
     }
     void Move()
     {
-        rb.velocity = new(0, 0, -mmi.speedMulti* mmi.speedUni);
+        //rb.velocity = new(0, 0, -mmi.speedMulti* mmi.speedUni);
+        transform.Translate(new(0, 0, -mmi.speedMulti * mmi.speedUni * Time.deltaTime));
         if(transform.position.z < mmi.threshold.transform.position.z -mmi.speedMulti * mmi.speedUni*0.150f)
         {
             Destroy(gameObject);
@@ -46,7 +42,7 @@ public class Momentus : MonoBehaviour
     }
     public void SweepStab()
     {
-        
+        Debug.Log(nameof(SweepStab));
         float sweepTruth = (mmi.threshold.transform.position.z - transform.position.z)
                             /
                             (mmi.speedMulti * mmi.speedUni) * 1000;
@@ -68,7 +64,8 @@ public class Momentus : MonoBehaviour
     void SetSweepWithColor(Color c)
     {
         GetComponent<BoxCollider>().enabled = false;
-        GameObject t = Instantiate(sweepEffect, transform.position, transform.rotation);
+        Vector3 newPos = new(transform.position.x, mmi.threshold.position.y, mmi.threshold.position.z);
+        GameObject t = Instantiate(sweepEffect, newPos, transform.rotation);
         t.GetComponent<ParticleSystem>().startColor = c;
         t.GetComponent<Animator>().enabled = true;
         t.SetActive(true);
