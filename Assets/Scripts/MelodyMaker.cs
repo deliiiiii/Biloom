@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.UI;
 
 public class MelodyMaker : MonoBehaviour
@@ -42,6 +43,7 @@ public class MelodyMaker : MonoBehaviour
         {
             if(!paused)
             {
+
                 sliderTimeStamp.value = curAudioSource.time / curAudioClip.length;
                 inputTimeStamp.text = curAudioSource.time.ToString();
                 
@@ -51,6 +53,15 @@ public class MelodyMaker : MonoBehaviour
         }
     }
 
+    
+    void HandleInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            OnPause();
+        }
+
+    }
     private void OnStartMake(AudioClip audioClip)
     {
         curAudioSource = AudioManager.instance.GetSource(AudioManager.instance.PlayLoop(curAudioClip, 1, 1));
@@ -62,13 +73,6 @@ public class MelodyMaker : MonoBehaviour
         paused = false;
         isMaking = true;
 
-    }
-    void HandleInput()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            OnPause();
-        }
     }
     public void OnPause()
     {
@@ -84,12 +88,22 @@ public class MelodyMaker : MonoBehaviour
             curAudioSource.UnPause();
             paused = false;
         }
+        
+    }
+    public void OnPause_Drag()
+    {
+        if (paused)
+            return;
+        OnPause();
+        OnTimeChanged_Slider();
+        OnPause();
     }
     public void OnTimeChanged_Slider()
     {
-        if (!paused)
-            return;
-        curAudioSource.time = sliderTimeStamp.value * curAudioClip.length;
+        //if (!paused)
+        //    return;
+        if(sliderTimeStamp.value != 1)
+            curAudioSource.time = sliderTimeStamp.value * curAudioClip.length;
         inputTimeStamp.text = curAudioSource.time.ToString();
     }
     public void OnTimeChanged_Input()

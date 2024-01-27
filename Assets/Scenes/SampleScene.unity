@@ -2039,6 +2039,7 @@ GameObject:
   m_Component:
   - component: {fileID: 802829921}
   - component: {fileID: 802829922}
+  - component: {fileID: 802829923}
   m_Layer: 5
   m_Name: Slider_TimeStamp
   m_TagString: Untagged
@@ -2122,6 +2123,33 @@ MonoBehaviour:
       - m_Target: {fileID: 872174685}
         m_TargetAssemblyTypeName: MelodyMaker, Assembly-CSharp
         m_MethodName: OnTimeChanged_Slider
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &802829923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802829920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d1563b9b9efede40b9576b8956878e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 872174685}
+        m_TargetAssemblyTypeName: MelodyMaker, Assembly-CSharp
+        m_MethodName: OnPause_Drag
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
