@@ -9,6 +9,8 @@ public class Momentus : MonoBehaviour
     public int size;
     public float capitalX;//appear pos
     public float capitalTime;//appear time
+
+    //public float curTimeStamp;
     public enum Type
     {
         stab,               //tap
@@ -16,7 +18,8 @@ public class Momentus : MonoBehaviour
         biloom,             //biloom
     };
     public Type type;
-    private bool isOpposite = false;
+    public bool isInMaker = false;
+    public bool isOpposite = false;
 
     public List<int> sweeper = new();//valid finger
     public GameObject sweepEffect;
@@ -26,18 +29,20 @@ public class Momentus : MonoBehaviour
     {
         mmi = MomentusManager.instance;
     }
-    private void FixedUpdate()
+    private void Update()
     {
         //TowardsThreshold
         Move();
     }
     void Move()
     {
-        //rb.velocity = new(0, 0, -mmi.speedMulti* mmi.speedUni);
-        transform.Translate(new(0, 0, -mmi.speedMulti * mmi.speedUni * Time.deltaTime));
-        if(transform.position.z < mmi.threshold.transform.position.z -mmi.speedMulti * mmi.speedUni*0.150f)
+        if(!isInMaker)
         {
-            Destroy(gameObject);
+            transform.Translate(new(0, 0, -mmi.speedMulti * mmi.speedUni * Time.deltaTime));
+            if (transform.position.z < mmi.threshold.transform.position.z - mmi.speedMulti * mmi.speedUni * 0.150f)
+            {
+                Destroy(gameObject);
+            }
         }
     }
     public void SweepStab()
@@ -66,7 +71,7 @@ public class Momentus : MonoBehaviour
         GetComponent<BoxCollider>().enabled = false;
         Vector3 newPos = new(transform.position.x, mmi.threshold.position.y, mmi.threshold.position.z);
         GameObject t = Instantiate(sweepEffect, newPos, transform.rotation);
-        t.GetComponent<ParticleSystem>().startColor = c;
+        t.GetComponent<ParticleSystem>().startColor = new(c.r,c.g,c.b,0.5f);
         t.GetComponent<Animator>().enabled = true;
         t.SetActive(true);
         Destroy(gameObject);

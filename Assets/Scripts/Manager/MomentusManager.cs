@@ -46,14 +46,16 @@ public class MomentusManager : MonoBehaviour
     {
         GameObject t = Instantiate(stab.gameObject, popper.position, stab.transform.rotation, pMomentus.transform);
         float ranX = UnityEngine.Random.Range(-5, 5);
-        t.transform.position = new(x, t.transform.position.y + 0.5f, t.transform.position.z + offset);
+        t.transform.position = new(x, threshold.position.y, t.transform.position.z + offset);
         t.SetActive(true);
     }
+    
+
     public void Temp_GenerateLinger()
     {
         GameObject t = Instantiate(linger.gameObject, popper.position, stab.transform.rotation, pMomentus.transform);
         float ranX = UnityEngine.Random.Range(-5, 5);
-        t.transform.position = new(ranX, t.transform.position.y + 0.5f, t.transform.position.z + offset);
+        t.transform.position = new(ranX, threshold.position.y, t.transform.position.z + offset);
         t.SetActive(true);
     }
     public void OnSpeedSliderChange()
