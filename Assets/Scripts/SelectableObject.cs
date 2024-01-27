@@ -12,3 +12,4 @@ public class SelectableObject : MonoBehaviour, IPointerDownHandler
         onClick.Invoke();
     }
 }
+
