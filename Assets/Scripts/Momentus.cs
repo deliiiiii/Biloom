@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Momentus : MonoBehaviour  
+public class Momentus : MonoBehaviour
 {
     //TODO 2 by generator
     public int size;
-    public float capitalX;//appear pos
-    public float capitalTime;//appear time
+    public float globalX;//appear pos
+    public float accTime;//appear time
 
     //public float curTimeStamp;
     public enum Type
@@ -16,18 +17,25 @@ public class Momentus : MonoBehaviour
         stab,               //tap
         linger,             //hold
         biloom,             //biloom
-    };
+    }
     public Type type;
-    public bool isInMaker = false;
+    public ObservableValue<bool,Momentus> isInMaker;
+    public BoxCollider colInMaker;
+    public BoxCollider colInPlay;
     public bool isOpposite = false;
 
     public List<int> sweeper = new();//valid finger
     public GameObject sweepEffect;
+    public GameObject selected;
     private MomentusManager mmi;
-
+    private void Awake()
+    {
+        isInMaker = new(false, this);
+    }
     private void Start()
     {
         mmi = MomentusManager.instance;
+
     }
     private void Update()
     {
@@ -36,7 +44,7 @@ public class Momentus : MonoBehaviour
     }
     void Move()
     {
-        if(!isInMaker)
+        if(!isInMaker.Value)
         {
             transform.Translate(new(0, 0, -mmi.speedMulti * mmi.speedUni * Time.deltaTime));
             if (transform.position.z < mmi.threshold.transform.position.z - mmi.speedMulti * mmi.speedUni * 0.150f)
@@ -76,4 +84,46 @@ public class Momentus : MonoBehaviour
         t.SetActive(true);
         Destroy(gameObject);
     }
+    public void SetXTime(float x,float time)
+    {
+        transform.position = new Vector3(x, 0.87f, transform.position.z);
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, time * MomentusManager.instance.speedUni * MomentusManager.instance.speedMulti);
+        globalX = x;
+        accTime = time;
+    }
+    private void OnMouseDown()
+    {
+        if(!Input.GetKey(KeyCode.LeftControl))
+        {
+            foreach (var it in MelodyMaker.instance.selectedMomentus)
+                it.selected.SetActive(false);
+            MelodyMaker.instance.selectedMomentus.Clear();
+        }
+        if(!selected.activeSelf)
+        {
+            MelodyMaker.instance.selectedMomentus.Add(this);
+            selected.SetActive(true);
+        }
+        else
+        {
+            MelodyMaker.instance.selectedMomentus.Remove(this);
+            selected.SetActive(false);
+        }
+        print("Stab clicked");
+        MelodyMaker.instance.OnSelectNote();
+    }
+
+    public void OnIsInMakerChange()
+    {
+        if(isInMaker.Value)
+        {
+            colInMaker.enabled = true;
+            colInPlay.enabled = false;
+            return;
+        }
+        colInMaker.enabled = false;
+        colInPlay.enabled = true;
+    }
+
+   
 }
