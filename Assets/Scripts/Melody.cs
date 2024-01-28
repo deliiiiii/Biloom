@@ -12,10 +12,12 @@ public class Melody
     {
         public float itensity;//difficulty
         public int outcome;//score
-        public List<Momentus> momentus = new();
+        public List<MomentusData> momentus = new();
     }
     public List<Sheet>sheets = new();
+    [SerializeReference]
     public AudioClip audio;
     public float bpm;
     public int length;//unit : s
 }
+

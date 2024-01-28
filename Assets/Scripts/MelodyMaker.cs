@@ -1,12 +1,17 @@
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.UI;
+using static Momentus;
 
 public class MelodyMaker : MonoBehaviour
 {
     public static MelodyMaker instance;
     private MomentusManager mmi;
+
+    public GameObject panel_Notification;
+    public Text text_Notification;
 
     public Text textPause;
     public Slider sliderTimeStamp;
@@ -31,6 +36,7 @@ public class MelodyMaker : MonoBehaviour
     public AudioSource curAudioSource;
 
     public Transform p_Grid;
+    public Transform p_HLine;
     public Transform p_Momentus;
     public GameObject horizontalLine;
 
@@ -38,8 +44,8 @@ public class MelodyMaker : MonoBehaviour
     private bool isMaking = false;
     private bool paused = false;
 
-    private Vector2 mouseLastPos;
-    public Vector2 mouseSensitivity = new(1e-4f, 1e-4f);
+    //private Vector2 mouseLastPos;
+    //public Vector2 mouseSensitivity = new(1e-4f, 1e-4f);
     private void Awake()
     {
         instance = this;
@@ -74,27 +80,47 @@ public class MelodyMaker : MonoBehaviour
         {
             OnPause();
         }
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.X))
         {
             ClearSelectedNote();
         }
-        if(Input.GetMouseButton(0))
+        if(Input.GetKeyDown(KeyCode.D))
         {
-            //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //RaycastHit raycastHit;
-            //Physics.Raycast(ray,out raycastHit);
-            Vector2 DeltaPos = (Vector2)Input.mousePosition - mouseLastPos;
-            mouseLastPos = (Vector2)Input.mousePosition;
-            //Debug.Log(DeltaPos);
-            foreach(var it in selectedMomentus)
-            {
-                //it.SetXTime(it.globalX + DeltaPos.x * mouseSensitivity.x, it.accTime + DeltaPos.y * mouseSensitivity.y);
-            }
+            DeleteSelectedNote();
         }
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            ReadCurSheet();
+        }
+        if(Input.GetKeyDown(KeyCode.W))
+        {
+            WriteCurSheet();
+        }
+        if(Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            MagnetZ(1);
+        }if(Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            MagnetZ(-1);
+        }
+        //if (Input.GetMouseButton(0))
+        //{
+        //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //    RaycastHit raycastHit;
+        //    Physics.Raycast(ray, out raycastHit);
+        //    Vector2 DeltaPos = (Vector2)Input.mousePosition - mouseLastPos;
+        //    mouseLastPos = (Vector2)Input.mousePosition;
+        //    Debug.Log(DeltaPos);
+        //    foreach (var it in selectedMomentus)
+        //    {
+        //        it.SetXTime(it.globalX + DeltaPos.x * mouseSensitivity.x, it.accTime + DeltaPos.y * mouseSensitivity.y);
+        //    }
+        //}
     }
     private void OnStartMake()
     {
         curAudioSource = AudioManager.instance.GetSource(AudioManager.instance.PlayLoop(curAudioClip, 1, 1));
+        curMelody.sheets.Add(new());
         textEndStamp.text = curAudioClip.length.ToString();
         inputNumerator.text = "1";
         inputDenominator.text = "1";
@@ -151,14 +177,16 @@ public class MelodyMaker : MonoBehaviour
     }
     public void OnLineOffsetChanged_Input()
     {
-        ClearChild(p_Grid);
+        ClearChild(p_HLine);
         float curTimeStamp = 0f;
         while(curTimeStamp < curAudioClip.length)
         {
-            Vector3 v = new(0, 0, (curTimeStamp + float.Parse(inputLineOffset.text) / 1000f) * mmi.speedUni * mmi.speedMulti);
-            GameObject g = Instantiate(horizontalLine, Vector3.zero, Quaternion.identity, p_Grid);
+            float trueTime = curTimeStamp + float.Parse(inputLineOffset.text) / 1000f;
+            Vector3 v = new(0, 0, trueTime * mmi.speedUni * mmi.speedMulti);
+            GameObject g = Instantiate(horizontalLine, Vector3.zero, Quaternion.identity, p_HLine);
             g.transform.localPosition = v;
             g.transform.localRotation = Quaternion.identity;
+            g.GetComponent<GridLine>().accTime = trueTime;
             g.SetActive(true);
             curTimeStamp +=  60f / curMelody.bpm * (float.Parse(inputNumerator.text) / float.Parse(inputDenominator.text));
         }
@@ -167,7 +195,7 @@ public class MelodyMaker : MonoBehaviour
             p_Momentus.GetChild(i).transform.localPosition
                 = new(p_Momentus.GetChild(i).transform.localPosition.x
                     , p_Momentus.GetChild(i).transform.localPosition.y
-                    , p_Momentus.GetChild(i).GetComponent<Momentus>().accTime * mmi.speedUni * mmi.speedMulti);
+                    , p_Momentus.GetChild(i).GetComponent<Momentus>().momentusData.accTime * mmi.speedUni * mmi.speedMulti);
         }
     }
     public void OnNoteSpeedChanged_Input()
@@ -179,7 +207,7 @@ public class MelodyMaker : MonoBehaviour
     {
         foreach(var it in selectedMomentus)
         {
-            it.type = (Momentus.Type)dropdownType.value;
+            it.momentusData.type = (MomentusData.Type)dropdownType.value;
         }
     }
 
@@ -202,8 +230,8 @@ public class MelodyMaker : MonoBehaviour
             inputCapitalZ.interactable = true;
             inputDeltaZ.interactable = true;
             inputDeltaZ.text = "";
-            inputCapitalX.text = selectedMomentus[0].globalX.ToString();
-            inputCapitalZ.text = selectedMomentus[0].accTime.ToString();
+            inputCapitalX.text = selectedMomentus[0].momentusData.globalX.ToString();
+            inputCapitalZ.text = selectedMomentus[0].momentusData.accTime.ToString();
         }
         else//multi
         {
@@ -214,7 +242,6 @@ public class MelodyMaker : MonoBehaviour
             inputCapitalX.text = "";
             inputCapitalZ.text = "";
         }
-       
     }
     public void ClearSelectedNote()
     {
@@ -225,43 +252,57 @@ public class MelodyMaker : MonoBehaviour
         selectedMomentus.Clear();
         OnSelectNote();
     }
+    public void DeleteSelectedNote()
+    {
+        for (int i=0;i<selectedMomentus.Count;i++)
+        {
+            curMelody.sheets[^1].momentus.Remove(selectedMomentus[i].momentusData);
+            Destroy(selectedMomentus[i].gameObject);
+        }
+        selectedMomentus.Clear();
+        OnSelectNote();
+    }
     public void OnConfigurationChanged()
     {
         if(selectedMomentus.Count == 1)
         {
-            var it = selectedMomentus[0];
-            float.TryParse(inputCapitalX.text, out it.globalX);
-            float.TryParse(inputCapitalZ.text, out it.accTime);
+            Momentus it = selectedMomentus[0];
+            MomentusData it2 = selectedMomentus[0].momentusData;
+            float.TryParse(inputCapitalX.text, out it2.globalX);
+            float.TryParse(inputCapitalZ.text, out it2.accTime);
 
             if (float.TryParse(inputDeltaZ.text, out float delta))
-                it.accTime += delta;
-            inputCapitalZ.text = it.accTime.ToString();
-            it.SetXTime(it.globalX, it.accTime);
+                it2.accTime += delta;
+            if (it2.accTime < 0)
+                it2.accTime = 0;
+            if(it2.accTime > curAudioClip.length)
+                it2.accTime = curAudioClip.length;
+            inputCapitalZ.text = it2.accTime.ToString();
+            it.SetXTime(it2.globalX, it2.accTime);
         }
         else
         {
             foreach (var it in selectedMomentus)
             {
+                MomentusData it2 = it.momentusData;
                 if (float.TryParse(inputDeltaZ.text, out float delta))
-                    it.accTime += delta;
-                inputCapitalZ.text = it.accTime.ToString();
-                it.SetXTime(it.globalX, it.accTime);
+                    it2.accTime += delta;
+                if (it2.accTime < 0)
+                    it2.accTime = 0;
+                if (it2.accTime > curAudioClip.length)
+                    it2.accTime = curAudioClip.length;
+                inputCapitalZ.text = it2.accTime.ToString();
+                it.SetXTime(it2.globalX, it2.accTime);
             }
         }
         
         if (!toggleLockDeltaZ.isOn)
             inputDeltaZ.text = "";
     }
-    //public void OnMagnetX_Button()
-    //{
-    //    foreach (var it in selectedMomentus)
-    //    {
-
-    //    }
-    //}
-    public void OnMagnetZ_Button()
+    public void MagnetZ(int minus)
     {
-        
+        float minDeltaZ = 0x7fffffff;
+        float targetZ = 0x7fffffff;
         foreach (var note in selectedMomentus)
         {
             BoxCollider[] cols = note.GetComponents<BoxCollider>();
@@ -274,41 +315,120 @@ public class MelodyMaker : MonoBehaviour
                     break;
                 }
             }
-            Collider[] hits = Physics.OverlapBox(note.transform.position, judgeCol.size/2,Quaternion.identity);
-            t = judgeCol.size;
-            Debug.Log(hits.Length);
-            float minDeltaZ = 0x7fffffff;
-            float targetZ = 0x7fffffff;
+            Collider[] hits = Physics.OverlapBox(note.transform.position, note.transform.lossyScale *10, Quaternion.identity);
+            minDeltaZ = 0x7fffffff;
+            targetZ = 0x7fffffff;
+            //if (minus == 1)
+            //{
+            //    note.transform.Translate(0, 0, 1e-5f);
+            //}
+            //else
+            //{
+            //    note.transform.Translate(0, 0, -1e-5f);
+            //}
             foreach (var hit in hits)
             {
-                if (!hit.GetComponent<LineRenderer>())
+                if (!hit.GetComponent<GridLine>())
                     continue;
-                if(minDeltaZ > Mathf.Abs(hit.transform.position.z - note.transform.position.z))
+                if(minus == 1)
                 {
-                    minDeltaZ = Mathf.Abs(hit.transform.position.z - note.transform.position.z);
-                    targetZ = hit.transform.position.z;
+                    if (hit.transform.position.z < note.transform.position.z + 1e-5f)
+                        continue;
+                }
+                else
+                {
+                    if (hit.transform.position.z > note.transform.position.z - 1e-5f)
+                        continue;
+                }
+                if (minDeltaZ > minus * (hit.transform.position.z - note.transform.position.z))
+                {
+                    minDeltaZ = minus * (hit.transform.position.z - note.transform.position.z);
+                    targetZ = hit.GetComponent<GridLine>().accTime;
                 }
             }
-            Debug.Log(targetZ);
+            if (targetZ < 0 || targetZ > curAudioClip.length)
+                continue;
+            Debug.Log(nameof(targetZ) + "" + targetZ);
+            note.SetXTime(note.momentusData.globalX, targetZ);
         }
-    }
-    Vector3 t;
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        //Check that it is being run in Play Mode, so it doesn't try to draw this in Editor mode
-            //Draw a cube where the OverlapBox is (positioned where your GameObject is as well as a size)
-            Gizmos.DrawWireCube(transform.position, t);
+        if(selectedMomentus.Count == 1)
+        {
+            inputCapitalZ.text = selectedMomentus[0].momentusData.accTime.ToString();
+        }
     }
     public void GenerateStab(int x)
     {
         GameObject t = Instantiate(MomentusManager.instance.stab.gameObject, Vector3.zero, Quaternion.identity);
+        curMelody.sheets[^1].momentus.Add(t.GetComponent<Momentus>().momentusData);
         t.SetActive(true);
         t.transform.parent = p_Momentus;
         t.GetComponent<Momentus>().SetXTime(x, curAudioSource.time);
         t.GetComponent<Momentus>().isInMaker.Value = true;
     }
+    public void GenerateNoteByData(MomentusData data)
+    {
+        GameObject t = Instantiate(MomentusManager.instance.stab.gameObject, Vector3.zero, Quaternion.identity);//TODO type
+        t.SetActive(true);
+        t.transform.parent = p_Momentus;
+        t.GetComponent<Momentus>().SetXTime(data.globalX, data.accTime);
+        t.GetComponent<Momentus>().isInMaker.Value = true;
+    }
+    public void ClearALLNote()
+    {
+        DeleteSelectedNote();
+        foreach (var it in curMelody.sheets[^1].momentus)
+        {
+            ClearChild(p_Momentus);
+        }
+    }
+    public void WriteCurSheet()
+    {
+        //curMelody.sheets[^1] => json
+        string path = Application.streamingAssetsPath + "/Sheet/" + curMelody.audio.name + ".json";
+        if (!Directory.Exists(Application.streamingAssetsPath))
+        {
+            Directory.CreateDirectory(Application.streamingAssetsPath);
+        }
+        string str = JsonUtility.ToJson(curMelody, true);
+        File.WriteAllText(path, str);
+        UI_Write();
+    }
+    public void ReadCurSheet()
+    {
+        //json => curMelody.sheets[^1]
+        string path = Application.streamingAssetsPath + "/Sheet/" + curMelody.audio.name + ".json";
+        if (!File.Exists(path))
+        {
+            UI_Read(false);
+            return;
+        }
+        string str =  File.ReadAllText(path);
+        curMelody = JsonUtility.FromJson<Melody>(str);
+        ClearALLNote();
+        foreach (var it in curMelody.sheets[^1].momentus)
+        {
+            GenerateNoteByData(it);
+        }
+        UI_Read(true);
+    }
 
+    public void UI_Read(bool success)
+    {
+        panel_Notification.SetActive(true);
+        if(success)
+        {
+            text_Notification.text = "读取成功!";
+        }
+        else
+        {
+            text_Notification.text = "读取失败!";
+        }
+    }
+    public void UI_Write()
+    {
+        panel_Notification.SetActive(true);
+        text_Notification.text = "保存成功!";
+    }
     public void ClearChild(Transform p)
     {
         for (int i = 1; i < p.childCount; i++)//0:P_Momentus

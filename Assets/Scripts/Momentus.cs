@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
-public class Momentus : MonoBehaviour
+[Serializable]
+public class MomentusData
 {
     //TODO 2 by generator
     public int size;
@@ -17,12 +18,20 @@ public class Momentus : MonoBehaviour
         stab,               //tap
         linger,             //hold
         biloom,             //biloom
+        horizontalLine,
     }
     public Type type;
+    public bool isOpposite = false;
+}
+public class Momentus : MonoBehaviour
+{
+    
+    public MomentusData momentusData;
+
     public ObservableValue<bool,Momentus> isInMaker;
     public BoxCollider colInMaker;
     public BoxCollider colInPlay;
-    public bool isOpposite = false;
+    
 
     public List<int> sweeper = new();//valid finger
     public GameObject sweepEffect;
@@ -88,8 +97,8 @@ public class Momentus : MonoBehaviour
     {
         transform.position = new Vector3(x, 0.87f, transform.position.z);
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, time * MomentusManager.instance.speedUni * MomentusManager.instance.speedMulti);
-        globalX = x;
-        accTime = time;
+        momentusData.globalX = x;
+        momentusData.accTime = time;
     }
     private void OnMouseDown()
     {

@@ -1,0 +1,30 @@
+{
+    "id": 0,
+    "sheets": [
+        {
+            "itensity": 0.0,
+            "outcome": 0,
+            "momentus": [
+                {
+                    "size": 0,
+                    "globalX": -3.0,
+                    "accTime": 0.3243243098258972,
+                    "type": 0,
+                    "isOpposite": false
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.0,
+                    "accTime": 0.6486486196517944,
+                    "type": 0,
+                    "isOpposite": false
+                }
+            ]
+        }
+    ],
+    "audio": {
+        "instanceID": 27160
+    },
+    "bpm": 185.0,
+    "length": 164
+}

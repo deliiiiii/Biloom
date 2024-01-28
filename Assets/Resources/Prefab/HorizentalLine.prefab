@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7507639877482080424}
   - component: {fileID: 6968589292392438769}
   - component: {fileID: 2705090435962040410}
+  - component: {fileID: 7829141980350992276}
   m_Layer: 7
   m_Name: HorizentalLine
   m_TagString: Untagged
@@ -158,3 +159,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.3, y: 2.2, z: 1.42}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7829141980350992276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995985072748498802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6086c7dc07b27ac4a89c3c5fc47c1042, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  accTime: 0
