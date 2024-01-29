@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Internal;
 using UnityEngine.UI;
 [Serializable]
 public class MomentusData
@@ -22,6 +23,11 @@ public class MomentusData
     }
     public Type type;
     public bool isOpposite = false;
+    public int syncCount;
+    MomentusData()
+    {
+        syncCount = 1;
+    }
 }
 public class Momentus : MonoBehaviour
 {
@@ -36,6 +42,9 @@ public class Momentus : MonoBehaviour
     public List<int> sweeper = new();//valid finger
     public GameObject sweepEffect;
     public GameObject selected;
+    public GameObject multiSweep;
+    
+
     private MomentusManager mmi;
     private void Awake()
     {
@@ -95,10 +104,58 @@ public class Momentus : MonoBehaviour
     }
     public void SetXTime(float x,float time)
     {
+        OnNoteLeave();
         transform.position = new Vector3(x, 0.87f, transform.position.z);
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, time * MomentusManager.instance.speedUni * MomentusManager.instance.speedMulti);
         momentusData.globalX = x;
         momentusData.accTime = time;
+        OnNoteAppear();
+    }
+    public void SetXTime_WhenGenerated(float x, float time)
+    {
+        transform.position = new Vector3(x, 0.87f, transform.position.z);
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, time * MomentusManager.instance.speedUni * MomentusManager.instance.speedMulti);
+        momentusData.globalX = x;
+        momentusData.accTime = time;
+    }
+    public void OnNoteLeave()
+    {
+        Collider[] hitsBefore = Physics.OverlapBox(transform.position, new Vector3(10, 1, 1), Quaternion.identity);
+        foreach (var it in hitsBefore)
+        {
+            if (!it.GetComponent<Momentus>())
+                continue;
+            if (it.gameObject == gameObject)
+                continue;
+            //print("before" + it.GetComponent<Momentus>().momentusData.accTime);
+            if (momentusData.accTime == it.GetComponent<Momentus>().momentusData.accTime)
+            {
+                it.GetComponent<Momentus>().momentusData.syncCount--;
+                if (it.GetComponent<Momentus>().momentusData.syncCount == 1)
+                    it.GetComponent<Momentus>().multiSweep.SetActive(false);
+            }
+        }
+    }
+    public void OnNoteAppear()
+    {
+        Collider[] hitsAfter = Physics.OverlapBox(transform.position, new Vector3(10, 1, 1), Quaternion.identity);
+
+        momentusData.syncCount = 1;
+        foreach (var it in hitsAfter)
+        {
+            if (!it.GetComponent<Momentus>())
+                continue;
+            if (it.gameObject == gameObject)
+                continue;
+            //print("after" + it.GetComponent<Momentus>().momentusData.accTime);
+            if (momentusData.accTime == it.GetComponent<Momentus>().momentusData.accTime)
+            {
+                momentusData.syncCount++;
+                it.GetComponent<Momentus>().momentusData.syncCount++;
+                it.GetComponent<Momentus>().multiSweep.SetActive(true);
+            }
+        }
+        multiSweep.SetActive(momentusData.syncCount > 1);
     }
     private void OnMouseDown()
     {
@@ -118,7 +175,7 @@ public class Momentus : MonoBehaviour
             MelodyMaker.instance.selectedMomentus.Remove(this);
             selected.SetActive(false);
         }
-        print("Stab clicked");
+        //print("Stab clicked");
         MelodyMaker.instance.OnSelectNote();
     }
 

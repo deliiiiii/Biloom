@@ -7,23 +7,177 @@
             "momentus": [
                 {
                     "size": 0,
+                    "globalX": -5.0,
+                    "accTime": 0.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "syncCount": 6
+                },
+                {
+                    "size": 0,
+                    "globalX": 5.0,
+                    "accTime": 0.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "syncCount": 6
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.0,
+                    "accTime": 1.2972972393035889,
+                    "type": 0,
+                    "isOpposite": false,
+                    "syncCount": 2
+                },
+                {
+                    "size": 0,
                     "globalX": -3.0,
+                    "accTime": 0.6486486196517944,
+                    "type": 0,
+                    "isOpposite": false,
+                    "syncCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": 1.0,
+                    "accTime": 1.2972972393035889,
+                    "type": 0,
+                    "isOpposite": false,
+                    "syncCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": 3.0,
+                    "accTime": 0.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "syncCount": 6
+                },
+                {
+                    "size": 0,
+                    "globalX": -2.0,
+                    "accTime": 0.9729729294776917,
+                    "type": 0,
+                    "isOpposite": false,
+                    "syncCount": 3
+                },
+                {
+                    "size": 0,
+                    "globalX": -4.0,
                     "accTime": 0.3243243098258972,
                     "type": 0,
-                    "isOpposite": false
+                    "isOpposite": false,
+                    "syncCount": 5
+                },
+                {
+                    "size": 0,
+                    "globalX": 2.0,
+                    "accTime": 0.3243243098258972,
+                    "type": 0,
+                    "isOpposite": false,
+                    "syncCount": 5
+                },
+                {
+                    "size": 0,
+                    "globalX": 0.0,
+                    "accTime": 1.6216216087341309,
+                    "type": 0,
+                    "isOpposite": false,
+                    "syncCount": 1
+                },
+                {
+                    "size": 0,
+                    "globalX": 4.0,
+                    "accTime": 0.3243243098258972,
+                    "type": 0,
+                    "isOpposite": false,
+                    "syncCount": 5
+                },
+                {
+                    "size": 0,
+                    "globalX": -3.0,
+                    "accTime": 0.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "syncCount": 6
                 },
                 {
                     "size": 0,
                     "globalX": -1.0,
                     "accTime": 0.6486486196517944,
                     "type": 0,
-                    "isOpposite": false
+                    "isOpposite": false,
+                    "syncCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": 1.0,
+                    "accTime": 0.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "syncCount": 6
+                },
+                {
+                    "size": 0,
+                    "globalX": 3.0,
+                    "accTime": 0.6486486196517944,
+                    "type": 0,
+                    "isOpposite": false,
+                    "syncCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.0,
+                    "accTime": 0.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "syncCount": 6
+                },
+                {
+                    "size": 0,
+                    "globalX": 1.0,
+                    "accTime": 0.6486486196517944,
+                    "type": 0,
+                    "isOpposite": false,
+                    "syncCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -2.0,
+                    "accTime": 0.3243243098258972,
+                    "type": 0,
+                    "isOpposite": false,
+                    "syncCount": 5
+                },
+                {
+                    "size": 0,
+                    "globalX": 0.0,
+                    "accTime": 0.9729729294776917,
+                    "type": 0,
+                    "isOpposite": false,
+                    "syncCount": 3
+                },
+                {
+                    "size": 0,
+                    "globalX": 2.0,
+                    "accTime": 0.9729729294776917,
+                    "type": 0,
+                    "isOpposite": false,
+                    "syncCount": 3
+                },
+                {
+                    "size": 0,
+                    "globalX": 0.0,
+                    "accTime": 0.3243243098258972,
+                    "type": 0,
+                    "isOpposite": false,
+                    "syncCount": 5
                 }
             ]
         }
     ],
     "audio": {
-        "instanceID": 27160
+        "instanceID": 3322
     },
     "bpm": 185.0,
     "length": 164

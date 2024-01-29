@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -12,6 +13,8 @@ public class MelodyMaker : MonoBehaviour
 
     public GameObject panel_Notification;
     public Text text_Notification;
+    public GameObject panel_Warning;
+    public Text text_Warning;
 
     public Text textPause;
     public Slider sliderTimeStamp;
@@ -43,7 +46,6 @@ public class MelodyMaker : MonoBehaviour
     public List<Momentus> selectedMomentus = new();
     private bool isMaking = false;
     private bool paused = false;
-
     //private Vector2 mouseLastPos;
     //public Vector2 mouseSensitivity = new(1e-4f, 1e-4f);
     private void Awake()
@@ -98,10 +100,20 @@ public class MelodyMaker : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.UpArrow))
         {
-            MagnetZ(1);
-        }if(Input.GetKeyDown(KeyCode.DownArrow))
+            if(!panel_Warning.activeSelf)
+                StartCoroutine(MagnetZ(1));
+        }
+        if(Input.GetKeyDown(KeyCode.DownArrow))
         {
-            MagnetZ(-1);
+            if (!panel_Warning.activeSelf)
+                StartCoroutine(MagnetZ(-1));
+        }
+        if(Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            MagnetX(-1f);
+        } if(Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            MagnetX(1f);
         }
         //if (Input.GetMouseButton(0))
         //{
@@ -254,10 +266,11 @@ public class MelodyMaker : MonoBehaviour
     }
     public void DeleteSelectedNote()
     {
-        for (int i=0;i<selectedMomentus.Count;i++)
+        foreach (var it in selectedMomentus)
         {
-            curMelody.sheets[^1].momentus.Remove(selectedMomentus[i].momentusData);
-            Destroy(selectedMomentus[i].gameObject);
+            it.OnNoteLeave();
+            curMelody.sheets[^1].momentus.Remove(it.momentusData);
+            Destroy(it.gameObject);
         }
         selectedMomentus.Clear();
         OnSelectNote();
@@ -273,10 +286,13 @@ public class MelodyMaker : MonoBehaviour
 
             if (float.TryParse(inputDeltaZ.text, out float delta))
                 it2.accTime += delta;
-            if (it2.accTime < 0)
-                it2.accTime = 0;
-            if(it2.accTime > curAudioClip.length)
-                it2.accTime = curAudioClip.length;
+            //if (it2.accTime < 0)
+            //    it2.accTime = 0;
+            //if(it2.accTime > curAudioClip.length)
+            //    it2.accTime = curAudioClip.length;
+            it2.globalX = Mathf.Clamp(it2.globalX, -5f, 5f);
+            it2.accTime = Mathf.Clamp(it2.accTime,0f, curAudioClip.length);
+            inputCapitalX.text = it2.globalX.ToString();
             inputCapitalZ.text = it2.accTime.ToString();
             it.SetXTime(it2.globalX, it2.accTime);
         }
@@ -287,10 +303,11 @@ public class MelodyMaker : MonoBehaviour
                 MomentusData it2 = it.momentusData;
                 if (float.TryParse(inputDeltaZ.text, out float delta))
                     it2.accTime += delta;
-                if (it2.accTime < 0)
-                    it2.accTime = 0;
-                if (it2.accTime > curAudioClip.length)
-                    it2.accTime = curAudioClip.length;
+                //if (it2.accTime < 0)
+                //    it2.accTime = 0;
+                //if (it2.accTime > curAudioClip.length)
+                //    it2.accTime = curAudioClip.length;
+                it2.accTime = Mathf.Clamp(it2.accTime, 0f, curAudioClip.length);
                 inputCapitalZ.text = it2.accTime.ToString();
                 it.SetXTime(it2.globalX, it2.accTime);
             }
@@ -299,8 +316,9 @@ public class MelodyMaker : MonoBehaviour
         if (!toggleLockDeltaZ.isOn)
             inputDeltaZ.text = "";
     }
-    public void MagnetZ(int minus)
+    public IEnumerator MagnetZ(int minus)
     {
+        UI_Move(true);
         float minDeltaZ = 0x7fffffff;
         float targetZ = 0x7fffffff;
         foreach (var note in selectedMomentus)
@@ -315,7 +333,7 @@ public class MelodyMaker : MonoBehaviour
                     break;
                 }
             }
-            Collider[] hits = Physics.OverlapBox(note.transform.position, note.transform.lossyScale *10, Quaternion.identity);
+            Collider[] hits = Physics.OverlapBox(note.transform.position, note.transform.lossyScale *100, Quaternion.identity);
             minDeltaZ = 0x7fffffff;
             targetZ = 0x7fffffff;
             //if (minus == 1)
@@ -348,35 +366,63 @@ public class MelodyMaker : MonoBehaviour
             }
             if (targetZ < 0 || targetZ > curAudioClip.length)
                 continue;
-            Debug.Log(nameof(targetZ) + "" + targetZ);
+            //Debug.Log(nameof(targetZ) + "" + targetZ);
+            //print("move Z ");
             note.SetXTime(note.momentusData.globalX, targetZ);
+            yield return new WaitForFixedUpdate();
         }
         if(selectedMomentus.Count == 1)
         {
             inputCapitalZ.text = selectedMomentus[0].momentusData.accTime.ToString();
         }
+        UI_Move(false);
+        yield break;
     }
+    void MagnetX(float deltaX)
+    {
+        int i = 0;
+        foreach(var it in selectedMomentus)
+        {
+            i++;
+            //print("move x " + i);
+            it.momentusData.globalX = Mathf.Clamp(it.momentusData.globalX + deltaX, -5f, 5f);
+            it.SetXTime(it.momentusData.globalX, it.momentusData.accTime);
+        }
+        if (selectedMomentus.Count == 1)
+        {
+            inputCapitalX.text = selectedMomentus[0].momentusData.globalX.ToString();
+        }
+    }
+    
     public void GenerateStab(int x)
     {
         GameObject t = Instantiate(MomentusManager.instance.stab.gameObject, Vector3.zero, Quaternion.identity);
         curMelody.sheets[^1].momentus.Add(t.GetComponent<Momentus>().momentusData);
         t.SetActive(true);
         t.transform.parent = p_Momentus;
-        t.GetComponent<Momentus>().SetXTime(x, curAudioSource.time);
+        t.GetComponent<Momentus>().SetXTime_WhenGenerated(x, curAudioSource.time);
         t.GetComponent<Momentus>().isInMaker.Value = true;
+
+        ClearSelectedNote();
+        selectedMomentus.Add(t.GetComponent<Momentus>());
+        selectedMomentus[0].selected.SetActive(true);
     }
-    public void GenerateNoteByData(MomentusData data)
+    public void GenerateNoteByData(int index,MomentusData data)
     {
         GameObject t = Instantiate(MomentusManager.instance.stab.gameObject, Vector3.zero, Quaternion.identity);//TODO type
         t.SetActive(true);
         t.transform.parent = p_Momentus;
-        t.GetComponent<Momentus>().SetXTime(data.globalX, data.accTime);
+        t.GetComponent<Momentus>().SetXTime_WhenGenerated(data.globalX, data.accTime);
+        t.GetComponent<Momentus>().momentusData.syncCount = data.syncCount;
         t.GetComponent<Momentus>().isInMaker.Value = true;
+        if (data.syncCount >1)
+            t.GetComponent<Momentus>().multiSweep.SetActive(true);
+        curMelody.sheets[^1].momentus[index] = t.GetComponent<Momentus>().momentusData;
     }
     public void ClearALLNote()
     {
         DeleteSelectedNote();
-        foreach (var it in curMelody.sheets[^1].momentus)
+        //foreach (var it in curMelody.sheets[^1].momentus)
         {
             ClearChild(p_Momentus);
         }
@@ -385,10 +431,15 @@ public class MelodyMaker : MonoBehaviour
     {
         //curMelody.sheets[^1] => json
         string path = Application.streamingAssetsPath + "/Sheet/" + curMelody.audio.name + ".json";
-        if (!Directory.Exists(Application.streamingAssetsPath))
+        string pathShort = Application.streamingAssetsPath + "/Sheet";
+        if (!Directory.Exists(pathShort))
         {
-            Directory.CreateDirectory(Application.streamingAssetsPath);
+            Directory.CreateDirectory(pathShort);
         }
+        //if (!File.Exists(path))
+        //{
+        //    File.Create(path);
+        //}
         string str = JsonUtility.ToJson(curMelody, true);
         File.WriteAllText(path, str);
         UI_Write();
@@ -402,12 +453,12 @@ public class MelodyMaker : MonoBehaviour
             UI_Read(false);
             return;
         }
+        ClearALLNote();
         string str =  File.ReadAllText(path);
         curMelody = JsonUtility.FromJson<Melody>(str);
-        ClearALLNote();
-        foreach (var it in curMelody.sheets[^1].momentus)
+        for (int i= 0;i < curMelody.sheets[^1].momentus.Count;i++)
         {
-            GenerateNoteByData(it);
+            GenerateNoteByData(i, curMelody.sheets[^1].momentus[i]);
         }
         UI_Read(true);
     }
@@ -429,9 +480,14 @@ public class MelodyMaker : MonoBehaviour
         panel_Notification.SetActive(true);
         text_Notification.text = "保存成功!";
     }
+    public void UI_Move(bool isMoving)
+    {
+        panel_Warning.SetActive(isMoving);
+        text_Warning.text = "移动中";
+    }
     public void ClearChild(Transform p)
     {
-        for (int i = 1; i < p.childCount; i++)//0:P_Momentus
+        for (int i = 0; i < p.childCount; i++)
             if(p.GetChild(i).gameObject.activeSelf)
                 Destroy(p.GetChild(i).gameObject);
     }
