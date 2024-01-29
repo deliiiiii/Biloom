@@ -117,6 +117,7 @@ public class Momentus : MonoBehaviour
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, time * MomentusManager.instance.speedUni * MomentusManager.instance.speedMulti);
         momentusData.globalX = x;
         momentusData.accTime = time;
+        OnNoteAppear();
     }
     public void OnNoteLeave()
     {
