@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.UI;
@@ -30,6 +31,7 @@ public class MelodyMaker : MonoBehaviour
     public InputField inputCapitalX;
     //public Toggle toggleMagnetX;
     public InputField inputCapitalZ;
+    public Text textMultiSweep;
     //public Toggle toggleMagnetZ;
     public InputField inputDeltaZ;
     public Toggle toggleLockDeltaZ;
@@ -234,6 +236,7 @@ public class MelodyMaker : MonoBehaviour
             inputCapitalX.text = "";
             inputCapitalZ.text = "";
             inputDeltaZ.text = "";
+            textMultiSweep.text = "";
         }
         else if (selectedMomentus.Count == 1)//uni
         {
@@ -244,6 +247,7 @@ public class MelodyMaker : MonoBehaviour
             inputDeltaZ.text = "";
             inputCapitalX.text = selectedMomentus[0].momentusData.globalX.ToString();
             inputCapitalZ.text = selectedMomentus[0].momentusData.accTime.ToString();
+            textMultiSweep.text = selectedMomentus[0].momentusData.multiSweepCount.ToString();
         }
         else//multi
         {
@@ -253,6 +257,7 @@ public class MelodyMaker : MonoBehaviour
             inputDeltaZ.interactable = true;
             inputCapitalX.text = "";
             inputCapitalZ.text = "";
+            textMultiSweep.text = "";
         }
     }
     public void ClearSelectedNote()
@@ -294,6 +299,7 @@ public class MelodyMaker : MonoBehaviour
             it2.accTime = Mathf.Clamp(it2.accTime,0f, curAudioClip.length);
             inputCapitalX.text = it2.globalX.ToString();
             inputCapitalZ.text = it2.accTime.ToString();
+            textMultiSweep.text = it2.multiSweepCount.ToString();
             it.SetXTime(it2.globalX, it2.accTime);
         }
         else
@@ -374,6 +380,7 @@ public class MelodyMaker : MonoBehaviour
         if(selectedMomentus.Count == 1)
         {
             inputCapitalZ.text = selectedMomentus[0].momentusData.accTime.ToString();
+            textMultiSweep.text = selectedMomentus[0].momentusData.multiSweepCount.ToString();
         }
         UI_Move(false);
         yield break;
@@ -391,6 +398,7 @@ public class MelodyMaker : MonoBehaviour
         if (selectedMomentus.Count == 1)
         {
             inputCapitalX.text = selectedMomentus[0].momentusData.globalX.ToString();
+            textMultiSweep.text = selectedMomentus[0].momentusData.multiSweepCount.ToString();
         }
     }
     
@@ -406,6 +414,7 @@ public class MelodyMaker : MonoBehaviour
         ClearSelectedNote();
         selectedMomentus.Add(t.GetComponent<Momentus>());
         selectedMomentus[0].selected.SetActive(true);
+        OnSelectNote();
     }
     public void GenerateNoteByData(int index,MomentusData data)
     {
@@ -413,9 +422,9 @@ public class MelodyMaker : MonoBehaviour
         t.SetActive(true);
         t.transform.parent = p_Momentus;
         t.GetComponent<Momentus>().SetXTime_WhenGenerated(data.globalX, data.accTime);
-        t.GetComponent<Momentus>().momentusData.syncCount = data.syncCount;
+        t.GetComponent<Momentus>().momentusData.multiSweepCount = data.multiSweepCount;
         t.GetComponent<Momentus>().isInMaker.Value = true;
-        if (data.syncCount >1)
+        if (data.multiSweepCount >1)
             t.GetComponent<Momentus>().multiSweep.SetActive(true);
         curMelody.sheets[^1].momentus[index] = t.GetComponent<Momentus>().momentusData;
     }

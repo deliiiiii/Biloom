@@ -23,10 +23,10 @@ public class MomentusData
     }
     public Type type;
     public bool isOpposite = false;
-    public int syncCount;
+    public int multiSweepCount;
     MomentusData()
     {
-        syncCount = 1;
+        multiSweepCount = 1;
     }
 }
 public class Momentus : MonoBehaviour
@@ -131,8 +131,8 @@ public class Momentus : MonoBehaviour
             //print("before" + it.GetComponent<Momentus>().momentusData.accTime);
             if (momentusData.accTime == it.GetComponent<Momentus>().momentusData.accTime)
             {
-                it.GetComponent<Momentus>().momentusData.syncCount--;
-                if (it.GetComponent<Momentus>().momentusData.syncCount == 1)
+                it.GetComponent<Momentus>().momentusData.multiSweepCount--;
+                if (it.GetComponent<Momentus>().momentusData.multiSweepCount == 1)
                     it.GetComponent<Momentus>().multiSweep.SetActive(false);
             }
         }
@@ -141,7 +141,7 @@ public class Momentus : MonoBehaviour
     {
         Collider[] hitsAfter = Physics.OverlapBox(transform.position, new Vector3(10, 1, 1), Quaternion.identity);
 
-        momentusData.syncCount = 1;
+        momentusData.multiSweepCount = 1;
         foreach (var it in hitsAfter)
         {
             if (!it.GetComponent<Momentus>())
@@ -151,12 +151,12 @@ public class Momentus : MonoBehaviour
             //print("after" + it.GetComponent<Momentus>().momentusData.accTime);
             if (momentusData.accTime == it.GetComponent<Momentus>().momentusData.accTime)
             {
-                momentusData.syncCount++;
-                it.GetComponent<Momentus>().momentusData.syncCount++;
+                momentusData.multiSweepCount++;
+                it.GetComponent<Momentus>().momentusData.multiSweepCount++;
                 it.GetComponent<Momentus>().multiSweep.SetActive(true);
             }
         }
-        multiSweep.SetActive(momentusData.syncCount > 1);
+        multiSweep.SetActive(momentusData.multiSweepCount > 1);
     }
     private void OnMouseDown()
     {

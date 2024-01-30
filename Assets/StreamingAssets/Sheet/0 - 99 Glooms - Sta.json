@@ -7,171 +7,979 @@
             "momentus": [
                 {
                     "size": 0,
-                    "globalX": -5.0,
-                    "accTime": 0.0,
+                    "globalX": -3.0,
+                    "accTime": 2.7345948219299318,
                     "type": 0,
                     "isOpposite": false,
-                    "syncCount": 6
+                    "multiSweepCount": 6
+                },
+                {
+                    "size": 0,
+                    "globalX": 3.0,
+                    "accTime": 2.7345948219299318,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 6
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.0,
+                    "accTime": 5.260000228881836,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": 0.0,
+                    "accTime": 5.343999862670898,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 1
+                },
+                {
+                    "size": 0,
+                    "globalX": 0.0,
+                    "accTime": 5.427999973297119,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 1
+                },
+                {
+                    "size": 0,
+                    "globalX": 2.0,
+                    "accTime": 5.560553073883057,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": 0.0,
+                    "accTime": 5.668661594390869,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 1
+                },
+                {
+                    "size": 0,
+                    "globalX": 0.0,
+                    "accTime": 5.7497429847717289,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 1
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.0,
+                    "accTime": 3.992974042892456,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 1
+                },
+                {
+                    "size": 0,
+                    "globalX": -2.0,
+                    "accTime": 4.074055194854736,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.0,
+                    "accTime": 4.297295093536377,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": 1.0,
+                    "accTime": 4.625,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": 1.0,
+                    "accTime": 4.965944766998291,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.0,
+                    "accTime": 4.276753902435303,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": 1.0,
+                    "accTime": 4.601079940795898,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": 0.0,
+                    "accTime": 5.047028064727783,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": 3.200000047683716,
+                    "accTime": 5.977835178375244,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 6
+                },
+                {
+                    "size": 0,
+                    "globalX": -3.200000047683716,
+                    "accTime": 5.977835178375244,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 6
+                },
+                {
+                    "size": 0,
+                    "globalX": -5.0,
+                    "accTime": 6.302158832550049,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -5.0,
+                    "accTime": 6.950806140899658,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -5.0,
+                    "accTime": 7.923777103424072,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -3.200000047683716,
+                    "accTime": 8.248102188110352,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -5.0,
+                    "accTime": 8.572427749633789,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -5.0,
+                    "accTime": 9.869729995727539,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": 3.0,
+                    "accTime": 11.00486946105957,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 1
+                },
+                {
+                    "size": 0,
+                    "globalX": 1.0,
+                    "accTime": 11.168672561645508,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 1
+                },
+                {
+                    "size": 0,
+                    "globalX": -3.200000047683716,
+                    "accTime": 7.275129795074463,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 6
                 },
                 {
                     "size": 0,
                     "globalX": 5.0,
-                    "accTime": 0.0,
+                    "accTime": 7.275129795074463,
                     "type": 0,
                     "isOpposite": false,
-                    "syncCount": 6
+                    "multiSweepCount": 6
                 },
                 {
                     "size": 0,
                     "globalX": -1.0,
-                    "accTime": 1.2972972393035889,
+                    "accTime": 2.7345948219299318,
                     "type": 0,
                     "isOpposite": false,
-                    "syncCount": 2
-                },
-                {
-                    "size": 0,
-                    "globalX": -3.0,
-                    "accTime": 0.6486486196517944,
-                    "type": 0,
-                    "isOpposite": false,
-                    "syncCount": 4
+                    "multiSweepCount": 6
                 },
                 {
                     "size": 0,
                     "globalX": 1.0,
-                    "accTime": 1.2972972393035889,
+                    "accTime": 2.7345948219299318,
                     "type": 0,
                     "isOpposite": false,
-                    "syncCount": 2
+                    "multiSweepCount": 6
                 },
                 {
                     "size": 0,
-                    "globalX": 3.0,
-                    "accTime": 0.0,
+                    "globalX": -5.0,
+                    "accTime": 5.977835178375244,
                     "type": 0,
                     "isOpposite": false,
-                    "syncCount": 6
+                    "multiSweepCount": 6
                 },
                 {
                     "size": 0,
-                    "globalX": -2.0,
-                    "accTime": 0.9729729294776917,
+                    "globalX": 5.0,
+                    "accTime": 5.977835178375244,
                     "type": 0,
                     "isOpposite": false,
-                    "syncCount": 3
+                    "multiSweepCount": 6
                 },
                 {
                     "size": 0,
-                    "globalX": -4.0,
-                    "accTime": 0.3243243098258972,
+                    "globalX": 5.0,
+                    "accTime": 8.41026496887207,
                     "type": 0,
                     "isOpposite": false,
-                    "syncCount": 5
+                    "multiSweepCount": 2
                 },
                 {
                     "size": 0,
-                    "globalX": 2.0,
-                    "accTime": 0.3243243098258972,
+                    "globalX": 2.200000047683716,
+                    "accTime": 8.734590530395508,
                     "type": 0,
                     "isOpposite": false,
-                    "syncCount": 5
-                },
-                {
-                    "size": 0,
-                    "globalX": 0.0,
-                    "accTime": 1.6216216087341309,
-                    "type": 0,
-                    "isOpposite": false,
-                    "syncCount": 1
+                    "multiSweepCount": 2
                 },
                 {
                     "size": 0,
                     "globalX": 4.0,
-                    "accTime": 0.3243243098258972,
+                    "accTime": 8.734590530395508,
                     "type": 0,
                     "isOpposite": false,
-                    "syncCount": 5
+                    "multiSweepCount": 2
                 },
                 {
                     "size": 0,
-                    "globalX": -3.0,
-                    "accTime": 0.0,
+                    "globalX": -5.0,
+                    "accTime": 8.977834701538086,
                     "type": 0,
                     "isOpposite": false,
-                    "syncCount": 6
+                    "multiSweepCount": 4
                 },
                 {
                     "size": 0,
-                    "globalX": -1.0,
-                    "accTime": 0.6486486196517944,
+                    "globalX": -3.200000047683716,
+                    "accTime": 8.977834701538086,
                     "type": 0,
                     "isOpposite": false,
-                    "syncCount": 4
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -3.200000047683716,
+                    "accTime": 9.302160263061524,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 6
+                },
+                {
+                    "size": 0,
+                    "globalX": 3.200000047683716,
+                    "accTime": 9.302160263061524,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 6
                 },
                 {
                     "size": 0,
                     "globalX": 1.0,
-                    "accTime": 0.0,
+                    "accTime": 9.545404434204102,
                     "type": 0,
                     "isOpposite": false,
-                    "syncCount": 6
+                    "multiSweepCount": 1
                 },
                 {
                     "size": 0,
                     "globalX": 3.0,
-                    "accTime": 0.6486486196517944,
+                    "accTime": 9.70756721496582,
                     "type": 0,
                     "isOpposite": false,
-                    "syncCount": 4
+                    "multiSweepCount": 1
                 },
                 {
                     "size": 0,
-                    "globalX": -1.0,
-                    "accTime": 0.0,
+                    "globalX": -3.200000047683716,
+                    "accTime": 9.869729995727539,
                     "type": 0,
                     "isOpposite": false,
-                    "syncCount": 6
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": 3.0,
+                    "accTime": 10.031892776489258,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 1
                 },
                 {
                     "size": 0,
                     "globalX": 1.0,
-                    "accTime": 0.6486486196517944,
+                    "accTime": 10.194055557250977,
                     "type": 0,
                     "isOpposite": false,
-                    "syncCount": 4
+                    "multiSweepCount": 1
                 },
                 {
                     "size": 0,
-                    "globalX": -2.0,
-                    "accTime": 0.3243243098258972,
+                    "globalX": -5.0,
+                    "accTime": 10.356218338012696,
                     "type": 0,
                     "isOpposite": false,
-                    "syncCount": 5
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": 1.0,
+                    "accTime": 10.356218338012696,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -5.0,
+                    "accTime": 11.32919979095459,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": -3.200000047683716,
+                    "accTime": 11.815679550170899,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 1
+                },
+                {
+                    "size": 0,
+                    "globalX": 5.0,
+                    "accTime": 10.842706680297852,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": 1.0,
+                    "accTime": 11.329195022583008,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": 5.0,
+                    "accTime": 9.869729995727539,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -3.200000047683716,
+                    "accTime": 10.356220245361329,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": 3.0,
+                    "accTime": 10.518381118774414,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 1
+                },
+                {
+                    "size": 0,
+                    "globalX": 5.0,
+                    "accTime": 10.680543899536133,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 1
+                },
+                {
+                    "size": 0,
+                    "globalX": 5.0,
+                    "accTime": 9.302160263061524,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 6
+                },
+                {
+                    "size": 0,
+                    "globalX": -5.0,
+                    "accTime": 9.302160263061524,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 6
+                },
+                {
+                    "size": 0,
+                    "globalX": -3.200000047683716,
+                    "accTime": 7.923777103424072,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -5.0,
+                    "accTime": 10.842706680297852,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -3.200000047683716,
+                    "accTime": 10.8427095413208,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": -3.200000047683716,
+                    "accTime": 11.329195022583008,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": 3.0,
+                    "accTime": 11.491357803344727,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 1
+                },
+                {
+                    "size": 0,
+                    "globalX": 5.0,
+                    "accTime": 11.653520584106446,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 1
+                },
+                {
+                    "size": 0,
+                    "globalX": -5.0,
+                    "accTime": 11.815683364868164,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 7
+                },
+                {
+                    "size": 0,
+                    "globalX": 5.0,
+                    "accTime": 11.815683364868164,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 7
+                },
+                {
+                    "size": 0,
+                    "globalX": 3.200000047683716,
+                    "accTime": 11.815683364868164,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 6
+                },
+                {
+                    "size": 0,
+                    "globalX": 1.0,
+                    "accTime": 3.992974042892456,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
                 },
                 {
                     "size": 0,
                     "globalX": 0.0,
-                    "accTime": 0.9729729294776917,
+                    "accTime": 4.074055194854736,
                     "type": 0,
                     "isOpposite": false,
-                    "syncCount": 3
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": 1.0,
+                    "accTime": 4.276753902435303,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": 1.0,
+                    "accTime": 4.297295093536377,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.0,
+                    "accTime": 4.601079940795898,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.0,
+                    "accTime": 4.625,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.0,
+                    "accTime": 4.965944766998291,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
                 },
                 {
                     "size": 0,
                     "globalX": 2.0,
-                    "accTime": 0.9729729294776917,
+                    "accTime": 5.047028064727783,
                     "type": 0,
                     "isOpposite": false,
-                    "syncCount": 3
+                    "multiSweepCount": 2
                 },
                 {
                     "size": 0,
-                    "globalX": 0.0,
-                    "accTime": 0.3243243098258972,
+                    "globalX": 1.0,
+                    "accTime": 5.260000228881836,
                     "type": 0,
                     "isOpposite": false,
-                    "syncCount": 5
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": -2.0,
+                    "accTime": 5.560553073883057,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": -3.200000047683716,
+                    "accTime": 6.626482009887695,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 1
+                },
+                {
+                    "size": 0,
+                    "globalX": -5.0,
+                    "accTime": 6.626482009887695,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": -3.200000047683716,
+                    "accTime": 7.599452972412109,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": -3.200000047683716,
+                    "accTime": 6.302158832550049,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -5.0,
+                    "accTime": 7.275129795074463,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 6
+                },
+                {
+                    "size": 0,
+                    "globalX": 4.0,
+                    "accTime": 7.842696189880371,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": -5.0,
+                    "accTime": 8.248102188110352,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -3.200000047683716,
+                    "accTime": 8.572427749633789,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": 2.200000047683716,
+                    "accTime": 9.058916091918946,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": -5.0,
+                    "accTime": 7.599453449249268,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 5
+                },
+                {
+                    "size": 0,
+                    "globalX": -3.200000047683716,
+                    "accTime": 6.950806140899658,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -5.0,
+                    "accTime": 2.7345948219299318,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 6
+                },
+                {
+                    "size": 0,
+                    "globalX": 5.0,
+                    "accTime": 2.7345948219299318,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 6
+                },
+                {
+                    "size": 0,
+                    "globalX": 4.0,
+                    "accTime": 7.437292098999023,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": 2.200000047683716,
+                    "accTime": 7.437292098999023,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 1
+                },
+                {
+                    "size": 0,
+                    "globalX": 3.200000047683716,
+                    "accTime": 7.275129795074463,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 6
+                },
+                {
+                    "size": 0,
+                    "globalX": 2.200000047683716,
+                    "accTime": 7.842696189880371,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": 3.200000047683716,
+                    "accTime": 8.41026496887207,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.399999976158142,
+                    "accTime": 6.302158832550049,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.399999976158142,
+                    "accTime": 6.626482009887695,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 3
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.399999976158142,
+                    "accTime": 6.950806140899658,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.399999976158142,
+                    "accTime": 7.275129795074463,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 6
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.399999976158142,
+                    "accTime": 5.977835178375244,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 6
+                },
+                {
+                    "size": 0,
+                    "globalX": 0.4000000059604645,
+                    "accTime": 5.977835178375244,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 6
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.399999976158142,
+                    "accTime": 7.599452972412109,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 1
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.399999976158142,
+                    "accTime": 7.923777103424072,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.399999976158142,
+                    "accTime": 8.248102188110352,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": 0.4000000059604645,
+                    "accTime": 6.302158832550049,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": 0.4000000059604645,
+                    "accTime": 6.626482009887695,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": 0.4000000059604645,
+                    "accTime": 6.950806140899658,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": 0.4000000059604645,
+                    "accTime": 7.275129795074463,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 6
+                },
+                {
+                    "size": 0,
+                    "globalX": 0.4000000059604645,
+                    "accTime": 7.599452972412109,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 3
+                },
+                {
+                    "size": 0,
+                    "globalX": 0.4000000059604645,
+                    "accTime": 7.923777103424072,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": 0.4000000059604645,
+                    "accTime": 8.248102188110352,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.399999976158142,
+                    "accTime": 8.572427749633789,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": 0.4000000059604645,
+                    "accTime": 8.572427749633789,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.399999976158142,
+                    "accTime": 8.977834701538086,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": 0.4000000059604645,
+                    "accTime": 8.977834701538086,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.399999976158142,
+                    "accTime": 9.302160263061524,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 6
+                },
+                {
+                    "size": 0,
+                    "globalX": 0.4000000059604645,
+                    "accTime": 9.302160263061524,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 6
+                },
+                {
+                    "size": 0,
+                    "globalX": 4.0,
+                    "accTime": 9.058916091918946,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.399999976158142,
+                    "accTime": 9.869729995727539,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.399999976158142,
+                    "accTime": 10.356220245361329,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 1
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.399999976158142,
+                    "accTime": 10.8427095413208,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 1
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.399999976158142,
+                    "accTime": 11.32919979095459,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 1
+                },
+                {
+                    "size": 0,
+                    "globalX": -0.3999999761581421,
+                    "accTime": 11.815679550170899,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 3
+                },
+                {
+                    "size": 0,
+                    "globalX": 1.399999976158142,
+                    "accTime": 11.815679550170899,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 3
                 }
             ]
         }
