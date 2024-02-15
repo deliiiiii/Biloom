@@ -105,19 +105,24 @@ public class Momentus : MonoBehaviour
     public void SetXTime(float x,float time)
     {
         OnNoteLeave();
-        transform.position = new Vector3(x, 0.87f, transform.position.z);
-        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, time * MomentusManager.instance.speedUni * MomentusManager.instance.speedMulti);
-        momentusData.globalX = x;
-        momentusData.accTime = time;
+        SetXTime_Part1(x, time);
         OnNoteAppear();
     }
     public void SetXTime_WhenGenerated(float x, float time)
+    {
+        SetXTime_Part1(x, time);
+        OnNoteAppear();
+    }
+    public void SetXTime_WhenReadData(float x, float time)
+    {
+        SetXTime_Part1(x, time);
+    }
+    public void SetXTime_Part1(float x, float time)
     {
         transform.position = new Vector3(x, 0.87f, transform.position.z);
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, time * MomentusManager.instance.speedUni * MomentusManager.instance.speedMulti);
         momentusData.globalX = x;
         momentusData.accTime = time;
-        OnNoteAppear();
     }
     public void OnNoteLeave()
     {
@@ -128,7 +133,7 @@ public class Momentus : MonoBehaviour
                 continue;
             if (it.gameObject == gameObject)
                 continue;
-            //print("before" + it.GetComponent<Momentus>().momentusData.accTime);
+            print("before" + it.GetComponent<Momentus>().momentusData.accTime);
             if (momentusData.accTime == it.GetComponent<Momentus>().momentusData.accTime)
             {
                 it.GetComponent<Momentus>().momentusData.multiSweepCount--;
@@ -148,7 +153,7 @@ public class Momentus : MonoBehaviour
                 continue;
             if (it.gameObject == gameObject)
                 continue;
-            //print("after" + it.GetComponent<Momentus>().momentusData.accTime);
+            print("after" + it.GetComponent<Momentus>().momentusData.accTime);
             if (momentusData.accTime == it.GetComponent<Momentus>().momentusData.accTime)
             {
                 momentusData.multiSweepCount++;

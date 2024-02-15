@@ -5,12 +5,14 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.UI;
-using static Momentus;
 
 public class MelodyMaker : MonoBehaviour
 {
     public static MelodyMaker instance;
     private MomentusManager mmi;
+
+    public int floatRoundExponent = 4;
+    public float floatRoundDiv;
 
     public GameObject panel_Notification;
     public Text text_Notification;
@@ -53,6 +55,7 @@ public class MelodyMaker : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        floatRoundDiv = Mathf.Pow(10, floatRoundExponent);
     }
     private void Start()
     {
@@ -100,20 +103,21 @@ public class MelodyMaker : MonoBehaviour
         {
             WriteCurSheet();
         }
+        if (panel_Warning.activeSelf)
+            return;
         if(Input.GetKeyDown(KeyCode.UpArrow))
         {
-            if(!panel_Warning.activeSelf)
-                StartCoroutine(MagnetZ(1));
+            StartCoroutine(MagnetZ(1));
         }
         if(Input.GetKeyDown(KeyCode.DownArrow))
         {
-            if (!panel_Warning.activeSelf)
-                StartCoroutine(MagnetZ(-1));
+            StartCoroutine(MagnetZ(-1));
         }
         if(Input.GetKeyDown(KeyCode.LeftArrow))
         {
             MagnetX(-1f);
-        } if(Input.GetKeyDown(KeyCode.RightArrow))
+        }
+        if(Input.GetKeyDown(KeyCode.RightArrow))
         {
             MagnetX(1f);
         }
@@ -148,13 +152,13 @@ public class MelodyMaker : MonoBehaviour
     {
         if (!paused)
         {
-            textPause.text = "| |";
+            textPause.text = " > ";
             curAudioSource.Pause();
             paused = true;
         }
         else
         {
-            textPause.text = " > ";
+            textPause.text = "| |";
             curAudioSource.UnPause();
             paused = false;
         }
@@ -291,12 +295,9 @@ public class MelodyMaker : MonoBehaviour
 
             if (float.TryParse(inputDeltaZ.text, out float delta))
                 it2.accTime += delta;
-            //if (it2.accTime < 0)
-            //    it2.accTime = 0;
-            //if(it2.accTime > curAudioClip.length)
-            //    it2.accTime = curAudioClip.length;
             it2.globalX = Mathf.Clamp(it2.globalX, -5f, 5f);
             it2.accTime = Mathf.Clamp(it2.accTime,0f, curAudioClip.length);
+            FloatRound(it2.accTime,out it2.accTime);
             inputCapitalX.text = it2.globalX.ToString();
             inputCapitalZ.text = it2.accTime.ToString();
             textMultiSweep.text = it2.multiSweepCount.ToString();
@@ -304,23 +305,26 @@ public class MelodyMaker : MonoBehaviour
         }
         else
         {
-            foreach (var it in selectedMomentus)
-            {
-                MomentusData it2 = it.momentusData;
-                if (float.TryParse(inputDeltaZ.text, out float delta))
-                    it2.accTime += delta;
-                //if (it2.accTime < 0)
-                //    it2.accTime = 0;
-                //if (it2.accTime > curAudioClip.length)
-                //    it2.accTime = curAudioClip.length;
-                it2.accTime = Mathf.Clamp(it2.accTime, 0f, curAudioClip.length);
-                inputCapitalZ.text = it2.accTime.ToString();
-                it.SetXTime(it2.globalX, it2.accTime);
-            }
+            StartCoroutine(MoveSelected());
+            
         }
-        
         if (!toggleLockDeltaZ.isOn)
             inputDeltaZ.text = "";
+    }
+    public IEnumerator MoveSelected()
+    {
+        UI_Move(true);
+        foreach (var it in selectedMomentus)
+        {
+            MomentusData it2 = it.momentusData;
+            if (float.TryParse(inputDeltaZ.text, out float delta))
+                it2.accTime += delta;
+            it2.accTime = Mathf.Clamp(it2.accTime, 0f, curAudioClip.length);
+            FloatRound(it2.accTime, out it2.accTime);
+            it.SetXTime(it2.globalX, it2.accTime);
+            yield return new WaitForSeconds(0.02f);
+        }
+        UI_Move(false);
     }
     public IEnumerator MagnetZ(int minus)
     {
@@ -354,16 +358,13 @@ public class MelodyMaker : MonoBehaviour
             {
                 if (!hit.GetComponent<GridLine>())
                     continue;
-                if(minus == 1)
-                {
-                    if (hit.transform.position.z < note.transform.position.z + 1e-5f)
-                        continue;
-                }
-                else
-                {
-                    if (hit.transform.position.z > note.transform.position.z - 1e-5f)
-                        continue;
-                }
+                float deltaZ = Mathf.Abs(hit.transform.position.z - note.transform.position.z);
+                if (deltaZ < 10 / floatRoundDiv)
+                    continue;
+                if (minus == 1 && hit.transform.position.z < note.transform.position.z)
+                    continue;
+                if (minus == -1 && hit.transform.position.z > note.transform.position.z)
+                    continue;
                 if (minDeltaZ > minus * (hit.transform.position.z - note.transform.position.z))
                 {
                     minDeltaZ = minus * (hit.transform.position.z - note.transform.position.z);
@@ -372,8 +373,9 @@ public class MelodyMaker : MonoBehaviour
             }
             if (targetZ < 0 || targetZ > curAudioClip.length)
                 continue;
-            //Debug.Log(nameof(targetZ) + "" + targetZ);
+            Debug.Log(nameof(targetZ) + "" + targetZ);
             //print("move Z ");
+            FloatRound(targetZ, out targetZ);
             note.SetXTime(note.momentusData.globalX, targetZ);
             yield return new WaitForFixedUpdate();
         }
@@ -421,7 +423,7 @@ public class MelodyMaker : MonoBehaviour
         GameObject t = Instantiate(MomentusManager.instance.stab.gameObject, Vector3.zero, Quaternion.identity);//TODO type
         t.SetActive(true);
         t.transform.parent = p_Momentus;
-        t.GetComponent<Momentus>().SetXTime_WhenGenerated(data.globalX, data.accTime);
+        t.GetComponent<Momentus>().SetXTime_WhenReadData(data.globalX, data.accTime);
         t.GetComponent<Momentus>().momentusData.multiSweepCount = data.multiSweepCount;
         t.GetComponent<Momentus>().isInMaker.Value = true;
         if (data.multiSweepCount >1)
@@ -457,12 +459,14 @@ public class MelodyMaker : MonoBehaviour
     {
         //json => curMelody.sheets[^1]
         string path = Application.streamingAssetsPath + "/Sheet/" + curMelody.audio.name + ".json";
+        print(path);
         if (!File.Exists(path))
         {
             UI_Read(false);
             return;
         }
         ClearALLNote();
+        
         string str =  File.ReadAllText(path);
         curMelody = JsonUtility.FromJson<Melody>(str);
         for (int i= 0;i < curMelody.sheets[^1].momentus.Count;i++)
@@ -493,6 +497,11 @@ public class MelodyMaker : MonoBehaviour
     {
         panel_Warning.SetActive(isMoving);
         text_Warning.text = "移动中";
+    }
+    public void FloatRound(in float vIn,out float vOut)
+    {
+        vOut = Mathf.Round(vIn * floatRoundDiv) / floatRoundDiv;
+        //print(vOut);
     }
     public void ClearChild(Transform p)
     {

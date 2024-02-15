@@ -16,8 +16,8 @@ public class TouchManager : MonoBehaviour
     [Tooltip("最大同时点击数")]
     public int maxCountTouch;
     public Text countTouch;
-    private List<Touch> list_touch = new();
-    private List<Touch> list_lastTouch = new();
+    //private List<Touch> list_touch = new();
+    //private List<Touch> list_lastTouch = new();
     private List<GameObject> list_touchCircle = new();
     private void OnEnable()
     {
@@ -31,7 +31,6 @@ public class TouchManager : MonoBehaviour
     {
         Input.multiTouchEnabled = true;
         ClearChild(p_touchCircle);
-        list_touch.Clear();
         list_touchCircle.Clear();
         for (int i = 0; i < maxCountTouch; i++)
         {
@@ -76,33 +75,6 @@ public class TouchManager : MonoBehaviour
             //        touch.phase == UnityEngine.InputSystem.TouchPhase.Moved)
             //    rayHits[id].collider.GetComponent<Momentus>().SweepLinger(touch.touchId);
         }
-        list_touch.Clear();
-        foreach (var touch in Touch.activeTouches)
-        {
-            list_touch.Add(touch);
-        }
-        //for (int i = 0; i < list_lastTouch.Count; i++)
-        //{
-        //    list_touchCircle[i].SetActive(true);
-        //    Debug.Log("World Position" + Camera.main.ScreenToWorldPoint(list_lastTouch[i].position));
-        //    Debug.Log("Screen Position" + list_lastTouch[i].position);
-        //    list_touchCircle[i].transform.localPosition = new(list_lastTouch[i].position.x,
-        //                                                 list_lastTouch[i].position.y,
-        //                                                 0);
-        //}
-        //for (int i = list_lastTouch.Count; i < maxCountTouch; i++)
-        //{
-        //    list_touchCircle[i].SetActive(false);
-        //}
-        //list_lastTouch.Clear();
-        //foreach (Touch touch in list_touch)
-        //    list_lastTouch.Add(touch);
-        //list_touch.Clear();
-        //foreach (Touch touch in Input.touches)
-        //{
-        //    list_touch.Add(touch);
-        //}
-
 
         //if (Input.GetMouseButtonDown(0))
         //{

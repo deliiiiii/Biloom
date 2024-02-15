@@ -42,29 +42,29 @@ public class MomentusManager : MonoBehaviour
     }
 
 
-    public void Temp_GenerateStab(int x)
-    {
-        GameObject t = Instantiate(stab.gameObject, popper.position, stab.transform.rotation, pMomentus.transform);
-        float ranX = UnityEngine.Random.Range(-5, 5);
-        t.transform.position = new(x, threshold.position.y, t.transform.position.z + offset);
-        t.SetActive(true);
-    }
+    //public void Temp_GenerateStab(int x)
+    //{
+    //    GameObject t = Instantiate(stab.gameObject, popper.position, stab.transform.rotation, pMomentus.transform);
+    //    float ranX = UnityEngine.Random.Range(-5, 5);
+    //    t.transform.position = new(x, threshold.position.y, t.transform.position.z + offset);
+    //    t.SetActive(true);
+    //}
     
 
-    public void Temp_GenerateLinger()
-    {
-        GameObject t = Instantiate(linger.gameObject, popper.position, stab.transform.rotation, pMomentus.transform);
-        float ranX = UnityEngine.Random.Range(-5, 5);
-        t.transform.position = new(ranX, threshold.position.y, t.transform.position.z + offset);
-        t.SetActive(true);
-    }
-    public void OnSpeedSliderChange()
-    {
-        speedMulti = 1 + speedSlider.value * (speedMaxMulti - 1);
-        if (speedMulti.ToString().Length < 3)
-            text_speedMulti.text = ((int)speedMulti).ToString() + ".0";
-        else
-            text_speedMulti.text = speedMulti.ToString()[..3];
-        //[0,1] => [1,5]
-    }
+    //public void Temp_GenerateLinger()
+    //{
+    ////    GameObject t = Instantiate(linger.gameObject, popper.position, stab.transform.rotation, pMomentus.transform);
+    //    float ranX = UnityEngine.Random.Range(-5, 5);
+    //    t.transform.position = new(ranX, threshold.position.y, t.transform.position.z + offset);
+    //    t.SetActive(true);
+    //}
+    //public void OnSpeedSliderChange()
+    //{
+    //    speedMulti = 1 + speedSlider.value * (speedMaxMulti - 1);
+    //    if (speedMulti.ToString().Length < 3)
+    //        text_speedMulti.text = ((int)speedMulti).ToString() + ".0";
+    //    else
+    //        text_speedMulti.text = speedMulti.ToString()[..3];
+    //    //[0,1] => [1,5]
+    //}
 }

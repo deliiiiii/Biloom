@@ -1782,7 +1782,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 293996056}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -210.00005}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1791,8 +1791,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 572, y: -191.00003}
-  m_SizeDelta: {x: 226.15198, y: 86.00098}
+  m_AnchoredPosition: {x: 500.1, y: -151.8}
+  m_SizeDelta: {x: 312, y: 112.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &293996058
 MonoBehaviour:
@@ -4172,7 +4172,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &750298958
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4740,6 +4740,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e608d3a92b25444b9c44cec0d3b6d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floatRoundExponent: 4
+  floatRoundDiv: 0
   panel_Notification: {fileID: 1355573134}
   text_Notification: {fileID: 157584057}
   panel_Warning: {fileID: 1335320597}
@@ -6041,7 +6043,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -1.0999947}
+  m_AnchoredPosition: {x: 0, y: -1.0999985}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1023462936
@@ -11878,12 +11880,14 @@ MonoBehaviour:
     m_Options:
     - m_Text: Stab
       m_Image: {fileID: 0}
+    - m_Text: Slash
+      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 872174685}
         m_TargetAssemblyTypeName: MelodyMaker, Assembly-CSharp
-        m_MethodName: OnTypeChanged_Dropdown
+        m_MethodName: OnNoteTypeChanged_Dropdown
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11967,8 +11971,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 165.70001, y: -630.7}
-  m_SizeDelta: {x: 239.069, y: 106.338}
+  m_AnchoredPosition: {x: 1583.9, y: -292.2}
+  m_SizeDelta: {x: 450.3, y: 117.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1335320600
 MonoBehaviour:
@@ -11983,7 +11987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.7529412}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -12701,8 +12705,6 @@ RectTransform:
   - {fileID: 750298958}
   - {fileID: 2143374542}
   - {fileID: 1889102404}
-  - {fileID: 1355573135}
-  - {fileID: 1335320598}
   - {fileID: 2128419592}
   - {fileID: 1759677401}
   - {fileID: 918410963}
@@ -12710,6 +12712,8 @@ RectTransform:
   - {fileID: 646542183}
   - {fileID: 631813986}
   - {fileID: 900745749}
+  - {fileID: 1355573135}
+  - {fileID: 1335320598}
   m_Father: {fileID: 872174684}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -12944,7 +12948,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '>'
+  m_Text: '| |'
 --- !u!222 &1413244639
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15319,7 +15323,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1889102404
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15643,7 +15647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -15680,19 +15684,7 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2111109573}
-        m_TargetAssemblyTypeName: MomentusManager, Assembly-CSharp
-        m_MethodName: OnSpeedSliderChange
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1960528537
 GameObject:
   m_ObjectHideFlags: 0
@@ -16975,7 +16967,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2143374542
 RectTransform:
   m_ObjectHideFlags: 0
