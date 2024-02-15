@@ -20,6 +20,9 @@ public class MelodyMaker : MonoBehaviour
     public Text text_Warning;
 
     public Text textPause;
+    public InputField inputDeltaTime;
+    public InputField inputDeltaTime_Multi;
+
     public Slider sliderTimeStamp;
     public InputField inputTimeStamp;
     public Text textEndStamp;
@@ -30,13 +33,20 @@ public class MelodyMaker : MonoBehaviour
     public InputField inputNoteSpeed;
 
     public Dropdown dropdownType;
+    public Toggle toggleIsOpposite;
+    public Image toggleIsOppositeBack;
+    public GameObject isMixedOpposite;
     public InputField inputCapitalX;
     //public Toggle toggleMagnetX;
     public InputField inputCapitalZ;
     public Text textMultiSweep;
     //public Toggle toggleMagnetZ;
+    public InputField inputDeltaX;
     public InputField inputDeltaZ;
     public Toggle toggleLockDeltaZ;
+    public Text textLineOffset;
+    public Text textBeat;
+
 
     public Melody curMelody;
     public AudioClip curAudioClip;
@@ -60,8 +70,9 @@ public class MelodyMaker : MonoBehaviour
     private void Start()
     {
         mmi = MomentusManager.instance;
-        curMelody = MelodyManager.instance.list_melody[0];
-        curAudioClip = curMelody.audio;
+        int id = 0;
+        curMelody = MelodyManager.instance.list_melody[id];
+        curAudioClip = MelodyManager.instance.list_audioClip[id];
         OnStartMake();
     }
     private void Update()
@@ -90,6 +101,7 @@ public class MelodyMaker : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X))
         {
             ClearSelectedNote();
+            OnSelectNote();
         }
         if(Input.GetKeyDown(KeyCode.D))
         {
@@ -120,6 +132,14 @@ public class MelodyMaker : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.RightArrow))
         {
             MagnetX(1f);
+        }
+        if(Input.GetKeyDown(KeyCode.Comma))
+        {
+            MoveTime(-1);
+        }
+        if (Input.GetKeyDown(KeyCode.Period))
+        {
+            MoveTime(1);
         }
         //if (Input.GetMouseButton(0))
         //{
@@ -162,6 +182,22 @@ public class MelodyMaker : MonoBehaviour
             curAudioSource.UnPause();
             paused = false;
         }
+    }
+    public void MoveTime(int dir)
+    {
+        float tempTime = float.Parse(inputTimeStamp.text) + dir * float.Parse(inputDeltaTime.text) * (Input.GetKey(KeyCode.RightAlt) ? float.Parse(inputDeltaTime_Multi.text) : 1);
+        if (tempTime < 0 || tempTime > curAudioClip.length)
+            return;
+        curAudioSource.time = tempTime;
+        sliderTimeStamp.value = curAudioSource.time / curAudioClip.length;
+    }
+    public void MultiDeltaTime(float multi)
+    {
+        inputDeltaTime.text = (float.Parse(inputDeltaTime.text) * multi).ToString();
+    }
+    public void AddDeltaTimeMulti(int adder)
+    {
+        inputDeltaTime_Multi.text = (float.Parse(inputDeltaTime_Multi.text) + adder).ToString();
     }
     public void OnPause_Drag()
     {
@@ -221,47 +257,59 @@ public class MelodyMaker : MonoBehaviour
         mmi.speedMulti = float.Parse(inputNoteSpeed.text);
         OnLineOffsetChanged_Input();
     }
-    public void OnNoteTypeChanged_Dropdown()
-    {
-        foreach(var it in selectedMomentus)
-        {
-            it.momentusData.type = (MomentusData.Type)dropdownType.value;
-        }
-    }
 
     public void OnSelectNote()
     {
         if (selectedMomentus.Count == 0)
         {
             dropdownType.interactable = false;
+            toggleIsOpposite.gameObject.SetActive(false);
+            isMixedOpposite.SetActive(false);
             inputCapitalX.interactable = false;
             inputCapitalZ.interactable = false;
+            inputDeltaX.interactable = false;
             inputDeltaZ.interactable = false;
             inputCapitalX.text = "";
             inputCapitalZ.text = "";
+            inputDeltaX.text = "";
             inputDeltaZ.text = "";
             textMultiSweep.text = "";
+            textLineOffset.text = "";
+            textBeat.text = "";
         }
         else if (selectedMomentus.Count == 1)//uni
         {
             dropdownType.interactable = true;
+            toggleIsOpposite.gameObject.SetActive(true);
+            toggleIsOpposite.isOn = selectedMomentus[0].momentusData.isOpposite;
+            isMixedOpposite.SetActive(false);
+            toggleIsOppositeBack.color = toggleIsOpposite.isOn ? Color.black : Color.white;
+            toggleIsOpposite.interactable = true;
             inputCapitalX.interactable = true;
             inputCapitalZ.interactable = true;
+            inputDeltaX.interactable = true;
             inputDeltaZ.interactable = true;
-            inputDeltaZ.text = "";
             inputCapitalX.text = selectedMomentus[0].momentusData.globalX.ToString();
             inputCapitalZ.text = selectedMomentus[0].momentusData.accTime.ToString();
             textMultiSweep.text = selectedMomentus[0].momentusData.multiSweepCount.ToString();
+            textLineOffset.text = selectedMomentus[0].momentusData.lineOffset.ToString();
+            textBeat.text = selectedMomentus[0].momentusData.beatNumerator.ToString() + " / " + selectedMomentus[0].momentusData.beatDenominator.ToString();
         }
         else//multi
         {
             dropdownType.interactable = true;
+            toggleIsOpposite.gameObject.SetActive(true);
+            isMixedOpposite.SetActive(true);
+            toggleIsOppositeBack.color = Color.white;
             inputCapitalX.interactable = false;
             inputCapitalZ.interactable = false;
+            inputDeltaX.interactable = true;
             inputDeltaZ.interactable = true;
             inputCapitalX.text = "";
             inputCapitalZ.text = "";
             textMultiSweep.text = "";
+            textLineOffset.text = "";
+            textBeat.text = "";
         }
     }
     public void ClearSelectedNote()
@@ -271,7 +319,6 @@ public class MelodyMaker : MonoBehaviour
             it.selected.SetActive(false);
         }
         selectedMomentus.Clear();
-        OnSelectNote();
     }
     public void DeleteSelectedNote()
     {
@@ -286,131 +333,133 @@ public class MelodyMaker : MonoBehaviour
     }
     public void OnConfigurationChanged()
     {
-        if(selectedMomentus.Count == 1)
-        {
-            Momentus it = selectedMomentus[0];
-            MomentusData it2 = selectedMomentus[0].momentusData;
-            float.TryParse(inputCapitalX.text, out it2.globalX);
-            float.TryParse(inputCapitalZ.text, out it2.accTime);
-
-            if (float.TryParse(inputDeltaZ.text, out float delta))
-                it2.accTime += delta;
-            it2.globalX = Mathf.Clamp(it2.globalX, -5f, 5f);
-            it2.accTime = Mathf.Clamp(it2.accTime,0f, curAudioClip.length);
-            FloatRound(it2.accTime,out it2.accTime);
-            inputCapitalX.text = it2.globalX.ToString();
-            inputCapitalZ.text = it2.accTime.ToString();
-            textMultiSweep.text = it2.multiSweepCount.ToString();
-            it.SetXTime(it2.globalX, it2.accTime);
-        }
-        else
-        {
-            StartCoroutine(MoveSelected());
-            
-        }
+        StartCoroutine(MoveSelected());
         if (!toggleLockDeltaZ.isOn)
             inputDeltaZ.text = "";
+    }
+    public void OnOppositeChanged()
+    {
+        foreach (var it in selectedMomentus)
+        {
+            //MomentusData it2 = it.momentusData;
+            //it.SetXTime(it2.globalX, it2.accTime);
+            it.momentusData.isOpposite = toggleIsOpposite.isOn;
+            it.visage.sprite = it.visage_type_to_BoolSprite[it.momentusData.type][it.momentusData.isOpposite];
+        }
+        toggleIsOppositeBack.color = toggleIsOpposite.isOn ? Color.black : Color.white;
+        isMixedOpposite.SetActive(false);
     }
     public IEnumerator MoveSelected()
     {
         UI_Move(true);
         foreach (var it in selectedMomentus)
         {
-            MomentusData it2 = it.momentusData;
+            float.TryParse(inputCapitalX.text, out float tempX);
+            float.TryParse(inputCapitalZ.text, out float tempZ);
             if (float.TryParse(inputDeltaZ.text, out float delta))
-                it2.accTime += delta;
-            it2.accTime = Mathf.Clamp(it2.accTime, 0f, curAudioClip.length);
-            FloatRound(it2.accTime, out it2.accTime);
-            it.SetXTime(it2.globalX, it2.accTime);
+                tempZ += delta;
+            tempX = Mathf.Clamp(tempX, -7f, 7f);
+            tempZ = Mathf.Clamp(tempZ, 0f, curAudioClip.length);
+            FloatRound(tempZ, out tempZ);
+            it.OnNoteLeave();
+            it.SetXTime(tempX, tempZ);
             yield return new WaitForSeconds(0.02f);
         }
+        OnSelectNote();
         UI_Move(false);
     }
-    public IEnumerator MagnetZ(int minus)
+    public IEnumerator MagnetZ(int dirZ)
     {
         UI_Move(true);
-        float minDeltaZ = 0x7fffffff;
-        float targetZ = 0x7fffffff;
-        foreach (var note in selectedMomentus)
+        if(inputDeltaZ.text != "")
         {
-            BoxCollider[] cols = note.GetComponents<BoxCollider>();
-            BoxCollider judgeCol = null;
-            foreach (var col in cols)
+            foreach (var it in selectedMomentus)
             {
-                if(!col.enabled)
-                {
-                    judgeCol = col;
-                    break;
-                }
+                it.OnNoteLeave();
+                it.SetXTime(it.momentusData.globalX, Mathf.Clamp(it.momentusData.accTime + dirZ * float.Parse(inputDeltaZ.text), 0, curAudioClip.length));
             }
-            Collider[] hits = Physics.OverlapBox(note.transform.position, note.transform.lossyScale *100, Quaternion.identity);
-            minDeltaZ = 0x7fffffff;
-            targetZ = 0x7fffffff;
-            //if (minus == 1)
-            //{
-            //    note.transform.Translate(0, 0, 1e-5f);
-            //}
-            //else
-            //{
-            //    note.transform.Translate(0, 0, -1e-5f);
-            //}
-            foreach (var hit in hits)
-            {
-                if (!hit.GetComponent<GridLine>())
-                    continue;
-                float deltaZ = Mathf.Abs(hit.transform.position.z - note.transform.position.z);
-                if (deltaZ < 10 / floatRoundDiv)
-                    continue;
-                if (minus == 1 && hit.transform.position.z < note.transform.position.z)
-                    continue;
-                if (minus == -1 && hit.transform.position.z > note.transform.position.z)
-                    continue;
-                if (minDeltaZ > minus * (hit.transform.position.z - note.transform.position.z))
-                {
-                    minDeltaZ = minus * (hit.transform.position.z - note.transform.position.z);
-                    targetZ = hit.GetComponent<GridLine>().accTime;
-                }
-            }
-            if (targetZ < 0 || targetZ > curAudioClip.length)
-                continue;
-            Debug.Log(nameof(targetZ) + "" + targetZ);
-            //print("move Z ");
-            FloatRound(targetZ, out targetZ);
-            note.SetXTime(note.momentusData.globalX, targetZ);
-            yield return new WaitForFixedUpdate();
+            OnSelectNote();
         }
-        if(selectedMomentus.Count == 1)
+        else
         {
-            inputCapitalZ.text = selectedMomentus[0].momentusData.accTime.ToString();
-            textMultiSweep.text = selectedMomentus[0].momentusData.multiSweepCount.ToString();
+            float minDeltaZ = 0x7fffffff;
+            float targetZ = 0x7fffffff;
+            foreach (var note in selectedMomentus)
+            {
+                BoxCollider[] cols = note.GetComponents<BoxCollider>();
+                BoxCollider judgeCol = null;
+                foreach (var col in cols)
+                {
+                    if (!col.enabled)
+                    {
+                        judgeCol = col;
+                        break;
+                    }
+                }
+                Collider[] hits = Physics.OverlapBox(note.transform.position, note.transform.lossyScale * 100, Quaternion.identity);
+                minDeltaZ = 0x7fffffff;
+                targetZ = 0x7fffffff;
+                //if (minus == 1)
+                //{
+                //    note.transform.Translate(0, 0, 1e-5f);
+                //}
+                //else
+                //{
+                //    note.transform.Translate(0, 0, -1e-5f);
+                //}
+                foreach (var hit in hits)
+                {
+                    if (!hit.GetComponent<GridLine>())
+                        continue;
+                    float deltaZ = Mathf.Abs(hit.transform.position.z - note.transform.position.z);
+                    if (deltaZ < 20 / floatRoundDiv)
+                        continue;
+                    if (dirZ == 1 && hit.transform.position.z < note.transform.position.z)
+                        continue;
+                    if (dirZ == -1 && hit.transform.position.z > note.transform.position.z)
+                        continue;
+                    if (minDeltaZ > deltaZ)
+                    {
+                        minDeltaZ = deltaZ;
+                        targetZ = hit.GetComponent<GridLine>().accTime;
+                    }
+                }
+                if (targetZ < 0 || targetZ > curAudioClip.length)
+                    continue;
+                //Debug.Log(nameof(targetZ) + "" + targetZ);
+                //print("move Z ");
+                FloatRound(targetZ, out targetZ);
+                note.OnNoteLeave();
+                note.SetXTime(note.momentusData.globalX, targetZ);
+                yield return new WaitForFixedUpdate();
+            }
+
         }
+        
         UI_Move(false);
+        OnSelectNote();
         yield break;
     }
-    void MagnetX(float deltaX)
+    void MagnetX(float dirX)
     {
-        int i = 0;
         foreach(var it in selectedMomentus)
         {
-            i++;
-            //print("move x " + i);
-            it.momentusData.globalX = Mathf.Clamp(it.momentusData.globalX + deltaX, -5f, 5f);
-            it.SetXTime(it.momentusData.globalX, it.momentusData.accTime);
+            if(float.TryParse(inputDeltaX.text,out float t))
+            {
+                it.OnNoteLeave();
+                it.SetXTime(Mathf.Clamp(it.momentusData.globalX + dirX * float.Parse(inputDeltaX.text), -7f, 7f), it.momentusData.accTime);
+            }
         }
-        if (selectedMomentus.Count == 1)
-        {
-            inputCapitalX.text = selectedMomentus[0].momentusData.globalX.ToString();
-            textMultiSweep.text = selectedMomentus[0].momentusData.multiSweepCount.ToString();
-        }
+        OnSelectNote();
     }
     
-    public void GenerateStab(int x)
+    public void GenerateNote(int x)
     {
         GameObject t = Instantiate(MomentusManager.instance.stab.gameObject, Vector3.zero, Quaternion.identity);
         curMelody.sheets[^1].momentus.Add(t.GetComponent<Momentus>().momentusData);
         t.SetActive(true);
         t.transform.parent = p_Momentus;
-        t.GetComponent<Momentus>().SetXTime_WhenGenerated(x, curAudioSource.time);
+        t.GetComponent<Momentus>().SetXTime(x, curAudioSource.time);
         t.GetComponent<Momentus>().isInMaker.Value = true;
 
         ClearSelectedNote();
@@ -418,17 +467,20 @@ public class MelodyMaker : MonoBehaviour
         selectedMomentus[0].selected.SetActive(true);
         OnSelectNote();
     }
-    public void GenerateNoteByData(int index,MomentusData data)
+    public void GenerateNoteByData(MomentusData data)
     {
         GameObject t = Instantiate(MomentusManager.instance.stab.gameObject, Vector3.zero, Quaternion.identity);//TODO type
         t.SetActive(true);
         t.transform.parent = p_Momentus;
         t.GetComponent<Momentus>().SetXTime_WhenReadData(data.globalX, data.accTime);
-        t.GetComponent<Momentus>().momentusData.multiSweepCount = data.multiSweepCount;
         t.GetComponent<Momentus>().isInMaker.Value = true;
-        if (data.multiSweepCount >1)
+        if (data.multiSweepCount > 1)
             t.GetComponent<Momentus>().multiSweep.SetActive(true);
-        curMelody.sheets[^1].momentus[index] = t.GetComponent<Momentus>().momentusData;
+        else
+            t.GetComponent<Momentus>().multiSweep.SetActive(false);
+        t.GetComponent<Momentus>().visage.sprite = t.GetComponent<Momentus>().visage_type_to_BoolSprite[data.type][data.isOpposite];
+        t.GetComponent<Momentus>().momentusData = data;
+
     }
     public void ClearALLNote()
     {
@@ -441,7 +493,7 @@ public class MelodyMaker : MonoBehaviour
     public void WriteCurSheet()
     {
         //curMelody.sheets[^1] => json
-        string path = Application.streamingAssetsPath + "/Sheet/" + curMelody.audio.name + ".json";
+        string path = Application.streamingAssetsPath + "/Sheet/" + curAudioClip.name + ".json";
         string pathShort = Application.streamingAssetsPath + "/Sheet";
         if (!Directory.Exists(pathShort))
         {
@@ -458,7 +510,7 @@ public class MelodyMaker : MonoBehaviour
     public void ReadCurSheet()
     {
         //json => curMelody.sheets[^1]
-        string path = Application.streamingAssetsPath + "/Sheet/" + curMelody.audio.name + ".json";
+        string path = Application.streamingAssetsPath + "/Sheet/" + curAudioClip.name + ".json";
         print(path);
         if (!File.Exists(path))
         {
@@ -471,7 +523,7 @@ public class MelodyMaker : MonoBehaviour
         curMelody = JsonUtility.FromJson<Melody>(str);
         for (int i= 0;i < curMelody.sheets[^1].momentus.Count;i++)
         {
-            GenerateNoteByData(i, curMelody.sheets[^1].momentus[i]);
+            GenerateNoteByData(curMelody.sheets[^1].momentus[i]);
         }
         UI_Read(true);
     }

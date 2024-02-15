@@ -15,8 +15,6 @@ public class Melody
         public List<MomentusData> momentus = new();
     }
     public List<Sheet>sheets = new();
-    [SerializeReference]
-    public AudioClip audio;
     public float bpm;
     public int length;//unit : s
 }

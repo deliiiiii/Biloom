@@ -12,14 +12,18 @@ public class MomentusData
     public int size;
     public float globalX;//appear pos
     public float accTime;//appear time
+    public float lineOffset;
+    public float beatNumerator;
+    public float beatDenominator;
 
     //public float curTimeStamp;
     public enum Type
     {
         stab,               //tap
+        slash,              //flick
         linger,             //hold
         biloom,             //biloom
-        horizontalLine,
+
     }
     public Type type;
     public bool isOpposite = false;
@@ -31,20 +35,18 @@ public class MomentusData
 }
 public class Momentus : MonoBehaviour
 {
-    
     public MomentusData momentusData;
 
     public ObservableValue<bool,Momentus> isInMaker;
     public BoxCollider colInMaker;
     public BoxCollider colInPlay;
     
-
     public List<int> sweeper = new();//valid finger
     public GameObject sweepEffect;
     public GameObject selected;
+    public SpriteRenderer visage;
     public GameObject multiSweep;
-    
-
+    public SerializableDictionary<MomentusData.Type, SerializableDictionary<bool, Sprite>> visage_type_to_BoolSprite;
     private MomentusManager mmi;
     private void Awake()
     {
@@ -53,11 +55,9 @@ public class Momentus : MonoBehaviour
     private void Start()
     {
         mmi = MomentusManager.instance;
-
     }
     private void Update()
     {
-        //TowardsThreshold
         Move();
     }
     void Move()
@@ -104,38 +104,35 @@ public class Momentus : MonoBehaviour
     }
     public void SetXTime(float x,float time)
     {
-        OnNoteLeave();
-        SetXTime_Part1(x, time);
-        OnNoteAppear();
-    }
-    public void SetXTime_WhenGenerated(float x, float time)
-    {
-        SetXTime_Part1(x, time);
-        OnNoteAppear();
-    }
-    public void SetXTime_WhenReadData(float x, float time)
-    {
-        SetXTime_Part1(x, time);
-    }
-    public void SetXTime_Part1(float x, float time)
-    {
         transform.position = new Vector3(x, 0.87f, transform.position.z);
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, time * MomentusManager.instance.speedUni * MomentusManager.instance.speedMulti);
         momentusData.globalX = x;
         momentusData.accTime = time;
+        momentusData.lineOffset = float.Parse(MelodyMaker.instance.inputLineOffset.text);
+        momentusData.beatNumerator = float.Parse(MelodyMaker.instance.inputNumerator.text);
+        momentusData.beatDenominator = float.Parse(MelodyMaker.instance.inputDenominator.text);
+        momentusData.type = (MomentusData.Type)MelodyMaker.instance.dropdownType.value;
+        OnNoteAppear();
     }
+    public void SetXTime_WhenReadData(float x, float time)
+    {
+        transform.position = new Vector3(x, 0.87f, transform.position.z);
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, time * MomentusManager.instance.speedUni * MomentusManager.instance.speedMulti);
+    }
+
     public void OnNoteLeave()
     {
-        Collider[] hitsBefore = Physics.OverlapBox(transform.position, new Vector3(10, 1, 1), Quaternion.identity);
+        Collider[] hitsBefore = Physics.OverlapBox(transform.position, new Vector3(10, 1, 1)*2, Quaternion.identity);
         foreach (var it in hitsBefore)
         {
             if (!it.GetComponent<Momentus>())
                 continue;
             if (it.gameObject == gameObject)
                 continue;
-            print("before" + it.GetComponent<Momentus>().momentusData.accTime);
+            //print("before" + it.GetComponent<Momentus>().momentusData.accTime);
             if (momentusData.accTime == it.GetComponent<Momentus>().momentusData.accTime)
             {
+                //print("b");
                 it.GetComponent<Momentus>().momentusData.multiSweepCount--;
                 if (it.GetComponent<Momentus>().momentusData.multiSweepCount == 1)
                     it.GetComponent<Momentus>().multiSweep.SetActive(false);
@@ -144,7 +141,7 @@ public class Momentus : MonoBehaviour
     }
     public void OnNoteAppear()
     {
-        Collider[] hitsAfter = Physics.OverlapBox(transform.position, new Vector3(10, 1, 1), Quaternion.identity);
+        Collider[] hitsAfter = Physics.OverlapBox(transform.position, new Vector3(10, 1, 1)*2, Quaternion.identity);
 
         momentusData.multiSweepCount = 1;
         foreach (var it in hitsAfter)
@@ -153,9 +150,10 @@ public class Momentus : MonoBehaviour
                 continue;
             if (it.gameObject == gameObject)
                 continue;
-            print("after" + it.GetComponent<Momentus>().momentusData.accTime);
+            //print("after" + it.GetComponent<Momentus>().momentusData.accTime);
             if (momentusData.accTime == it.GetComponent<Momentus>().momentusData.accTime)
             {
+                //print("a");
                 momentusData.multiSweepCount++;
                 it.GetComponent<Momentus>().momentusData.multiSweepCount++;
                 it.GetComponent<Momentus>().multiSweep.SetActive(true);
@@ -165,6 +163,8 @@ public class Momentus : MonoBehaviour
     }
     private void OnMouseDown()
     {
+        if (MelodyMaker.instance.panel_Warning.activeSelf || !MelodyMaker.instance.gameObject.activeSelf)
+            return;
         if(!Input.GetKey(KeyCode.LeftControl))
         {
             foreach (var it in MelodyMaker.instance.selectedMomentus)
@@ -184,7 +184,6 @@ public class Momentus : MonoBehaviour
         //print("Stab clicked");
         MelodyMaker.instance.OnSelectNote();
     }
-
     public void OnIsInMakerChange()
     {
         if(isInMaker.Value)

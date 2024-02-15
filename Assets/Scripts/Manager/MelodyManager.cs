@@ -6,6 +6,7 @@ public class MelodyManager : MonoBehaviour
 {
     public static MelodyManager instance;
     public List<Melody> list_melody;
+    public List<AudioClip> list_audioClip;
     private void Awake()
     {
         instance = this;

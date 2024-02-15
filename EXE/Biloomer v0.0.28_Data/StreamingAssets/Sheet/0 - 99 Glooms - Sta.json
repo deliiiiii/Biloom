@@ -1,0 +1,79 @@
+{
+    "id": 0,
+    "sheets": [
+        {
+            "itensity": 0.0,
+            "outcome": 0,
+            "momentus": [
+                {
+                    "size": 0,
+                    "globalX": 2.0,
+                    "accTime": 0.6485999822616577,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": true,
+                    "multiSweepCount": 1
+                },
+                {
+                    "size": 0,
+                    "globalX": 2.0,
+                    "accTime": 0.0,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": 2.0,
+                    "accTime": 0.32429999113082888,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": true,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": 2.0,
+                    "accTime": 0.9729999899864197,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": true,
+                    "multiSweepCount": 1
+                },
+                {
+                    "size": 0,
+                    "globalX": -2.5,
+                    "accTime": 0.0,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": true,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 0,
+                    "globalX": -3.0,
+                    "accTime": 0.32429999113082888,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                }
+            ]
+        }
+    ],
+    "bpm": 185.0,
+    "length": 164
+}
