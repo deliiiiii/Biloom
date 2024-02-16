@@ -7,6 +7,10 @@ using UnityEngine;
 public class Melody
 {
     public int id;//identical to each melody
+    public string title;
+    public string composer;
+    public float bpm;
+    public int length;//unit : s
     [Serializable]
     public class Sheet
     {
@@ -15,7 +19,6 @@ public class Melody
         public List<MomentusData> momentus = new();
     }
     public List<Sheet>sheets = new();
-    public float bpm;
-    public int length;//unit : s
+    
 }
 

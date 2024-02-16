@@ -10,19 +10,27 @@ public class MelodyMaker : MonoBehaviour
 {
     public static MelodyMaker instance;
     private MomentusManager mmi;
-
+    [Header("FloatRound")]
     public int floatRoundExponent = 4;
-    public float floatRoundDiv;
+    private float floatRoundDiv;
 
+    [Header("UI Notice")]
     public GameObject panel_Notification;
     public Text text_Notification;
     public GameObject panel_Warning;
     public Text text_Warning;
 
+    [Header("Panel Melody")]
+    public Text text_id;
+    public Text text_BPM;
+    public Text text_title;
+    public Text text_composer;
+    public Dropdown drop_intensity;
+
+    [Header("Panel Time")]
     public Text textPause;
     public InputField inputDeltaTime;
     public InputField inputDeltaTime_Multi;
-
     public Slider sliderTimeStamp;
     public InputField inputTimeStamp;
     public Text textEndStamp;
@@ -32,6 +40,7 @@ public class MelodyMaker : MonoBehaviour
     public InputField inputLineOffset;
     public InputField inputNoteSpeed;
 
+    [Header("Panel Configuration")]
     public Dropdown dropdownType;
     public Toggle toggleIsOpposite;
     public Image toggleIsOppositeBack;
@@ -47,11 +56,12 @@ public class MelodyMaker : MonoBehaviour
     public Text textLineOffset;
     public Text textBeat;
 
-
+    [Header("Audio")]
     public Melody curMelody;
     public AudioClip curAudioClip;
     public AudioSource curAudioSource;
 
+    [Header("Transform")]
     public Transform p_Grid;
     public Transform p_HLine;
     public Transform p_Momentus;
@@ -72,6 +82,7 @@ public class MelodyMaker : MonoBehaviour
         mmi = MomentusManager.instance;
         int id = 0;
         curMelody = MelodyManager.instance.list_melody[id];
+        RefreshMelodyInfo();
         curAudioClip = MelodyManager.instance.list_audioClip[id];
         OnStartMake();
     }
@@ -482,18 +493,11 @@ public class MelodyMaker : MonoBehaviour
         t.GetComponent<Momentus>().momentusData = data;
 
     }
-    public void ClearALLNote()
-    {
-        DeleteSelectedNote();
-        //foreach (var it in curMelody.sheets[^1].momentus)
-        {
-            ClearChild(p_Momentus);
-        }
-    }
+   
     public void WriteCurSheet()
     {
         //curMelody.sheets[^1] => json
-        string path = Application.streamingAssetsPath + "/Sheet/" + curAudioClip.name + ".json";
+        string path = Application.streamingAssetsPath + "/Sheet/" + curMelody.id + " - " + curMelody.title + " - " + curMelody.composer + ".json";
         string pathShort = Application.streamingAssetsPath + "/Sheet";
         if (!Directory.Exists(pathShort))
         {
@@ -510,7 +514,8 @@ public class MelodyMaker : MonoBehaviour
     public void ReadCurSheet()
     {
         //json => curMelody.sheets[^1]
-        string path = Application.streamingAssetsPath + "/Sheet/" + curAudioClip.name + ".json";
+        //TODO more sheet
+        string path = Application.streamingAssetsPath + "/Sheet/" + curMelody.id + " - " + curMelody.title + " - " + curMelody.composer + ".json";
         print(path);
         if (!File.Exists(path))
         {
@@ -521,17 +526,29 @@ public class MelodyMaker : MonoBehaviour
         
         string str =  File.ReadAllText(path);
         curMelody = JsonUtility.FromJson<Melody>(str);
+        RefreshMelodyInfo();
         for (int i= 0;i < curMelody.sheets[^1].momentus.Count;i++)
         {
             GenerateNoteByData(curMelody.sheets[^1].momentus[i]);
         }
         UI_Read(true);
     }
-
-    public void UI_Read(bool success)
+    void RefreshMelodyInfo()
+    {
+        text_id.text = curMelody.id.ToString();
+        text_BPM.text = curMelody.bpm.ToString();
+        text_title.text = curMelody.title.ToString();
+        text_composer.text = curMelody.composer.ToString();
+    }
+    #region float round & UI notice
+    public void FloatRound(in float vIn,out float vOut)
+    {
+        vOut = Mathf.Round(vIn * floatRoundDiv) / floatRoundDiv;
+    }
+    public void UI_Read(bool succeed)
     {
         panel_Notification.SetActive(true);
-        if(success)
+        if(succeed)
         {
             text_Notification.text = "读取成功!";
         }
@@ -550,10 +567,14 @@ public class MelodyMaker : MonoBehaviour
         panel_Warning.SetActive(isMoving);
         text_Warning.text = "移动中";
     }
-    public void FloatRound(in float vIn,out float vOut)
+    #endregion
+    public void ClearALLNote()
     {
-        vOut = Mathf.Round(vIn * floatRoundDiv) / floatRoundDiv;
-        //print(vOut);
+        DeleteSelectedNote();
+        //foreach (var it in curMelody.sheets[^1].momentus)
+        {
+            ClearChild(p_Momentus);
+        }
     }
     public void ClearChild(Transform p)
     {
