@@ -112,8 +112,6 @@ PPS 白色数字改了按回车才有效
 
 #### v0.0.28（PC端制谱器）
 
-##### 
-
 ![image-20240215202540151](C:\Users\Deli\AppData\Roaming\Typora\typora-user-images\image-20240215202540151.png)
 
 ![image-20240215211141270](C:\Users\Deli\AppData\Roaming\Typora\typora-user-images\image-20240215211141270.png)
@@ -144,6 +142,12 @@ PPS 白色数字改了按回车才有效
 
 ​	正在移动note时快速点击其他note卡死的bug
 
+#### v0.0.29（PC端制谱器）2024.2.16
+
+##### 更新：
+
+​	切换歌曲UI
+
 ##### remaining bugs：
 
 ​	音乐声音太大，并且只有右声道
@@ -151,8 +155,6 @@ PPS 白色数字改了按回车才有效
 ##### 咕咕：
 
 ​	更改note大小、单独的流速，实现类似变速谱的效果
-
-​	切换歌曲、难度等UI
 
 ​	滑键Slash
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,14 @@ public class MelodyManager : MonoBehaviour
 {
     public static MelodyManager instance;
     public List<Melody> list_melody;
-    public List<AudioClip> list_audioClip;
+    // public List<AudioClip> list_audioClip;
+    [Serializable]
+    public struct MelodySource
+    {
+        public AudioClip audio;
+        public Sprite cover;
+    }
+    public List<MelodySource> melodySources; 
     private void Awake()
     {
         instance = this;

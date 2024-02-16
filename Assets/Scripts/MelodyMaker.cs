@@ -25,7 +25,7 @@ public class MelodyMaker : MonoBehaviour
     public Text text_BPM;
     public Text text_title;
     public Text text_composer;
-    public Dropdown drop_intensity;
+    public InputField input_intensity;
 
     [Header("Panel Time")]
     public Text textPause;
@@ -83,7 +83,7 @@ public class MelodyMaker : MonoBehaviour
         int id = 0;
         curMelody = MelodyManager.instance.list_melody[id];
         RefreshMelodyInfo();
-        curAudioClip = MelodyManager.instance.list_audioClip[id];
+        curAudioClip = MelodyManager.instance.melodySources[id].audio;
         OnStartMake();
     }
     private void Update()
@@ -539,6 +539,10 @@ public class MelodyMaker : MonoBehaviour
         text_BPM.text = curMelody.bpm.ToString();
         text_title.text = curMelody.title.ToString();
         text_composer.text = curMelody.composer.ToString();
+    }
+    public void WakeUp()//select song
+    {
+
     }
     #region float round & UI notice
     public void FloatRound(in float vIn,out float vOut)
