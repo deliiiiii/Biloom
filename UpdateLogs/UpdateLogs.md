@@ -147,7 +147,7 @@
 
 ##### 修复：
 
-​	99 Glooms十分炸裂（指音量）的bug
+​	歌曲开播后十分炸裂右耳（指音量太大和只有右声道）的bug
 
 ##### remaining bugs：
 
@@ -200,11 +200,11 @@ Composer：作曲
 
 Intensity：难度
 
-Write：写入文件
+Write：写入文件，需要确认
 
-Read：读取文件
+Read：读取文件，需要确认
 
-Wake Up：退出当前这首歌的编辑返回选歌，确认退出还没加
+Wake Up：退出制谱器返回选歌，需要确认
 
 ##### <u>Configuration面板</u>
 
