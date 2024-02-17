@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class MelodyMaker : MonoBehaviour
 {
     public static MelodyMaker instance;
-    private MomentusManager mmi;
+    public MomentusManager mmi;
     [Header("FloatRound")]
     public int floatRoundExponent = 4;
     private float floatRoundDiv;
@@ -76,15 +76,6 @@ public class MelodyMaker : MonoBehaviour
     {
         instance = this;
         floatRoundDiv = Mathf.Pow(10, floatRoundExponent);
-    }
-    private void Start()
-    {
-        mmi = MomentusManager.instance;
-        int id = 0;
-        curMelody = MelodyManager.instance.list_melody[id];
-        RefreshMelodyInfo();
-        curAudioClip = MelodyManager.instance.melodySources[id].audio;
-        OnStartMake();
     }
     private void Update()
     {
@@ -166,10 +157,21 @@ public class MelodyMaker : MonoBehaviour
         //    }
         //}
     }
-    private void OnStartMake()
+    public void OnStartWeave(int id)
     {
+        UIManager.instance.panel_SelectMelody.SetActive(false);
+        UIManager.instance.melodyMaker.SetActive(true);
+        UIManager.instance.p_trail.SetActive(true);
+
+
+        curMelody = MelodyManager.instance.list_melody[id];
+        RefreshMelodyInfo();
+        curAudioClip = MelodyManager.instance.melodySources[id].audio;
         curAudioSource = AudioManager.instance.GetSource(AudioManager.instance.PlayLoop(curAudioClip, 1, 1));
-        curMelody.sheets.Add(new());
+        if (curMelody.sheets.Count == 0)
+            curMelody.sheets.Add(new());
+        else
+            curMelody.sheets[0] = new();
         textEndStamp.text = curAudioClip.length.ToString();
         inputNumerator.text = "1";
         inputDenominator.text = "1";
@@ -178,6 +180,14 @@ public class MelodyMaker : MonoBehaviour
         OnConfigurationChanged();
         paused = false;
         isMaking = true;
+    }
+    public void OnWakeUp()
+    {
+        UIManager.instance.panel_SelectMelody.SetActive(true);
+        UIManager.instance.melodyMaker.SetActive(false);
+        UIManager.instance.p_trail.SetActive(false);
+        AudioManager.instance.Stop(curAudioClip);
+        ClearALLNote();
     }
     public void OnPause()
     {
@@ -539,10 +549,6 @@ public class MelodyMaker : MonoBehaviour
         text_BPM.text = curMelody.bpm.ToString();
         text_title.text = curMelody.title.ToString();
         text_composer.text = curMelody.composer.ToString();
-    }
-    public void WakeUp()//select song
-    {
-
     }
     #region float round & UI notice
     public void FloatRound(in float vIn,out float vOut)

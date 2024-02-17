@@ -3,12 +3,23 @@
     "title": "99 Glooms",
     "composer": "Sta",
     "bpm": 185.0,
-    "length": 164,
     "sheets": [
         {
             "itensity": 0.0,
             "outcome": 0,
-            "momentus": []
+            "momentus": [
+                {
+                    "size": 0,
+                    "globalX": -3.0,
+                    "accTime": 0.32429999113082888,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 1
+                }
+            ]
         }
     ]
 }

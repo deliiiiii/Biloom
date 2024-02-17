@@ -1,0 +1,36 @@
+{
+    "id": 1,
+    "title": "Dandelion Girls, Dandelion Boys",
+    "composer": "mili",
+    "bpm": 166.0,
+    "sheets": [
+        {
+            "itensity": 0.0,
+            "outcome": 0,
+            "momentus": [
+                {
+                    "size": 0,
+                    "globalX": -3.0,
+                    "accTime": 0.7228999733924866,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 1
+                },
+                {
+                    "size": 0,
+                    "globalX": -3.0,
+                    "accTime": 0.3614000082015991,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 1
+                }
+            ]
+        }
+    ]
+}

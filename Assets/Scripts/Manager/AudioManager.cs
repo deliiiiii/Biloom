@@ -111,6 +111,14 @@ public class AudioManager : MonoBehaviour
             m_channels[id].channel.Stop();
         }
     }
+    public void Stop(AudioClip ac)
+    {
+        foreach (CHANNEL channel in m_channels)
+        {
+            if(channel.channel.isPlaying && channel.channel.clip == ac)
+                channel.channel.Stop();
+        }
+    }
     public AudioSource GetSource(int id)
     {
         return m_channels[id].channel;
