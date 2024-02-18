@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Policy;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
@@ -72,28 +73,56 @@ public class MelodyMaker : MonoBehaviour
     private bool paused = false;
     //private Vector2 mouseLastPos;
     //public Vector2 mouseSensitivity = new(1e-4f, 1e-4f);
+
+    //不同平台下StreamingAssets的路径是不同的，这里需要注意一下。  
+    public static string PathURL;
     private void Awake()
     {
         instance = this;
         floatRoundDiv = Mathf.Pow(10, floatRoundExponent);
+        //android
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            PathURL = Application.persistentDataPath + "/";
+        }
+        else
+        {
+            //iPhone
+            if (Application.platform == RuntimePlatform.IPhonePlayer)
+            {
+                PathURL = Application.persistentDataPath + "/Raw/";
+            }
+            else
+            {
+                //edit&pc
+                PathURL = Application.streamingAssetsPath + "/";
+            }
+        }
+        SetCamera();
     }
     private void Update()
     {
-        if(isMaking)
+        if(!paused)
         {
-            if(!paused)
-            {
-
-                sliderTimeStamp.value = curAudioSource.time / curAudioClip.length;
-                inputTimeStamp.text = curAudioSource.time.ToString();
+            if (!curAudioSource)
+                return;
+            sliderTimeStamp.value = curAudioSource.time / curAudioClip.length;
+            inputTimeStamp.text = curAudioSource.time.ToString();
                 
-            }
-            p_Grid.transform.localPosition = new(0,0, -curAudioSource.time * mmi.speedUni * mmi.speedMulti / 1f);// TODO 0.3f??
-            HandleInput();
         }
+        p_Grid.transform.localPosition = new(0,0, -curAudioSource.time * mmi.speedUni * mmi.speedMulti / 1f);// TODO 0.3f??
+        HandleInput();
+        SetCamera();
+    }
+    void SetCamera()
+    {
+        if (Screen.width / Screen.height > 1.6f)
+            Camera.main.gameObject.transform.position = new Vector3(0f, 6f, -12.5f);
+        else
+            Camera.main.gameObject.transform.position = new Vector3(0f, 8f, -14f);
     }
 
-    
+
     void HandleInput()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -105,18 +134,22 @@ public class MelodyMaker : MonoBehaviour
             ClearSelectedNote();
             OnSelectNote();
         }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            GenerateNote(0);
+        }
         if(Input.GetKeyDown(KeyCode.D))
         {
             DeleteSelectedNote();
         }
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            ReadCurSheet();
-        }
-        if(Input.GetKeyDown(KeyCode.W))
-        {
-            WriteCurSheet();
-        }
+        //if(Input.GetKeyDown(KeyCode.R))
+        //{
+        //    ReadCurSheet();
+        //}
+        //if(Input.GetKeyDown(KeyCode.W))
+        //{
+        //    WriteCurSheet();
+        //}
         if (panel_Warning.activeSelf)
             return;
         if(Input.GetKeyDown(KeyCode.UpArrow))
@@ -162,33 +195,37 @@ public class MelodyMaker : MonoBehaviour
         UIManager.instance.panel_SelectMelody.SetActive(false);
         UIManager.instance.melodyMaker.SetActive(true);
         UIManager.instance.p_trail.SetActive(true);
-
+        p_HLine.gameObject.SetActive(true);
 
         curMelody = MelodyManager.instance.list_melody[id];
-        RefreshMelodyInfo();
+        ReadCurSheet();
         curAudioClip = MelodyManager.instance.melodySources[id].audio;
-        curAudioSource = AudioManager.instance.GetSource(AudioManager.instance.PlayLoop(curAudioClip, 1, 1));
-        if (curMelody.sheets.Count == 0)
-            curMelody.sheets.Add(new());
-        else
-            curMelody.sheets[0] = new();
+        curAudioSource = AudioManager.instance.GetSource(AudioManager.instance.PlayLoop(curAudioClip, 1, 1,float.Parse(inputTimePitch.text.ToString())));
+       
         textEndStamp.text = curAudioClip.length.ToString();
-        inputNumerator.text = "1";
-        inputDenominator.text = "1";
+        //inputNumerator.text = "1";
+        //inputDenominator.text = "1";
         OnLineOffsetChanged_Input();
         OnSelectNote();
         OnConfigurationChanged();
-        paused = false;
+        if(paused)
+            OnPause();
         isMaking = true;
     }
     public void OnWakeUp()
     {
+        ClearSelectedNote();
+        WriteCurSheet();
         UIManager.instance.panel_SelectMelody.SetActive(true);
         UIManager.instance.melodyMaker.SetActive(false);
         UIManager.instance.p_trail.SetActive(false);
         AudioManager.instance.Stop(curAudioClip);
-        ClearALLNote();
+        
     }
+    public bool IsPaused()
+    {
+        return paused;
+    }    
     public void OnPause()
     {
         if (!paused)
@@ -292,8 +329,8 @@ public class MelodyMaker : MonoBehaviour
             inputDeltaZ.interactable = false;
             inputCapitalX.text = "";
             inputCapitalZ.text = "";
-            inputDeltaX.text = "";
-            inputDeltaZ.text = "";
+            //inputDeltaX.text = "";
+            //inputDeltaZ.text = "";
             textMultiSweep.text = "";
             textLineOffset.text = "";
             textBeat.text = "";
@@ -336,8 +373,9 @@ public class MelodyMaker : MonoBehaviour
     public void ClearSelectedNote()
     {
         foreach(var it in selectedMomentus)
-        {
-            it.selected.SetActive(false);
+        {   
+            if(it != null)
+                it.selected.SetActive(false);
         }
         selectedMomentus.Clear();
     }
@@ -346,6 +384,7 @@ public class MelodyMaker : MonoBehaviour
         foreach (var it in selectedMomentus)
         {
             it.OnNoteLeave();
+            //print(curMelody.sheets.Count);
             curMelody.sheets[^1].momentus.Remove(it.momentusData);
             Destroy(it.gameObject);
         }
@@ -461,7 +500,7 @@ public class MelodyMaker : MonoBehaviour
         OnSelectNote();
         yield break;
     }
-    void MagnetX(float dirX)
+    public void MagnetX(float dirX)
     {
         foreach(var it in selectedMomentus)
         {
@@ -503,34 +542,27 @@ public class MelodyMaker : MonoBehaviour
         t.GetComponent<Momentus>().momentusData = data;
 
     }
-   
-    public void WriteCurSheet()
+
+public void WriteCurSheet()
     {
         //curMelody.sheets[^1] => json
-        string path = Application.streamingAssetsPath + "/Sheet/" + curMelody.id + " - " + curMelody.title + " - " + curMelody.composer + ".json";
-        string pathShort = Application.streamingAssetsPath + "/Sheet";
+        string path = PathURL + "Sheet/" + curMelody.id + " - " + curMelody.title + " - " + curMelody.composer + ".json";
+        string pathShort = PathURL + "Sheet";
         if (!Directory.Exists(pathShort))
         {
             Directory.CreateDirectory(pathShort);
         }
-        //if (!File.Exists(path))
-        //{
-        //    File.Create(path);
-        //}
         string str = JsonUtility.ToJson(curMelody, true);
         File.WriteAllText(path, str);
-        UI_Write();
     }
     public void ReadCurSheet()
     {
         //json => curMelody.sheets[^1]
-        //TODO more sheet
-        string path = Application.streamingAssetsPath + "/Sheet/" + curMelody.id + " - " + curMelody.title + " - " + curMelody.composer + ".json";
-        print(path);
+        string path = PathURL + "Sheet/" + curMelody.id + " - " + curMelody.title + " - " + curMelody.composer + ".json";
         if (!File.Exists(path))
         {
-            UI_Read(false);
-            return;
+            curMelody.sheets.Add(new());
+            WriteCurSheet();
         }
         ClearALLNote();
         
@@ -541,7 +573,6 @@ public class MelodyMaker : MonoBehaviour
         {
             GenerateNoteByData(curMelody.sheets[^1].momentus[i]);
         }
-        UI_Read(true);
     }
     void RefreshMelodyInfo()
     {

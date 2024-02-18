@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
 
+[Serializable]
 public class ObservableValue<T,TCLASS>
 {
+    [SerializeField]
     private T value;
     //private readonly string valueType;
     private readonly TCLASS valueClass;

@@ -64,15 +64,18 @@ public class Momentus : MonoBehaviour
     {
         if(!isInMaker.Value)
         {
-            transform.Translate(new(0, 0, -mmi.speedMulti * mmi.speedUni * Time.deltaTime));
+            transform.Translate(new(0, 0, -mmi.speedMulti * mmi.speedUni * Time.deltaTime * float.Parse(MelodyMaker.instance.inputTimePitch.text)));
             if (transform.position.z < mmi.threshold.transform.position.z - mmi.speedMulti * mmi.speedUni * 0.150f)
             {
-                Destroy(gameObject);
+                //Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
     }
     public void SweepStab()
     {
+        if (isInMaker.Value)
+            return;
         Debug.Log(nameof(SweepStab));
         float sweepTruth = (mmi.threshold.transform.position.z - transform.position.z)
                             /
@@ -186,14 +189,8 @@ public class Momentus : MonoBehaviour
     }
     public void OnIsInMakerChange()
     {
-        if(isInMaker.Value)
-        {
-            colInMaker.enabled = true;
-            colInPlay.enabled = false;
-            return;
-        }
-        colInMaker.enabled = false;
-        colInPlay.enabled = true;
+        colInMaker.enabled = isInMaker.Value;
+        colInPlay.enabled = !isInMaker.Value;
     }
 
    
