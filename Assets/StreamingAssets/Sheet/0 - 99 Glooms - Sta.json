@@ -13,10 +13,10 @@
                 {
                     "size": 0,
                     "globalX": -3.0,
-                    "accTime": 2.7345948219299318,
+                    "accTime": 2.734600067138672,
                     "lineOffset": 0.0,
-                    "beatNumerator": 0.0,
-                    "beatDenominator": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
                     "type": 0,
                     "isOpposite": false,
                     "multiSweepCount": 6
@@ -24,10 +24,10 @@
                 {
                     "size": 0,
                     "globalX": 3.0,
-                    "accTime": 2.7345948219299318,
+                    "accTime": 2.734600067138672,
                     "lineOffset": 0.0,
-                    "beatNumerator": 0.0,
-                    "beatDenominator": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
                     "type": 0,
                     "isOpposite": false,
                     "multiSweepCount": 6
@@ -321,10 +321,10 @@
                 {
                     "size": 0,
                     "globalX": -1.0,
-                    "accTime": 2.7345948219299318,
+                    "accTime": 2.734600067138672,
                     "lineOffset": 0.0,
-                    "beatNumerator": 0.0,
-                    "beatDenominator": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
                     "type": 0,
                     "isOpposite": true,
                     "multiSweepCount": 6
@@ -332,10 +332,10 @@
                 {
                     "size": 0,
                     "globalX": 1.0,
-                    "accTime": 2.7345948219299318,
+                    "accTime": 2.734600067138672,
                     "lineOffset": 0.0,
-                    "beatNumerator": 0.0,
-                    "beatDenominator": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
                     "type": 0,
                     "isOpposite": true,
                     "multiSweepCount": 6
@@ -959,10 +959,10 @@
                 {
                     "size": 0,
                     "globalX": -5.0,
-                    "accTime": 2.7345948219299318,
+                    "accTime": 2.734600067138672,
                     "lineOffset": 0.0,
-                    "beatNumerator": 0.0,
-                    "beatDenominator": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
                     "type": 0,
                     "isOpposite": false,
                     "multiSweepCount": 6
@@ -970,10 +970,10 @@
                 {
                     "size": 0,
                     "globalX": 5.0,
-                    "accTime": 2.7345948219299318,
+                    "accTime": 2.734600067138672,
                     "lineOffset": 0.0,
-                    "beatNumerator": 0.0,
-                    "beatDenominator": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
                     "type": 0,
                     "isOpposite": false,
                     "multiSweepCount": 6

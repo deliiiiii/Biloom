@@ -12,69 +12,179 @@
             "momentus": [
                 {
                     "size": 0,
-                    "globalX": 3.0,
-                    "accTime": 0.0,
+                    "globalX": 2.0,
+                    "accTime": 3.253000020980835,
                     "lineOffset": 0.0,
                     "beatNumerator": 1.0,
                     "beatDenominator": 1.0,
                     "type": 0,
                     "isOpposite": false,
-                    "multiSweepCount": 2
+                    "multiSweepCount": 4
                 },
                 {
                     "size": 0,
-                    "globalX": 3.0,
-                    "accTime": 0.7228999733924866,
+                    "globalX": 2.0,
+                    "accTime": 2.530100107192993,
                     "lineOffset": 0.0,
                     "beatNumerator": 1.0,
                     "beatDenominator": 1.0,
                     "type": 0,
                     "isOpposite": true,
-                    "multiSweepCount": 1
+                    "multiSweepCount": 4
                 },
                 {
                     "size": 0,
-                    "globalX": 3.0,
-                    "accTime": 1.0843000411987305,
+                    "globalX": 4.0,
+                    "accTime": 2.8915998935699465,
                     "lineOffset": 0.0,
                     "beatNumerator": 1.0,
                     "beatDenominator": 1.0,
                     "type": 0,
                     "isOpposite": true,
-                    "multiSweepCount": 1
+                    "multiSweepCount": 4
                 },
                 {
                     "size": 0,
-                    "globalX": 3.0,
-                    "accTime": 0.3614000082015991,
+                    "globalX": 4.0,
+                    "accTime": 3.253000020980835,
                     "lineOffset": 0.0,
                     "beatNumerator": 1.0,
                     "beatDenominator": 1.0,
                     "type": 0,
                     "isOpposite": true,
-                    "multiSweepCount": 2
+                    "multiSweepCount": 4
                 },
                 {
                     "size": 0,
                     "globalX": -3.0,
-                    "accTime": 0.0,
+                    "accTime": 3.253000020980835,
                     "lineOffset": 0.0,
                     "beatNumerator": 1.0,
                     "beatDenominator": 1.0,
                     "type": 0,
                     "isOpposite": true,
-                    "multiSweepCount": 2
+                    "multiSweepCount": 4
                 },
                 {
                     "size": 0,
                     "globalX": -3.0,
-                    "accTime": 0.3614000082015991,
+                    "accTime": 2.1686999797821047,
                     "lineOffset": 0.0,
                     "beatNumerator": 1.0,
                     "beatDenominator": 1.0,
                     "type": 0,
                     "isOpposite": false,
-                    "multiSweepCount": 2
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.0,
+                    "accTime": 3.253000020980835,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -3.0,
+                    "accTime": 2.530100107192993,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.0,
+                    "accTime": 2.1686999797821047,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": 2.0,
+                    "accTime": 2.1686999797821047,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": 4.0,
+                    "accTime": 2.1686999797821047,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.0,
+                    "accTime": 2.530100107192993,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": 4.0,
+                    "accTime": 2.530100107192993,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": 2.0,
+                    "accTime": 2.8915998935699465,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -1.0,
+                    "accTime": 2.8915998935699465,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 0,
+                    "globalX": -3.0,
+                    "accTime": 2.8915998935699465,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
                 }
             ]
         }

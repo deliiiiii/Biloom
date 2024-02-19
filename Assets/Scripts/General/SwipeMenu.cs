@@ -59,8 +59,8 @@ public class SwipeMenu : MonoBehaviour
         if(!isRolling)
         {
             MagnetMelody();
+            RefreshMelody();
         }
-        
     }
     void MagnetMelody()
     {
@@ -73,7 +73,7 @@ public class SwipeMenu : MonoBehaviour
                 break;
             }
         }
-        RefreshMelody();
+        
     }
     public void RollMelody(Transform t)
     {

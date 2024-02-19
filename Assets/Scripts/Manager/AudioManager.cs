@@ -103,7 +103,7 @@ public class AudioManager : MonoBehaviour
     //公开方法：循环播放，用于播放长时间的背景音乐，处理方式相对简单一些
     public int PlayLoop(AudioClip clip, float volume, float pan, float pitch = 1.0f,float startT = 0f,float endT = float.MaxValue)
     {
-        print("Play :" + clip.name);
+        //print("Play :" + clip.name);
         for (int i = 0; i < m_channels.Length; i++)
         {
             if (!m_channels[i].channel.isPlaying)
@@ -138,7 +138,7 @@ public class AudioManager : MonoBehaviour
     }
     public void Stop(AudioClip ac)
     {
-        print("Stop :" + ac.name);
+        //print("Stop :" + ac.name);
         foreach (CHANNEL channel in m_channels)
         {
             if(channel.channel.isPlaying && channel.channel.clip == ac)
