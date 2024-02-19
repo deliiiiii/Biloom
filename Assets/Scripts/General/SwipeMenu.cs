@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System.Threading.Tasks;
 public class SwipeMenu : MonoBehaviour
 {
     public float lerpSpeed;
@@ -14,15 +14,21 @@ public class SwipeMenu : MonoBehaviour
     float scrollPos;
     float[] pos;
     float deltaPos = -1f;
-    public int curId;
+    public ObservableValue<int, SwipeMenu> curId;
     public bool isRolling = false;
 
     public GameObject prefabText;
+    public AudioSource curAudioPreview;
     private void Awake()
     {
-        RefreshMelodyList();
+        curId = new(-1, this);
+        InitMelodyList();
     }
-    public void RefreshMelodyList()
+    private void OnEnable()
+    {
+        OnCurIdChange();
+    }
+    public void InitMelodyList()
     {
         ClearAllChild(transform);
         for(int i=0; i< MelodyManager.instance.melodySources.Count; i++)
@@ -63,7 +69,7 @@ public class SwipeMenu : MonoBehaviour
         {
             if ((scrollPos < pos[i] + deltaPos / 2) && (scrollPos > pos[i] - deltaPos / 2))
             {
-                curId = i;
+                curId.Value = i;
                 break;
             }
         }
@@ -72,7 +78,7 @@ public class SwipeMenu : MonoBehaviour
     public void RollMelody(Transform t)
     {
         isRolling = true;
-        curId = (!t) ? 0 : t.GetSiblingIndex();
+        curId.Value = (!t) ? 0 : t.GetSiblingIndex();
         StartCoroutine(nameof(RollMelody_Co));
     }
     IEnumerator RollMelody_Co()
@@ -95,25 +101,32 @@ public class SwipeMenu : MonoBehaviour
     {
         if (!(Input.touchCount > 0 || Input.GetMouseButton(0)))
         {
-            float t = Mathf.Lerp(scrollBar.GetComponent<Scrollbar>().value, pos[curId], lerpSpeed);
+            float t = Mathf.Lerp(scrollBar.GetComponent<Scrollbar>().value, pos[curId.Value], lerpSpeed);
             t = Mathf.Clamp(t, 0f, 1f);
             scrollBar.GetComponent<Scrollbar>().value = t;
         }
         for (int i = 0;i<transform.childCount;i++)
         {
             transform.GetChild(i).GetComponent<Text>().color = Color.black;
-            int deltaId = Mathf.Abs(i - curId);
+            int deltaId = Mathf.Abs(i - curId.Value);
             deltaId = Mathf.Clamp(deltaId, 0, maxNearShown);
             transform.GetChild(i).GetComponent<Text>().transform.localScale = new Vector3(1, 1, 1) *( minNearScale + (1-minNearScale) *(maxNearShown - deltaId) / maxNearShown);
         }
-        transform.GetChild(curId).GetComponent<Text>().color = Color.white;
-        if (curId >= MelodyManager.instance.melodySources.Count)
+        transform.GetChild(curId.Value).GetComponent<Text>().color = Color.white;
+    }
+    public void OnCurIdChange()
+    {
+        if (curId.Value < 0 || curId.Value >= MelodyManager.instance.list_melody.Count)
             return;
-        UIManager.instance.curCover.sprite = MelodyManager.instance.melodySources[curId].cover;
+        UIManager.instance.curCover.sprite = MelodyManager.instance.melodySources[curId.Value].cover;
+        if (curAudioPreview)
+            AudioManager.instance.Stop(curAudioPreview.clip);
+        curAudioPreview = AudioManager.instance.GetSource(AudioManager.instance.PlayLoop(MelodyManager.instance.melodySources[curId.Value].audio, 1, 1, 1,
+            MelodyManager.instance.list_melody[curId.Value].startOnExtract, MelodyManager.instance.list_melody[curId.Value].endOnExtract));
     }
     bool NearTarget()
     {
-        float delta = Mathf.Abs(scrollBar.GetComponent<Scrollbar>().value - pos[curId]);
+        float delta = Mathf.Abs(scrollBar.GetComponent<Scrollbar>().value - pos[curId.Value]);
         if (delta < nearTolerance)
         {
             return true;
@@ -122,7 +135,8 @@ public class SwipeMenu : MonoBehaviour
     }
     public void CallOnStartMake()
     {
-        UIManager.instance.melodyMaker.GetComponent<MelodyMaker>().OnStartWeave(curId);
+        AudioManager.instance.Stop(curAudioPreview.clip);
+        UIManager.instance.melodyMaker.GetComponent<MelodyMaker>().OnStartWeave(curId.Value);
     }
     public void ClearAllChild(Transform p)
     {

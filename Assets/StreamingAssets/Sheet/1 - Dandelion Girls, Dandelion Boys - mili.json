@@ -3,6 +3,8 @@
     "title": "Dandelion Girls, Dandelion Boys",
     "composer": "Mili",
     "bpm": 166.0,
+    "startOnExtract": 0.0,
+    "endOnExtract": 0.0,
     "sheets": [
         {
             "itensity": 0.0,

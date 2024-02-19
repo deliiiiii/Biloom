@@ -69,7 +69,6 @@ public class MelodyMaker : MonoBehaviour
     public GameObject horizontalLine;
 
     public List<Momentus> selectedMomentus = new();
-    private bool isMaking = false;
     private bool paused = false;
     //private Vector2 mouseLastPos;
     //public Vector2 mouseSensitivity = new(1e-4f, 1e-4f);
@@ -93,7 +92,7 @@ public class MelodyMaker : MonoBehaviour
                 PathURL = Application.persistentDataPath + "/Raw/";
             }
             else
-            {
+            { 
                 //edit&pc
                 PathURL = Application.streamingAssetsPath + "/";
             }
@@ -104,15 +103,18 @@ public class MelodyMaker : MonoBehaviour
     {
         if(!paused)
         {
-            if (!curAudioSource)
-                return;
-            sliderTimeStamp.value = curAudioSource.time / curAudioClip.length;
-            inputTimeStamp.text = curAudioSource.time.ToString();
-                
+            if (curAudioSource) 
+            {
+                sliderTimeStamp.value = curAudioSource.time / curAudioClip.length;
+                inputTimeStamp.text = curAudioSource.time.ToString();
+            }
         }
-        p_Grid.transform.localPosition = new(0,0, -curAudioSource.time * mmi.speedUni * mmi.speedMulti / 1f);// TODO 0.3f??
+        MoveNote();
         HandleInput();
-        SetCamera();
+    }
+    public void MoveNote()
+    {
+        p_Grid.transform.localPosition = new(0, 0, -curAudioSource.time * mmi.speedUni * mmi.speedMulti / 1f);// TODO 0.3f??
     }
     void SetCamera()
     {
@@ -195,40 +197,43 @@ public class MelodyMaker : MonoBehaviour
         UIManager.instance.panel_SelectMelody.SetActive(false);
         UIManager.instance.melodyMaker.SetActive(true);
         UIManager.instance.p_trail.SetActive(true);
+        UIManager.instance.canvasBack.SetActive(true);
         p_HLine.gameObject.SetActive(true);
 
         curMelody = MelodyManager.instance.list_melody[id];
         ReadCurSheet();
         curAudioClip = MelodyManager.instance.melodySources[id].audio;
         curAudioSource = AudioManager.instance.GetSource(AudioManager.instance.PlayLoop(curAudioClip, 1, 1,float.Parse(inputTimePitch.text.ToString())));
-       
+        curAudioSource.time = 0f;
         textEndStamp.text = curAudioClip.length.ToString();
-        //inputNumerator.text = "1";
-        //inputDenominator.text = "1";
         OnLineOffsetChanged_Input();
         OnSelectNote();
         OnConfigurationChanged();
-        if(paused)
-            OnPause();
-        isMaking = true;
+        Pause(false);
     }
-    public void OnWakeUp()
+    public void OnWakeUp(bool isRemake)
     {
         ClearSelectedNote();
-        WriteCurSheet();
+        AudioManager.instance.Stop(curAudioClip);
+        if (!isRemake)
+            WriteCurSheet();
         UIManager.instance.panel_SelectMelody.SetActive(true);
         UIManager.instance.melodyMaker.SetActive(false);
         UIManager.instance.p_trail.SetActive(false);
-        AudioManager.instance.Stop(curAudioClip);
+        UIManager.instance.canvasBack.SetActive(false);
         
     }
     public bool IsPaused()
     {
         return paused;
-    }    
+    }
     public void OnPause()
     {
-        if (!paused)
+        Pause(!paused);
+    }
+    public void Pause(bool shouldPause)
+    {
+        if(shouldPause)
         {
             textPause.text = " > ";
             curAudioSource.Pause();
@@ -341,7 +346,7 @@ public class MelodyMaker : MonoBehaviour
             toggleIsOpposite.gameObject.SetActive(true);
             toggleIsOpposite.isOn = selectedMomentus[0].momentusData.isOpposite;
             isMixedOpposite.SetActive(false);
-            toggleIsOppositeBack.color = toggleIsOpposite.isOn ? Color.black : Color.white;
+            toggleIsOppositeBack.color = toggleIsOpposite.isOn ? Color.white : Color.black;
             toggleIsOpposite.interactable = true;
             inputCapitalX.interactable = true;
             inputCapitalZ.interactable = true;
@@ -406,7 +411,7 @@ public class MelodyMaker : MonoBehaviour
             it.momentusData.isOpposite = toggleIsOpposite.isOn;
             it.visage.sprite = it.visage_type_to_BoolSprite[it.momentusData.type][it.momentusData.isOpposite];
         }
-        toggleIsOppositeBack.color = toggleIsOpposite.isOn ? Color.black : Color.white;
+        toggleIsOppositeBack.color = toggleIsOpposite.isOn ? Color.white : Color.black;
         isMixedOpposite.SetActive(false);
     }
     public IEnumerator MoveSelected()
@@ -620,7 +625,7 @@ public void WriteCurSheet()
     public void ClearChild(Transform p)
     {
         for (int i = 0; i < p.childCount; i++)
-            if(p.GetChild(i).gameObject.activeSelf)
+            //if(p.GetChild(i).gameObject.activeSelf)
                 Destroy(p.GetChild(i).gameObject);
     }
 }

@@ -41,30 +41,25 @@ public class TouchManager : MonoBehaviour
     private void Update()
     {
         countTouch.text = Touch.activeTouches.Count.ToString();
-        //foreach(var touch in list_touch)
         foreach (var touch in Touch.activeTouches)
         {
             //Debug.Log(touch.touchId + " " + touch.phase);
             Ray ray = Camera.main.ScreenPointToRay(touch.screenPosition);
             RaycastHit[] rayHits = Physics.RaycastAll(ray);
-            //float minDeltaXDis = 0x7fffffff;
-            float minZ = 0x7fffffff;
+            float minDeltaT = 0x7fffffff;
             int id = -1;
             for (int i = 0; i < rayHits.Length; i++)
             {
                 RaycastHit rayHit = rayHits[i];
                 if (!rayHit.collider.GetComponent<Momentus>())
                     continue;
-                //float deltaXDis = rayHit.transform.position.x - touch.screenPosition.x;
-                //if (Mathf.Abs(deltaXDis) < minDeltaXDis)
-                //{
-                //    id = i;
-                //    minDeltaXDis = deltaXDis;
-                //}
-                if (rayHit.transform.position.z < minZ)
+                float deltaT = MathF.Abs(rayHit.collider.GetComponent<Momentus>().momentusData.accTime - MelodyMaker.instance.curAudioSource.time);
+                print(rayHit.collider.GetComponent<Momentus>().momentusData.accTime + " " + MelodyMaker.instance.curAudioSource.time);
+                if (deltaT < minDeltaT)
                 {
+                    print("min");
                     id = i;
-                    minZ = rayHit.transform.position.z;
+                    minDeltaT = deltaT;
                 }
             }
             if (id < 0)

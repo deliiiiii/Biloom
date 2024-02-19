@@ -10,6 +10,8 @@ public class Melody
     public string title;
     public string composer;
     public float bpm;
+    public float startOnExtract;
+    public float endOnExtract;
     //public int length;//unit : s
     [Serializable]
     public class Sheet

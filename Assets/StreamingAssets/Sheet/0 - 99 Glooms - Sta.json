@@ -3,6 +3,8 @@
     "title": "99 Glooms",
     "composer": "Sta",
     "bpm": 185.0,
+    "startOnExtract": 0.0,
+    "endOnExtract": 0.0,
     "sheets": [
         {
             "itensity": 0.0,
@@ -104,7 +106,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 1.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -159,7 +161,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -324,7 +326,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 6
                 },
                 {
@@ -335,7 +337,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 6
                 },
                 {
@@ -775,7 +777,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -797,7 +799,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -1083,7 +1085,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 6
                 },
                 {
@@ -1094,7 +1096,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 6
                 },
                 {

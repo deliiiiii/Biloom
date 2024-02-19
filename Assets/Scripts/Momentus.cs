@@ -41,8 +41,8 @@ public class Momentus : MonoBehaviour
     public BoxCollider colInMaker;
     public BoxCollider colInPlay;
     
-    public List<int> sweeper = new();//valid finger
-    public GameObject sweepEffect;
+    //public List<int> sweeper = new();//valid finger
+    public List<GameObject> sweepEffect;
     public GameObject selected;
     public SpriteRenderer visage;
     public GameObject multiSweep;
@@ -58,49 +58,54 @@ public class Momentus : MonoBehaviour
     }
     private void Update()
     {
-        Move();
+        CheckZ();
     }
-    void Move()
+    void CheckZ()
     {
-        if(!isInMaker.Value)
+        if (isInMaker.Value)
+            return;
+        //TODO ???
+        if (transform.position.z < mmi.threshold.transform.position.z - mmi.speedMulti * mmi.speedUni * 0.100f)
         {
-            transform.Translate(new(0, 0, -mmi.speedMulti * mmi.speedUni * Time.deltaTime * float.Parse(MelodyMaker.instance.inputTimePitch.text)));
-            if (transform.position.z < mmi.threshold.transform.position.z - mmi.speedMulti * mmi.speedUni * 0.150f)
-            {
-                //Destroy(gameObject);
-                gameObject.SetActive(false);
-            }
+            //Destroy(gameObject);
+            foreach(BoxCollider it in gameObject.GetComponents<BoxCollider>())
+                it.enabled = false;
+            Rehearser.instance.AddCombo(-1);
+            gameObject.SetActive(false);
         }
     }
     public void SweepStab()
     {
         if (isInMaker.Value)
             return;
-        Debug.Log(nameof(SweepStab));
+        //Debug.Log(nameof(SweepStab));
         float sweepTruth = (mmi.threshold.transform.position.z - transform.position.z)
                             /
                             (mmi.speedMulti * mmi.speedUni) * 1000;
         
-        if(sweepTruth > mmi.benignTime.x && sweepTruth <= mmi.benignTime.y)
+        if(sweepTruth >= mmi.benignTime.x && sweepTruth <= mmi.benignTime.y)
         {
             //TODO 2 by finger
-            SetSweepWithColor(Color.yellow);
+            SetSweep(0);
         }
-        if(sweepTruth > mmi.badTime.x && sweepTruth <= mmi.badTime.y)
+        else if(sweepTruth >= mmi.bareTime.x && sweepTruth <= mmi.bareTime.y)
         {
-            SetSweepWithColor(Color.red);
+            SetSweep(1);
         }
     }
     public void SweepLinger(int touchId)
     {
 
     }
-    void SetSweepWithColor(Color c)
+    void SetSweep(int sweepId)
     {
+        Rehearser.instance.AddCombo(1);
+
         GetComponent<BoxCollider>().enabled = false;
         Vector3 newPos = new(transform.position.x, mmi.threshold.position.y, mmi.threshold.position.z);
-        GameObject t = Instantiate(sweepEffect, newPos, transform.rotation);
-        t.GetComponent<ParticleSystem>().startColor = new(c.r,c.g,c.b,0.5f);
+        GameObject t = Instantiate(sweepEffect[sweepId], newPos, transform.rotation);
+        t.transform.localScale = Vector3.one;
+        //t.transform.parent = MelodyMaker.instance.p_Momentus;
         t.GetComponent<Animator>().enabled = true;
         t.SetActive(true);
         Destroy(gameObject);
