@@ -211,12 +211,13 @@ public class MelodyMaker : MonoBehaviour
         OnConfigurationChanged();
         Pause(false);
     }
-    public void OnWakeUp(bool isRemake)
+    public void OnWakeUp()
     {
         ClearSelectedNote();
         AudioManager.instance.Stop(curAudioClip);
-        if (!isRemake)
-            WriteCurSheet();
+
+        WriteCurSheet();
+
         UIManager.instance.panel_SelectMelody.SetActive(true);
         UIManager.instance.melodyMaker.SetActive(false);
         UIManager.instance.p_trail.SetActive(false);
