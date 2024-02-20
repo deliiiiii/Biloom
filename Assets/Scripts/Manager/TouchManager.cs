@@ -49,6 +49,10 @@ public class TouchManager : MonoBehaviour
             lastIllicitTouch.Add(touch);
         }
         thisIllicitTouch.Clear();
+
+        if (MelodyMaker.instance)
+            if (MelodyMaker.instance.IsPaused())
+                return;
         //if(lastIllicitTouch.Count != 0)
             //print("last " + lastIllicitTouch.Count);
         foreach (var touch in lastIllicitTouch)

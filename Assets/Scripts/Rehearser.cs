@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.Intrinsics;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,7 +13,10 @@ public class Rehearser : MonoBehaviour
     public MelodyMaker melodyMaker;
     public Text textCountDown;
     public Button retWeave;
-    public bool isReverse;
+    [Header("Reverse")]
+    //public bool isWhite;
+    [Range(0f,1f)]
+    public float whiteRate;
 
     [Header("Panel Info")]
     public Slider sliderTime;
@@ -26,8 +30,11 @@ public class Rehearser : MonoBehaviour
     public int minCombo = 3;
 
     [Header("Panel Pause")]
-    public GameObject panelPause;
+    public GameObject panelPauseButtons;
     public GameObject buttonPause;
+    public Image pauseBack;
+    public float pauseInDuration = 0.3f;
+    public float pauseOutDuration = 3f;
     private void Awake()
     {
         instance = this;
@@ -37,13 +44,17 @@ public class Rehearser : MonoBehaviour
     {
         if (melodyMaker.gameObject.activeSelf)
             return;
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            isReverse = !isReverse;
+        //if(Input.GetKeyDown(KeyCode.R))
+        //{
+        //    isReverse = !isReverse;
             RefreshReverse();
-        }
+        //}
+        
         sliderTime.value = melodyMaker.curAudioSource.time / melodyMaker.curAudioClip.length;
-        melodyMaker.MoveNote();
+        //if(melodyMaker.curAudioSource.isPlaying)
+        {
+            melodyMaker.MoveNote();
+        }
     }
     public void OnRehearse()
     {
@@ -61,31 +72,52 @@ public class Rehearser : MonoBehaviour
         RefreshReverse();
         melodyMaker.Pause(true);
         StartCoroutine(CountDown());
-        
     }
     public void Pause()
     {
-        panelPause.SetActive(true);
+        StartCoroutine(Fade(pauseInDuration, pauseBack,panelPauseButtons));
         melodyMaker.Pause(true);
     }
     public void UnPause()
     {
-        panelPause.SetActive(false);
         StartCoroutine(CountDown());
     }
     void RefreshReverse()
     {
         foreach (ReversableObject obj in reversableObjects)
-            obj.SetReverse(isReverse);
+            obj.SetReverse(whiteRate);
+        for(int i = 0;i<melodyMaker.p_Momentus.childCount;i++)
+            melodyMaker.p_Momentus.GetChild(i).GetComponent<Momentus>().SetReverse(whiteRate);
     }
+    IEnumerator Fade(float inTime,Image image,GameObject g)
+    {
+        bool isIn = inTime >= 0;
+        if (!isIn)
+            g.SetActive(false);
+        image.gameObject.SetActive(true);
+        float initTime = inTime = Mathf.Abs(inTime);
+        while (inTime > 0)
+        {
+            image.color = new Color(image.color.r, image.color.g, image.color.b,(isIn?(initTime - inTime) : inTime) /initTime);
+            inTime -= Time.deltaTime;
+            yield return null;
+        }
+        if (!isIn)
+            image.gameObject.SetActive(false);
+        if(isIn)
+            g.SetActive(true);
+        yield break;
+    }
+
     IEnumerator CountDown()
     {
+        StopCoroutine(Fade(pauseInDuration, pauseBack, panelPauseButtons));
+        StartCoroutine(Fade(-pauseOutDuration, pauseBack, panelPauseButtons));
         textCountDown.gameObject.SetActive(true);
         buttonPause.SetActive(false);
-        int countSec = 4;
+        int countSec = (int)pauseOutDuration;
         while (true)
         {
-            countSec--;
             textCountDown.text = countSec.ToString();
             if (countSec == 0)
             {
@@ -96,10 +128,30 @@ public class Rehearser : MonoBehaviour
                     melodyMaker.p_Momentus.GetChild(i).GetComponent<Momentus>().isInMaker.Value = false;
                 }
                 melodyMaker.Pause(false);
+                StartCoroutine(CheckSummary());
                 yield break;
             }
+            countSec--;
             yield return new WaitForSeconds(1f);
         }
+    }
+    public IEnumerator CheckSummary()
+    {
+        while(melodyMaker.curAudioSource.isPlaying || melodyMaker.IsPaused())
+        {
+            print("playing");
+            yield return new WaitForSeconds(0.3f);
+        }
+        int countSec = 4;
+        print("sum");
+        while (countSec > 0)
+        {
+            countSec--;
+            //print(countSec);
+            yield return new WaitForSeconds(1f);
+        }
+        Summary();
+        yield break;
     }
     public void AddCombo(int addedCombo)
     {
@@ -116,6 +168,10 @@ public class Rehearser : MonoBehaviour
         }
         textCombo.text = combo.ToString();
         textCombo.gameObject.SetActive(combo >= minCombo);
+
+    }
+    public void Summary()
+    {
 
     }
 }

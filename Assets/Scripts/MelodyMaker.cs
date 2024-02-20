@@ -103,8 +103,16 @@ public class MelodyMaker : MonoBehaviour
     {
         if(!paused)
         {
+            
             if (curAudioSource) 
             {
+                print(curAudioSource.clip);
+                if (!curAudioSource.isPlaying)
+                {
+                    curAudioSource.time = 0f;
+                    curAudioSource.Play();
+                }
+                    
                 sliderTimeStamp.value = curAudioSource.time / curAudioClip.length;
                 inputTimeStamp.text = curAudioSource.time.ToString();
             }
@@ -203,7 +211,7 @@ public class MelodyMaker : MonoBehaviour
         curMelody = MelodyManager.instance.list_melody[id];
         ReadCurSheet();
         curAudioClip = MelodyManager.instance.melodySources[id].audio;
-        curAudioSource = AudioManager.instance.GetSource(AudioManager.instance.PlayLoop(curAudioClip, 1, 1,float.Parse(inputTimePitch.text.ToString())));
+        curAudioSource = AudioManager.instance.GetSource(AudioManager.instance.PlayOneShot(curAudioClip, 1, 1,float.Parse(inputTimePitch.text.ToString())));
         curAudioSource.time = 0f;
         textEndStamp.text = curAudioClip.length.ToString();
         OnLineOffsetChanged_Input();
@@ -215,6 +223,8 @@ public class MelodyMaker : MonoBehaviour
     {
         ClearSelectedNote();
         AudioManager.instance.Stop(curAudioClip);
+        if(Rehearser.instance)
+            Rehearser.instance.StopAllCoroutines();
 
         WriteCurSheet();
 

@@ -51,7 +51,7 @@ public class AudioManager : MonoBehaviour
     }
     //公开方法：播放一次，参数为音频片段、音量、左右声道、速度
     //这个方法主要用于音效，因此考虑了音效顶替的逻辑
-    public int PlayOneShot(AudioClip clip, float volume, float pan, float pitch = 1.0f)
+    public int PlayOneShot(AudioClip clip, float volume, float pan, float pitch = 1.0f, float startT = 0f, float endT = float.MaxValue)
     {
         for (int i = 0; i < m_channels.Length; i++)
         {
@@ -80,6 +80,8 @@ public class AudioManager : MonoBehaviour
                 m_channels[i].channel.volume = volume;
                 m_channels[i].channel.pitch = pitch;
                 m_channels[i].channel.panStereo = pan;
+                m_channels[i].startT = m_channels[i].channel.time = startT;
+                m_channels[i].endT = endT;
                 m_channels[i].channel.loop = false;
                 m_channels[i].channel.Play();
                 m_channels[i].keyOnTime = Time.time;
@@ -93,6 +95,8 @@ public class AudioManager : MonoBehaviour
             m_channels[oldest].channel.volume = volume;
             m_channels[oldest].channel.pitch = pitch;
             m_channels[oldest].channel.panStereo = pan;
+            m_channels[oldest].startT = m_channels[oldest].channel.time = startT;
+            m_channels[oldest].endT = endT;
             m_channels[oldest].channel.loop = false;
             m_channels[oldest].channel.Play();
             m_channels[oldest].keyOnTime = Time.time;

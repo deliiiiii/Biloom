@@ -47,6 +47,9 @@ public class Momentus : MonoBehaviour
     public SpriteRenderer visage;
     public GameObject multiSweep;
     public SerializableDictionary<MomentusData.Type, SerializableDictionary<bool, Sprite>> visage_type_to_BoolSprite;
+
+    public float minAlpha = 0.3f;
+
     private MomentusManager mmi;
     private void Awake()
     {
@@ -185,6 +188,22 @@ public class Momentus : MonoBehaviour
             }
         }
         multiSweep.SetActive(momentusData.multiSweepCount > 1);
+    }
+    public void SetReverse(float whiteRate)
+    {
+        float tarAlpha = ((whiteRate >= 0.5f) ^ (momentusData.isOpposite)) ? minAlpha : 1f;
+        bool canMulti = !((whiteRate >= 0.5f) ^ (momentusData.isOpposite));
+        visage.color = SetAlpha(visage.color ,tarAlpha);
+        multiSweep.SetActive(canMulti && (momentusData.multiSweepCount > 1));
+        multiSweep.GetComponent<SpriteRenderer>().color = SetAlpha(multiSweep.GetComponent<SpriteRenderer>().color,tarAlpha);
+        foreach (var it in sweepEffect)
+        {
+            it.GetComponent<SpriteRenderer>().color = SetAlpha(it.GetComponent<SpriteRenderer>().color, tarAlpha);
+        }
+    }
+    Color SetAlpha(Color c, float a)
+    {
+        return new Color(c.r, c.g, c.b, a);
     }
     private void OnMouseDown()
     {
