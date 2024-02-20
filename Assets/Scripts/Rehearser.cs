@@ -1,6 +1,8 @@
+using NUnit.Framework.Internal.Commands;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.Intrinsics;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
@@ -15,19 +17,45 @@ public class Rehearser : MonoBehaviour
     public Button retWeave;
     [Header("Reverse")]
     //public bool isWhite;
+    public Slider sliderWhiteRate;
     [Range(0f,1f)]
-    public float whiteRate;
-
-    [Header("Panel Info")]
+    private float whiteRate;
+    
+   [Header("Panel Info")]
     public Slider sliderTime;
-    public Image cover;
-    public Text textTitle;
+    public Image infoCover;
+    public Text textInfoTitle;
     public List<ReversableObject> reversableObjects;
 
     [Header("Performance")]
     public Text textCombo;
-    private int combo;
-    public int minCombo = 3;
+    private int combo = 0;
+    public int minShownCombo = 3;
+    private int maxCombo = 0;
+
+    private int countBenignBlack = 0;
+    private int countBareBlack = 0;
+    private int countByBlack = 0;
+    private int countBenignWhite = 0;
+    private int countBareWhite = 0;
+    private int countByWhite = 0;
+    private int countGrossBlack = 0;
+    private int countGrossWhite = 0;
+
+    public GameObject panelSummary;
+    public Text textSummaryTitle;
+    public Image summaryCover;
+    //public Text textMaxCombo;
+    public Text textAccBlack;
+    public Text textAccWhite;
+    public Text textCountBenignBlack;
+    public Text textCountBareBlack;
+    public Text textCountByBlack;
+    public Text textCountBenignWhite;
+    public Text textCountBareWhite;
+    public Text textCountByWhite;
+    //public Text textCountGrossBlack;
+    //public Text textCountGrossWhite;
 
     [Header("Panel Pause")]
     public GameObject panelPauseButtons;
@@ -56,6 +84,10 @@ public class Rehearser : MonoBehaviour
             melodyMaker.MoveNote();
         }
     }
+    public void OnSkipMelody()
+    {
+        melodyMaker.curAudioSource.time = melodyMaker.curAudioClip.length - 0.1f;
+    }
     public void OnRehearse()
     {
         gameObject.SetActive(true);
@@ -64,15 +96,18 @@ public class Rehearser : MonoBehaviour
         melodyMaker.gameObject.SetActive(false);
         textCountDown.gameObject.SetActive(true);
         retWeave.gameObject.SetActive(true);
+        
 
-        cover.sprite = MelodyManager.instance.melodySources[melodyMaker.curMelody.id].cover;
-        textTitle.text = melodyMaker.curMelody.title;
-        AddCombo(-1);
 
-        RefreshReverse();
-        melodyMaker.Pause(true);
+        infoCover.sprite = MelodyManager.instance.melodySources[melodyMaker.curMelody.id].cover;
+        textInfoTitle.text = melodyMaker.curMelody.title;
+        sliderTime.gameObject.SetActive(true);
+        ResetPerformance();
+
+        
         StartCoroutine(CountDown());
     }
+    #region Pause
     public void Pause()
     {
         StartCoroutine(Fade(pauseInDuration, pauseBack,panelPauseButtons));
@@ -82,13 +117,18 @@ public class Rehearser : MonoBehaviour
     {
         StartCoroutine(CountDown());
     }
+    #endregion
+    #region Reverse
     void RefreshReverse()
     {
+        whiteRate = sliderWhiteRate.value;
         foreach (ReversableObject obj in reversableObjects)
             obj.SetReverse(whiteRate);
         for(int i = 0;i<melodyMaker.p_Momentus.childCount;i++)
             melodyMaker.p_Momentus.GetChild(i).GetComponent<Momentus>().SetReverse(whiteRate);
     }
+    #endregion
+    #region Coroutine
     IEnumerator Fade(float inTime,Image image,GameObject g)
     {
         bool isIn = inTime >= 0;
@@ -108,9 +148,9 @@ public class Rehearser : MonoBehaviour
             g.SetActive(true);
         yield break;
     }
-
     IEnumerator CountDown()
     {
+        melodyMaker.Pause(true);
         StopCoroutine(Fade(pauseInDuration, pauseBack, panelPauseButtons));
         StartCoroutine(Fade(-pauseOutDuration, pauseBack, panelPauseButtons));
         textCountDown.gameObject.SetActive(true);
@@ -140,10 +180,12 @@ public class Rehearser : MonoBehaviour
         while(melodyMaker.curAudioSource.isPlaying || melodyMaker.IsPaused())
         {
             print("playing");
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.02f);
         }
         int countSec = 4;
-        print("sum");
+        print("summary");
+        sliderTime.gameObject.SetActive(false);
+        buttonPause.SetActive(false);
         while (countSec > 0)
         {
             countSec--;
@@ -153,25 +195,56 @@ public class Rehearser : MonoBehaviour
         Summary();
         yield break;
     }
-    public void AddCombo(int addedCombo)
+    #endregion
+    #region Performance
+    void ResetPerformance()
     {
-        switch(addedCombo)
+        AddCombo(null, 2);
+        maxCombo = countGrossBlack = countGrossWhite = countBenignBlack = countBenignWhite =
+            countBareBlack = countBareWhite = countByBlack = countByWhite = 0;
+    }
+    public void AddCombo(MomentusData data,int sweepId)
+    {
+        if(sweepId == 2)
+            combo = 0;
+        else
         {
-            case -1:
-                combo = 0;
-                break;
-            case 1:
-                combo++;
-                break;
-            default:
-                break;
+            combo++;
         }
         textCombo.text = combo.ToString();
-        textCombo.gameObject.SetActive(combo >= minCombo);
+        textCombo.gameObject.SetActive(combo >= minShownCombo);
+        maxCombo = Mathf.Max(maxCombo, combo);
+        if (data == null)
+            return;
 
+        countGrossWhite += data.isOpposite ? 1 : 0;
+        countGrossBlack += (!data.isOpposite) ? 1 : 0;
+
+        countBenignBlack += ((!data.isOpposite) && (sweepId == 0)) ? 1 : 0;
+        countBareBlack += ((!data.isOpposite) && (sweepId == 1)) ? 1 : 0;
+        countByBlack += ((!data.isOpposite) && (sweepId == 2)) ? 1 : 0;
+
+        countBenignWhite += ((data.isOpposite) && (sweepId == 0)) ? 1 : 0;
+        countBareWhite += ((data.isOpposite) && (sweepId == 1)) ? 1 : 0;
+        countByWhite += ((data.isOpposite) && (sweepId == 2)) ? 1 : 0;
     }
     public void Summary()
     {
+        panelSummary.SetActive(true);
+        //textCountGrossBlack.text = countGrossBlack.ToString();
+        //textCountGrossWhite.text = countGrossWhite.ToString();
+        textSummaryTitle.text = melodyMaker.curMelody.title;
+        summaryCover.sprite = MelodyManager.instance.melodySources[melodyMaker.curMelody.id].cover;
+        textCountBenignBlack.text = countBenignBlack.ToString();
+        textCountBareBlack.text = countBareBlack.ToString();
+        textCountByBlack.text = countByBlack.ToString();
 
+        textCountBenignWhite.text = countBenignWhite.ToString();
+        textCountBareWhite.text = countBareWhite.ToString();
+        textCountByWhite.text = countByWhite.ToString();
+        //TODO calculate ACC
+        gameObject.SetActive(false);
     }
+    
+    #endregion
 }

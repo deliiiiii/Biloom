@@ -26,7 +26,7 @@ public class MomentusData
 
     }
     public Type type;
-    public bool isOpposite = false;
+    public bool isOpposite = false;//isWhite
     public int multiSweepCount;
     MomentusData()
     {
@@ -91,11 +91,11 @@ public class Momentus : MonoBehaviour
         if(sweepTruth >= mmi.benignTime.x && sweepTruth <= mmi.benignTime.y)
         {
             //TODO 2 by finger
-            SetSweep(0);
+            SetSweepStabEffect(0);
         }
         else if(sweepTruth >= mmi.bareTime.x && sweepTruth <= mmi.bareTime.y)
         {
-            SetSweep(1);
+            SetSweepStabEffect(1);
         }
         return 1;
     }
@@ -106,14 +106,14 @@ public class Momentus : MonoBehaviour
     public void SweepNotEligible()
     {
         //Destroy(gameObject);
-        foreach (BoxCollider it in gameObject.GetComponents<BoxCollider>())
-            it.enabled = false;
-        Rehearser.instance.AddCombo(-1);
+        //foreach (BoxCollider it in gameObject.GetComponents<BoxCollider>())
+        //    it.enabled = false;
+        Rehearser.instance.AddCombo(momentusData,2);
         gameObject.SetActive(false);
     }
-    void SetSweep(int sweepId)
+    void SetSweepStabEffect(int sweepId)
     {
-        Rehearser.instance.AddCombo(1);
+        Rehearser.instance.AddCombo(momentusData, sweepId);
         countSwept++;
         //print("one count = " + countSwept);
         GetComponent<BoxCollider>().enabled = false;
@@ -233,6 +233,4 @@ public class Momentus : MonoBehaviour
         colInMaker.enabled = isInMaker.Value;
         colInPlay.enabled = !isInMaker.Value;
     }
-
-   
 }

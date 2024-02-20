@@ -70,10 +70,7 @@ public class MelodyMaker : MonoBehaviour
 
     public List<Momentus> selectedMomentus = new();
     private bool paused = false;
-    //private Vector2 mouseLastPos;
-    //public Vector2 mouseSensitivity = new(1e-4f, 1e-4f);
-
-    //不同平台下StreamingAssets的路径是不同的，这里需要注意一下。  
+    
     public static string PathURL;
     private void Awake()
     {
@@ -106,13 +103,12 @@ public class MelodyMaker : MonoBehaviour
             
             if (curAudioSource) 
             {
-                print(curAudioSource.clip);
+                //print(curAudioSource.clip);
                 if (!curAudioSource.isPlaying)
                 {
                     curAudioSource.time = 0f;
                     curAudioSource.Play();
                 }
-                    
                 sliderTimeStamp.value = curAudioSource.time / curAudioClip.length;
                 inputTimeStamp.text = curAudioSource.time.ToString();
             }
@@ -131,8 +127,6 @@ public class MelodyMaker : MonoBehaviour
         else
             Camera.main.gameObject.transform.position = new Vector3(0f, 8f, -14f);
     }
-
-
     void HandleInput()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -142,7 +136,6 @@ public class MelodyMaker : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X))
         {
             ClearSelectedNote();
-            OnSelectNote();
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
@@ -394,6 +387,7 @@ public class MelodyMaker : MonoBehaviour
                 it.selected.SetActive(false);
         }
         selectedMomentus.Clear();
+        OnSelectNote();
     }
     public void DeleteSelectedNote()
     {
@@ -454,7 +448,6 @@ public class MelodyMaker : MonoBehaviour
                 it.OnNoteLeave();
                 it.SetXTime(it.momentusData.globalX, Mathf.Clamp(it.momentusData.accTime + dirZ * float.Parse(inputDeltaZ.text), 0, curAudioClip.length));
             }
-            OnSelectNote();
         }
         else
         {
@@ -511,9 +504,8 @@ public class MelodyMaker : MonoBehaviour
             }
 
         }
-        
-        UI_Move(false);
         OnSelectNote();
+        UI_Move(false);
         yield break;
     }
     public void MagnetX(float dirX)
@@ -559,7 +551,7 @@ public class MelodyMaker : MonoBehaviour
 
     }
 
-public void WriteCurSheet()
+    public void WriteCurSheet()
     {
         //curMelody.sheets[^1] => json
         string path = PathURL + "Sheet/" + curMelody.id + " - " + curMelody.title + " - " + curMelody.composer + ".json";
