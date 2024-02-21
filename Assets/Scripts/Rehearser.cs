@@ -20,9 +20,7 @@ public class Rehearser : MonoBehaviour
     //public bool isWhite;
     public Slider sliderWhiteRate;
     [Range(0f,1f)]
-    private float whiteRate;
-    public Color aWhite;
-    public Color aBlack;
+    private float whiteRate = 1f;
 
    [Header("Panel Info")]
     public Slider sliderTime;
@@ -32,9 +30,13 @@ public class Rehearser : MonoBehaviour
 
     [Header("Performance")]
     public Text textCombo;
+    public Text textCurAcc;
     private int combo = 0;
     public int minShownCombo = 3;
     private int maxCombo = 0;
+    private float curWhiteAcc = 0;
+    private float curBlackAcc = 0;
+
 
     private int countBenignBlack = 0;
     private int countBareBlack = 0;
@@ -49,14 +51,14 @@ public class Rehearser : MonoBehaviour
     public Text textSumTitle;
     public Image summaryCover;
     //public Text textMaxCombo;
-    public Text textAccBlack;
     public Text textAccWhite;
-    public Text textCountBenignBlack;
-    public Text textCountBareBlack;
-    public Text textCountByBlack;
+    public Text textAccBlack;
     public Text textCountBenignWhite;
     public Text textCountBareWhite;
     public Text textCountByWhite;
+    public Text textCountBenignBlack;
+    public Text textCountBareBlack;
+    public Text textCountByBlack;
     public Text textSumAcc;
     public Text textNewRecord;
     //public Text textCountGrossBlack;
@@ -109,8 +111,6 @@ public class Rehearser : MonoBehaviour
         textInfoTitle.text = melodyMaker.curMelody.title;
         sliderTime.gameObject.SetActive(true);
         ResetPerformance();
-
-        
         StartCoroutine(CountDown());
     }
     #region Pause
@@ -205,9 +205,11 @@ public class Rehearser : MonoBehaviour
     #region Performance
     void ResetPerformance()
     {
-        AddCombo(null, 2);
+        whiteRate = sliderWhiteRate.value = 1f;
         maxCombo = countGrossBlack = countGrossWhite = countBenignBlack = countBenignWhite =
             countBareBlack = countBareWhite = countByBlack = countByWhite = 0;
+        curWhiteAcc = curWhiteAcc = 0f;
+        AddCombo(null, 2);
     }
     public void AddCombo(MomentusData data,int sweepId)
     {
@@ -220,44 +222,58 @@ public class Rehearser : MonoBehaviour
         textCombo.text = combo.ToString();
         textCombo.gameObject.SetActive(combo >= minShownCombo);
         maxCombo = Mathf.Max(maxCombo, combo);
-        if (data == null)
-            return;
+        if (data != null)
+        {
+            countGrossBlack += (!data.isOpposite) ? 1 : 0;
+            countGrossWhite += data.isOpposite ? 1 : 0;
 
-        countGrossWhite += data.isOpposite ? 1 : 0;
-        countGrossBlack += (!data.isOpposite) ? 1 : 0;
+            countBenignBlack += ((!data.isOpposite) && (sweepId == 0)) ? 1 : 0;
+            countBareBlack += ((!data.isOpposite) && (sweepId == 1)) ? 1 : 0;
+            countByBlack += ((!data.isOpposite) && (sweepId == 2)) ? 1 : 0;
 
-        countBenignBlack += ((!data.isOpposite) && (sweepId == 0)) ? 1 : 0;
-        countBareBlack += ((!data.isOpposite) && (sweepId == 1)) ? 1 : 0;
-        countByBlack += ((!data.isOpposite) && (sweepId == 2)) ? 1 : 0;
+            countBenignWhite += ((data.isOpposite) && (sweepId == 0)) ? 1 : 0;
+            countBareWhite += ((data.isOpposite) && (sweepId == 1)) ? 1 : 0;
+            countByWhite += ((data.isOpposite) && (sweepId == 2)) ? 1 : 0;
+        }
+        CalculateAcc();
+        RefreshTextAcc();
+    }
+    void CalculateAcc()
+    {
+        if (countGrossBlack == 0)
+            curBlackAcc = 0f;
+        else
+            curBlackAcc = (countBenignBlack * 2f + countBareBlack * 1f) / (countGrossBlack * 2f);
+        if (countGrossWhite == 0)
+            curWhiteAcc = 0f;
+        else
+            curWhiteAcc = (countBenignWhite * 2f + countBareWhite * 1f) / (countGrossWhite * 2f);
+    }
+    void RefreshTextAcc()
+    {
+        float tAcc = Mathf.Round(curBlackAcc * 1e4f)/1e2f;
+        textAccBlack.text = (tAcc == 100 ? "100.00" : tAcc.ToString("#00.00")) + "%";
+        tAcc = Mathf.RoundToInt(curWhiteAcc * 1e2f);
+        textAccWhite.text = (tAcc == 100 ? "100.00" : tAcc.ToString("#00.00")) + "%";
+        //print("whiteRate (when RefreshTextAcc) = " + whiteRate);
 
-        countBenignWhite += ((data.isOpposite) && (sweepId == 0)) ? 1 : 0;
-        countBareWhite += ((data.isOpposite) && (sweepId == 1)) ? 1 : 0;
-        countByWhite += ((data.isOpposite) && (sweepId == 2)) ? 1 : 0;
+        textCurAcc.text = textSumAcc.text = (whiteRate >= 0.5f) ? textAccWhite.text : textAccBlack.text;
+        textCurAcc.color = textNewRecord.color = textSumAcc.color = (whiteRate >= 0.5f) ? UIManager.instance.aWhite : UIManager.instance.aBlack;
+        textCurAcc.GetComponent<Shadow>().effectColor = textNewRecord.GetComponent<Shadow>().effectColor = textSumAcc.GetComponent<Shadow>().effectColor = (whiteRate >= 0.5f) ? Color.black : Color.white;
     }
     public void Summary()
     {
-        #region UI 1
-        //TODO calculate ACC
-        textSumAcc.text = (whiteRate >= 0.5f) ? textAccWhite.text : textAccBlack.text; 
-        textSumAcc.color = textNewRecord.color = (whiteRate >= 0.5f) ? aWhite : aBlack;
-        textSumAcc.GetComponent<Shadow>().effectColor = textNewRecord.GetComponent<Shadow>().effectColor = 
-            (whiteRate >= 0.5f) ? Color.black: Color.white;
-        //textCountGrossBlack.text = countGrossBlack.ToString();
-        //textCountGrossWhite.text = countGrossWhite.ToString();
         textSumTitle.text = melodyMaker.curMelody.title;
         summaryCover.sprite = MelodyManager.instance.melodySources[melodyMaker.curMelody.id].cover;
+
         textCountBenignBlack.text = countBenignBlack.ToString();
         textCountBareBlack.text = countBareBlack.ToString();
         textCountByBlack.text = countByBlack.ToString();
-
         textCountBenignWhite.text = countBenignWhite.ToString();
         textCountBareWhite.text = countBareWhite.ToString();
         textCountByWhite.text = countByWhite.ToString();
 
-        
         panelSummary.SetActive(true);
-        #endregion
-
 
         gameObject.SetActive(false);
     }

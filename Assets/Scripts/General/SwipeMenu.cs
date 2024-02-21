@@ -24,10 +24,6 @@ public class SwipeMenu : MonoBehaviour
         curId = new(-1, this);
         InitMelodyList();
     }
-    private void OnEnable()
-    {
-        OnCurIdChange();
-    }
     public void InitMelodyList()
     {
         ClearAllChild(transform);
@@ -119,8 +115,7 @@ public class SwipeMenu : MonoBehaviour
         if (curId.Value < 0 || curId.Value >= MelodyManager.instance.list_melody.Count)
             return;
         UIManager.instance.curCover.sprite = MelodyManager.instance.melodySources[curId.Value].cover;
-        if (curAudioPreview)
-            AudioManager.instance.Stop(curAudioPreview.clip);
+        StopCurAudio();
         curAudioPreview = AudioManager.instance.GetSource(AudioManager.instance.PlayLoop(MelodyManager.instance.melodySources[curId.Value].audio, 1, 1, 1,
             MelodyManager.instance.list_melody[curId.Value].startOnExtract, MelodyManager.instance.list_melody[curId.Value].endOnExtract));
     }
@@ -135,8 +130,13 @@ public class SwipeMenu : MonoBehaviour
     }
     public void CallOnStartMake()
     {
-        AudioManager.instance.Stop(curAudioPreview.clip);
+        StopCurAudio();
         UIManager.instance.melodyMaker.GetComponent<MelodyMaker>().OnStartWeave(curId.Value);
+    }
+    public void StopCurAudio()
+    {
+        if(curAudioPreview)
+            AudioManager.instance.Stop(curAudioPreview.clip);
     }
     public void ClearAllChild(Transform p)
     {

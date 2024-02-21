@@ -11,18 +11,14 @@ public class UIManager : MonoBehaviour
     public GameObject panel_Title;
     public GameObject melodyMaker;
     public GameObject p_trail;
-    public GameObject canvasBack;
+    //public GameObject canvasDefaultBack;
 
-    public SwipeMenu swipeMenu;
+    public Color aWhite;
+    public Color aBlack;
+
     private void Awake()
     {
         instance = this;
     }
 
-    public void OnReturnTitle()
-    {
-        AudioManager.instance.Stop(swipeMenu.curAudioPreview.clip);
-        panel_SelectMelody.SetActive(false);
-        panel_Title.SetActive(true);
-    }
 }

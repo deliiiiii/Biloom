@@ -94,7 +94,6 @@ public class MelodyMaker : MonoBehaviour
                 PathURL = Application.streamingAssetsPath + "/";
             }
         }
-        SetCamera();
     }
     private void Update()
     {
@@ -120,10 +119,10 @@ public class MelodyMaker : MonoBehaviour
     {
         p_Grid.transform.localPosition = new(0, 0, -curAudioSource.time * mmi.speedUni * mmi.speedMulti / 1f);// TODO 0.3f??
     }
-    void SetCamera()
+    public void SetCamera()
     {
         if (Screen.width / Screen.height > 1.6f)
-            Camera.main.gameObject.transform.position = new Vector3(0f, 6f, -12.5f);
+            Camera.main.gameObject.transform.position = new Vector3(0f, 5.5f, -12.5f);
         else
             Camera.main.gameObject.transform.position = new Vector3(0f, 8f, -14f);
     }
@@ -198,7 +197,7 @@ public class MelodyMaker : MonoBehaviour
         UIManager.instance.panel_SelectMelody.SetActive(false);
         UIManager.instance.melodyMaker.SetActive(true);
         UIManager.instance.p_trail.SetActive(true);
-        UIManager.instance.canvasBack.SetActive(true);
+        //UIManager.instance.canvasDefaultBack.SetActive(true);
         p_HLine.gameObject.SetActive(true);
 
         curMelody = MelodyManager.instance.list_melody[id];
@@ -224,7 +223,7 @@ public class MelodyMaker : MonoBehaviour
         UIManager.instance.panel_SelectMelody.SetActive(true);
         UIManager.instance.melodyMaker.SetActive(false);
         UIManager.instance.p_trail.SetActive(false);
-        UIManager.instance.canvasBack.SetActive(false);
+        //UIManager.instance.canvasDefaultBack.SetActive(false);
         
     }
     public bool IsPaused()
