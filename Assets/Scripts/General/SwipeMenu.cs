@@ -77,6 +77,12 @@ public class SwipeMenu : MonoBehaviour
         curId.Value = (!t) ? 0 : t.GetSiblingIndex();
         StartCoroutine(nameof(RollMelody_Co));
     }
+    public void OnStopRollMelody()
+    {
+        //print("stop");
+        StopCoroutine(nameof(RollMelody_Co));
+        isRolling = false;
+    }
     IEnumerator RollMelody_Co()
     {
         while(true)

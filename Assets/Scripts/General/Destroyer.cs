@@ -15,7 +15,7 @@ public class Destroyer : MonoBehaviour
     {
         
     }
-    void MyDestroy()
+    public void MyDestroy()
     {
         
         Destroy(gameObject);
