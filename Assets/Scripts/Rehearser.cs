@@ -46,7 +46,7 @@ public class Rehearser : MonoBehaviour
     private int countGrossWhite = 0;
 
     public GameObject panelSummary;
-    public Text textSummaryTitle;
+    public Text textSumTitle;
     public Image summaryCover;
     //public Text textMaxCombo;
     public Text textAccBlack;
@@ -61,6 +61,7 @@ public class Rehearser : MonoBehaviour
     public Text textNewRecord;
     //public Text textCountGrossBlack;
     //public Text textCountGrossWhite;
+
 
     [Header("Panel Pause")]
     public GameObject panelPauseButtons;
@@ -235,12 +236,15 @@ public class Rehearser : MonoBehaviour
     }
     public void Summary()
     {
+        #region UI 1
+        //TODO calculate ACC
+        textSumAcc.text = (whiteRate >= 0.5f) ? textAccWhite.text : textAccBlack.text; 
         textSumAcc.color = textNewRecord.color = (whiteRate >= 0.5f) ? aWhite : aBlack;
         textSumAcc.GetComponent<Shadow>().effectColor = textNewRecord.GetComponent<Shadow>().effectColor = 
             (whiteRate >= 0.5f) ? Color.black: Color.white;
         //textCountGrossBlack.text = countGrossBlack.ToString();
         //textCountGrossWhite.text = countGrossWhite.ToString();
-        textSummaryTitle.text = melodyMaker.curMelody.title;
+        textSumTitle.text = melodyMaker.curMelody.title;
         summaryCover.sprite = MelodyManager.instance.melodySources[melodyMaker.curMelody.id].cover;
         textCountBenignBlack.text = countBenignBlack.ToString();
         textCountBareBlack.text = countBareBlack.ToString();
@@ -250,8 +254,11 @@ public class Rehearser : MonoBehaviour
         textCountBareWhite.text = countBareWhite.ToString();
         textCountByWhite.text = countByWhite.ToString();
 
+        
         panelSummary.SetActive(true);
-        //TODO calculate ACC
+        #endregion
+
+
         gameObject.SetActive(false);
     }
     
