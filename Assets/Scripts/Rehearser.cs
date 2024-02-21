@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
+using static Unity.Collections.AllocatorManager;
 
 public class Rehearser : MonoBehaviour
 {
@@ -20,7 +21,9 @@ public class Rehearser : MonoBehaviour
     public Slider sliderWhiteRate;
     [Range(0f,1f)]
     private float whiteRate;
-    
+    public Color aWhite;
+    public Color aBlack;
+
    [Header("Panel Info")]
     public Slider sliderTime;
     public Image infoCover;
@@ -54,6 +57,8 @@ public class Rehearser : MonoBehaviour
     public Text textCountBenignWhite;
     public Text textCountBareWhite;
     public Text textCountByWhite;
+    public Text textSumAcc;
+    public Text textNewRecord;
     //public Text textCountGrossBlack;
     //public Text textCountGrossWhite;
 
@@ -230,7 +235,9 @@ public class Rehearser : MonoBehaviour
     }
     public void Summary()
     {
-        panelSummary.SetActive(true);
+        textSumAcc.color = textNewRecord.color = (whiteRate >= 0.5f) ? aWhite : aBlack;
+        textSumAcc.GetComponent<Shadow>().effectColor = textNewRecord.GetComponent<Shadow>().effectColor = 
+            (whiteRate >= 0.5f) ? Color.black: Color.white;
         //textCountGrossBlack.text = countGrossBlack.ToString();
         //textCountGrossWhite.text = countGrossWhite.ToString();
         textSummaryTitle.text = melodyMaker.curMelody.title;
@@ -242,6 +249,8 @@ public class Rehearser : MonoBehaviour
         textCountBenignWhite.text = countBenignWhite.ToString();
         textCountBareWhite.text = countBareWhite.ToString();
         textCountByWhite.text = countByWhite.ToString();
+
+        panelSummary.SetActive(true);
         //TODO calculate ACC
         gameObject.SetActive(false);
     }
