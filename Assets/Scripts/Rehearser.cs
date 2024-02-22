@@ -98,6 +98,8 @@ public class Rehearser : MonoBehaviour
     }
     public void OnRehearse()
     {
+        melodyMaker.WriteCurSheet();
+
         gameObject.SetActive(true);
         melodyMaker.p_HLine.gameObject.SetActive(false);
         melodyMaker.ClearSelectedNote();
@@ -125,9 +127,9 @@ public class Rehearser : MonoBehaviour
     }
     #endregion
     #region Reverse
-    void RefreshReverse()
+    public void RefreshReverse()
     {
-        whiteRate = sliderWhiteRate.value;
+        whiteRate = sliderWhiteRate.value;//TODO
         foreach (ReversableObject obj in reversableObjects)
             obj.SetReverse(whiteRate);
         for(int i = 0;i<melodyMaker.p_Momentus.childCount;i++)

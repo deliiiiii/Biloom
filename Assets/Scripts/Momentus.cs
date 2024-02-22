@@ -5,11 +5,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Internal;
 using UnityEngine.UI;
+
 [Serializable]
 public class MomentusData
 {
     //TODO 2 by generator
-    public int size;
+    public float size;
     public float globalX;//appear pos
     public float accTime;//appear time
     public float lineOffset;
@@ -28,10 +29,11 @@ public class MomentusData
     public Type type;
     public bool isOpposite = false;//isWhite
     public int multiSweepCount;
-    MomentusData()
-    {
-        multiSweepCount = 1;
-    }
+    //MomentusData()
+    //{
+    //    multiSweepCount = 1;
+    //    size = 1.6f;
+    //}
 }
 public class Momentus : MonoBehaviour
 {
@@ -48,7 +50,7 @@ public class Momentus : MonoBehaviour
     public GameObject multiSweep;
     public SerializableDictionary<MomentusData.Type, SerializableDictionary<bool, Sprite>> visage_type_to_BoolSprite;
 
-    public float minAlpha = 0.3f;
+    public float minAlpha;
 
     private MomentusManager mmi;
     private void Awake()
@@ -143,6 +145,14 @@ public class Momentus : MonoBehaviour
         transform.position = new Vector3(x, 0.87f, transform.position.z);
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, time * MomentusManager.instance.speedUni * MomentusManager.instance.speedMulti);
         //SetColliderInPlay();
+    }
+    public void SetSize(float size = 0f)
+    {
+        transform.localScale = new Vector3((size == 0f ? momentusData.size: size) /
+                                           (momentusData.size == 0?1.6f: momentusData.size) * transform.localScale.x,
+            transform.localScale.y, transform.localScale.z);
+        if(size != 0f)
+            momentusData.size = size;
     }
     //void SetColliderInPlay()
     //{

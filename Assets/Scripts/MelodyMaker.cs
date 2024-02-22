@@ -43,6 +43,7 @@ public class MelodyMaker : MonoBehaviour
 
     [Header("Panel Configuration")]
     public Dropdown dropdownType;
+    public Dropdown dropdownSize;
     public Toggle toggleIsOpposite;
     public Image toggleIsOppositeBack;
     public GameObject isMixedOpposite;
@@ -122,9 +123,9 @@ public class MelodyMaker : MonoBehaviour
     public void SetCamera()
     {
         if (Screen.width / Screen.height > 1.6f)
-            Camera.main.gameObject.transform.position = new Vector3(0f, 5.5f, -12.5f);
+            Camera.main.gameObject.transform.position = new Vector3(0f, 5.5f, -12.2f);
         else
-            Camera.main.gameObject.transform.position = new Vector3(0f, 8f, -14f);
+            Camera.main.gameObject.transform.position = new Vector3(0f, 7f, -13f);
     }
     void HandleInput()
     {
@@ -206,6 +207,7 @@ public class MelodyMaker : MonoBehaviour
         curAudioSource = AudioManager.instance.GetSource(AudioManager.instance.PlayOneShot(curAudioClip, 1, 1,float.Parse(inputTimePitch.text.ToString())));
         curAudioSource.time = 0f;
         textEndStamp.text = curAudioClip.length.ToString();
+        SetCamera();
         OnLineOffsetChanged_Input();
         OnSelectNote();
         OnConfigurationChanged();
@@ -329,6 +331,9 @@ public class MelodyMaker : MonoBehaviour
         if (selectedMomentus.Count == 0)
         {
             dropdownType.interactable = false;
+            dropdownType.captionText.text = "";
+            dropdownSize.interactable = false;
+            dropdownSize.captionText.text = "";
             toggleIsOpposite.gameObject.SetActive(false);
             isMixedOpposite.SetActive(false);
             inputCapitalX.interactable = false;
@@ -346,6 +351,26 @@ public class MelodyMaker : MonoBehaviour
         else if (selectedMomentus.Count == 1)//uni
         {
             dropdownType.interactable = true;
+            for (int i = 0; i < dropdownType.options.Count; i++)
+            {
+                if (selectedMomentus[0].momentusData.type.ToString().ToLower() == dropdownType.options[i].text.ToLower())
+                {
+                    dropdownType.value = i;
+                    dropdownType.captionText.text = dropdownType.options[i].text;
+                    break;
+                }
+            }
+            dropdownSize.interactable = true;
+            print("Selected Single size = " + selectedMomentus[0].momentusData.size);
+            for(int i=0;i < dropdownSize.options.Count;i++)
+            {
+                if(selectedMomentus[0].momentusData.size == float.Parse(dropdownSize.options[i].text))
+                {
+                    dropdownSize.value = i;
+                    dropdownSize.captionText.text = dropdownSize.options[i].text;
+                    break;
+                }
+            }
             toggleIsOpposite.gameObject.SetActive(true);
             toggleIsOpposite.isOn = selectedMomentus[0].momentusData.isOpposite;
             isMixedOpposite.SetActive(false);
@@ -364,6 +389,11 @@ public class MelodyMaker : MonoBehaviour
         else//multi
         {
             dropdownType.interactable = true;
+            //dropdownType.value = -1;
+            dropdownType.captionText.text = "?";
+            dropdownSize.interactable = true;
+            //dropdownSize.value = -1;
+            dropdownSize.captionText.text = "?";
             toggleIsOpposite.gameObject.SetActive(true);
             isMixedOpposite.SetActive(true);
             toggleIsOppositeBack.color = Color.white;
@@ -405,6 +435,28 @@ public class MelodyMaker : MonoBehaviour
         StartCoroutine(MoveSelected());
         if (!toggleLockDeltaZ.isOn)
             inputDeltaZ.text = "";
+    }
+    public void OnTypeAndSizeChanged()
+    {
+        //print("Set typeId :" + dropdownType.value + " sizeId :" + dropdownSize.value);
+        //typeChanged first ,but also call this sizeValueChanged
+        
+        foreach (var it in selectedMomentus)
+        {
+            if (dropdownType.value >=0)
+            {
+                it.momentusData.type = (MomentusData.Type)dropdownType.value;
+                dropdownType.captionText.text = dropdownType.options[dropdownType.value].text;
+            }
+            if(dropdownSize.value >=0)
+            {
+                it.SetSize(float.Parse(dropdownSize.options[dropdownSize.value].text));
+                dropdownSize.captionText.text = dropdownSize.options[dropdownSize.value].text;
+            }
+            
+        }
+        
+        
     }
     public void OnOppositeChanged()
     {
@@ -527,6 +579,7 @@ public class MelodyMaker : MonoBehaviour
         t.SetActive(true);
         t.transform.parent = p_Momentus;
         t.GetComponent<Momentus>().SetXTime(x, curAudioSource.time);
+        t.GetComponent<Momentus>().SetSize();
         t.GetComponent<Momentus>().isInMaker.Value = true;
 
         ClearSelectedNote();
@@ -540,6 +593,10 @@ public class MelodyMaker : MonoBehaviour
         t.SetActive(true);
         t.transform.parent = p_Momentus;
         t.GetComponent<Momentus>().SetXTime_WhenReadData(data.globalX, data.accTime);
+        if (data.size == 0)
+            data.size = 1.6f;
+        else
+            t.GetComponent<Momentus>().SetSize(data.size);
         t.GetComponent<Momentus>().isInMaker.Value = true;
         if (data.multiSweepCount > 1)
             t.GetComponent<Momentus>().multiSweep.SetActive(true);

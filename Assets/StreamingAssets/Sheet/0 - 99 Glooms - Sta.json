@@ -11,7 +11,7 @@
             "outcome": 0,
             "momentus": [
                 {
-                    "size": 0,
+                    "size": 1.0,
                     "globalX": -3.0,
                     "accTime": 2.734600067138672,
                     "lineOffset": 0.0,
@@ -22,7 +22,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.0,
                     "globalX": 3.0,
                     "accTime": 2.734600067138672,
                     "lineOffset": 0.0,
@@ -33,7 +33,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -1.0,
                     "accTime": 5.260000228881836,
                     "lineOffset": 0.0,
@@ -44,7 +44,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 0.0,
                     "accTime": 5.343999862670898,
                     "lineOffset": 0.0,
@@ -55,7 +55,7 @@
                     "multiSweepCount": 1
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 0.0,
                     "accTime": 5.427999973297119,
                     "lineOffset": 0.0,
@@ -66,7 +66,7 @@
                     "multiSweepCount": 1
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 2.0,
                     "accTime": 5.560553073883057,
                     "lineOffset": 0.0,
@@ -77,7 +77,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 0.0,
                     "accTime": 5.668661594390869,
                     "lineOffset": 0.0,
@@ -88,7 +88,7 @@
                     "multiSweepCount": 1
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 0.0,
                     "accTime": 5.7497429847717289,
                     "lineOffset": 0.0,
@@ -99,7 +99,7 @@
                     "multiSweepCount": 1
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -1.0,
                     "accTime": 3.992974042892456,
                     "lineOffset": 0.0,
@@ -110,7 +110,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -2.0,
                     "accTime": 4.074055194854736,
                     "lineOffset": 0.0,
@@ -121,7 +121,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -1.0,
                     "accTime": 4.297295093536377,
                     "lineOffset": 0.0,
@@ -132,7 +132,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 1.0,
                     "accTime": 4.625,
                     "lineOffset": 0.0,
@@ -143,7 +143,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 1.0,
                     "accTime": 4.965944766998291,
                     "lineOffset": 0.0,
@@ -154,7 +154,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -1.0,
                     "accTime": 4.276753902435303,
                     "lineOffset": 0.0,
@@ -165,7 +165,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 1.0,
                     "accTime": 4.601079940795898,
                     "lineOffset": 0.0,
@@ -176,7 +176,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 0.0,
                     "accTime": 5.047028064727783,
                     "lineOffset": 0.0,
@@ -187,7 +187,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 3.200000047683716,
                     "accTime": 5.977835178375244,
                     "lineOffset": 0.0,
@@ -198,7 +198,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -3.200000047683716,
                     "accTime": 5.977835178375244,
                     "lineOffset": 0.0,
@@ -209,7 +209,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -5.0,
                     "accTime": 6.302158832550049,
                     "lineOffset": 0.0,
@@ -220,7 +220,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -5.0,
                     "accTime": 6.950806140899658,
                     "lineOffset": 0.0,
@@ -231,7 +231,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -5.0,
                     "accTime": 7.923777103424072,
                     "lineOffset": 0.0,
@@ -242,7 +242,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -3.200000047683716,
                     "accTime": 8.248102188110352,
                     "lineOffset": 0.0,
@@ -253,7 +253,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -5.0,
                     "accTime": 8.572427749633789,
                     "lineOffset": 0.0,
@@ -264,7 +264,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -5.0,
                     "accTime": 9.869729995727539,
                     "lineOffset": 0.0,
@@ -275,7 +275,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 3.0,
                     "accTime": 11.00486946105957,
                     "lineOffset": 0.0,
@@ -286,7 +286,7 @@
                     "multiSweepCount": 1
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 1.0,
                     "accTime": 11.168672561645508,
                     "lineOffset": 0.0,
@@ -297,7 +297,7 @@
                     "multiSweepCount": 1
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -3.200000047683716,
                     "accTime": 7.275129795074463,
                     "lineOffset": 0.0,
@@ -308,7 +308,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 5.0,
                     "accTime": 7.275129795074463,
                     "lineOffset": 0.0,
@@ -319,7 +319,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.0,
                     "globalX": -1.0,
                     "accTime": 2.734600067138672,
                     "lineOffset": 0.0,
@@ -330,7 +330,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.0,
                     "globalX": 1.0,
                     "accTime": 2.734600067138672,
                     "lineOffset": 0.0,
@@ -341,7 +341,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -5.0,
                     "accTime": 5.977835178375244,
                     "lineOffset": 0.0,
@@ -352,7 +352,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 5.0,
                     "accTime": 5.977835178375244,
                     "lineOffset": 0.0,
@@ -363,7 +363,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 5.0,
                     "accTime": 8.41026496887207,
                     "lineOffset": 0.0,
@@ -374,7 +374,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 2.200000047683716,
                     "accTime": 8.734590530395508,
                     "lineOffset": 0.0,
@@ -385,7 +385,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 4.0,
                     "accTime": 8.734590530395508,
                     "lineOffset": 0.0,
@@ -396,7 +396,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -5.0,
                     "accTime": 8.977834701538086,
                     "lineOffset": 0.0,
@@ -407,7 +407,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -3.200000047683716,
                     "accTime": 8.977834701538086,
                     "lineOffset": 0.0,
@@ -418,7 +418,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -3.200000047683716,
                     "accTime": 9.302160263061524,
                     "lineOffset": 0.0,
@@ -429,7 +429,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 3.200000047683716,
                     "accTime": 9.302160263061524,
                     "lineOffset": 0.0,
@@ -440,7 +440,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 1.0,
                     "accTime": 9.545404434204102,
                     "lineOffset": 0.0,
@@ -451,7 +451,7 @@
                     "multiSweepCount": 1
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 3.0,
                     "accTime": 9.70756721496582,
                     "lineOffset": 0.0,
@@ -462,7 +462,7 @@
                     "multiSweepCount": 1
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -3.200000047683716,
                     "accTime": 9.869729995727539,
                     "lineOffset": 0.0,
@@ -473,7 +473,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 3.0,
                     "accTime": 10.031892776489258,
                     "lineOffset": 0.0,
@@ -484,7 +484,7 @@
                     "multiSweepCount": 1
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 1.0,
                     "accTime": 10.194055557250977,
                     "lineOffset": 0.0,
@@ -495,7 +495,7 @@
                     "multiSweepCount": 1
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -5.0,
                     "accTime": 10.356200218200684,
                     "lineOffset": 0.0,
@@ -506,7 +506,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 1.0,
                     "accTime": 10.356200218200684,
                     "lineOffset": 0.0,
@@ -517,7 +517,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -5.0,
                     "accTime": 11.32919979095459,
                     "lineOffset": 0.0,
@@ -528,7 +528,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -3.200000047683716,
                     "accTime": 11.815699577331543,
                     "lineOffset": 0.0,
@@ -539,7 +539,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 5.0,
                     "accTime": 10.842700004577637,
                     "lineOffset": 0.0,
@@ -550,7 +550,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 1.0,
                     "accTime": 11.32919979095459,
                     "lineOffset": 0.0,
@@ -561,7 +561,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 5.0,
                     "accTime": 9.869729995727539,
                     "lineOffset": 0.0,
@@ -572,7 +572,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -3.200000047683716,
                     "accTime": 10.356200218200684,
                     "lineOffset": 0.0,
@@ -583,7 +583,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 3.0,
                     "accTime": 10.518381118774414,
                     "lineOffset": 0.0,
@@ -594,7 +594,7 @@
                     "multiSweepCount": 1
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 5.0,
                     "accTime": 10.680543899536133,
                     "lineOffset": 0.0,
@@ -605,7 +605,7 @@
                     "multiSweepCount": 1
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 5.0,
                     "accTime": 9.302160263061524,
                     "lineOffset": 0.0,
@@ -616,7 +616,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -5.0,
                     "accTime": 9.302160263061524,
                     "lineOffset": 0.0,
@@ -627,7 +627,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -3.200000047683716,
                     "accTime": 7.923777103424072,
                     "lineOffset": 0.0,
@@ -638,7 +638,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -5.0,
                     "accTime": 10.842700004577637,
                     "lineOffset": 0.0,
@@ -649,7 +649,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -3.200000047683716,
                     "accTime": 10.842700004577637,
                     "lineOffset": 0.0,
@@ -660,7 +660,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -3.200000047683716,
                     "accTime": 11.32919979095459,
                     "lineOffset": 0.0,
@@ -671,7 +671,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 3.0,
                     "accTime": 11.491357803344727,
                     "lineOffset": 0.0,
@@ -682,7 +682,7 @@
                     "multiSweepCount": 1
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 5.0,
                     "accTime": 11.653520584106446,
                     "lineOffset": 0.0,
@@ -693,7 +693,7 @@
                     "multiSweepCount": 1
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -5.0,
                     "accTime": 11.815699577331543,
                     "lineOffset": 0.0,
@@ -704,7 +704,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 5.0,
                     "accTime": 11.815699577331543,
                     "lineOffset": 0.0,
@@ -715,7 +715,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 3.200000047683716,
                     "accTime": 11.815699577331543,
                     "lineOffset": 0.0,
@@ -726,7 +726,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 1.0,
                     "accTime": 3.992974042892456,
                     "lineOffset": 0.0,
@@ -737,7 +737,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 0.0,
                     "accTime": 4.074055194854736,
                     "lineOffset": 0.0,
@@ -748,7 +748,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 1.0,
                     "accTime": 4.276753902435303,
                     "lineOffset": 0.0,
@@ -759,7 +759,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 1.0,
                     "accTime": 4.297295093536377,
                     "lineOffset": 0.0,
@@ -770,7 +770,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -1.0,
                     "accTime": 4.601079940795898,
                     "lineOffset": 0.0,
@@ -781,7 +781,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -1.0,
                     "accTime": 4.625,
                     "lineOffset": 0.0,
@@ -792,7 +792,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -1.0,
                     "accTime": 4.965944766998291,
                     "lineOffset": 0.0,
@@ -803,7 +803,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 2.0,
                     "accTime": 5.047028064727783,
                     "lineOffset": 0.0,
@@ -814,7 +814,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 1.0,
                     "accTime": 5.260000228881836,
                     "lineOffset": 0.0,
@@ -825,7 +825,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -2.0,
                     "accTime": 5.560553073883057,
                     "lineOffset": 0.0,
@@ -836,7 +836,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -3.1999998092651369,
                     "accTime": 6.626482009887695,
                     "lineOffset": 0.0,
@@ -847,7 +847,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -5.0,
                     "accTime": 6.626482009887695,
                     "lineOffset": 0.0,
@@ -858,7 +858,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -3.200000047683716,
                     "accTime": 7.599400043487549,
                     "lineOffset": 0.0,
@@ -869,7 +869,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -3.200000047683716,
                     "accTime": 6.302158832550049,
                     "lineOffset": 0.0,
@@ -880,7 +880,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -5.0,
                     "accTime": 7.275129795074463,
                     "lineOffset": 0.0,
@@ -891,7 +891,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 4.0,
                     "accTime": 7.842696189880371,
                     "lineOffset": 0.0,
@@ -902,7 +902,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -5.0,
                     "accTime": 8.248102188110352,
                     "lineOffset": 0.0,
@@ -913,7 +913,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -3.200000047683716,
                     "accTime": 8.572427749633789,
                     "lineOffset": 0.0,
@@ -924,7 +924,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 2.200000047683716,
                     "accTime": 9.058916091918946,
                     "lineOffset": 0.0,
@@ -935,7 +935,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -5.0,
                     "accTime": 7.599400043487549,
                     "lineOffset": 0.0,
@@ -946,7 +946,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -3.200000047683716,
                     "accTime": 6.950806140899658,
                     "lineOffset": 0.0,
@@ -957,7 +957,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -5.0,
                     "accTime": 2.734600067138672,
                     "lineOffset": 0.0,
@@ -968,7 +968,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 5.0,
                     "accTime": 2.734600067138672,
                     "lineOffset": 0.0,
@@ -979,7 +979,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 4.0,
                     "accTime": 7.437292098999023,
                     "lineOffset": 0.0,
@@ -990,7 +990,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 2.200000047683716,
                     "accTime": 7.437292098999023,
                     "lineOffset": 0.0,
@@ -1001,7 +1001,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 3.200000047683716,
                     "accTime": 7.275129795074463,
                     "lineOffset": 0.0,
@@ -1012,7 +1012,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 2.200000047683716,
                     "accTime": 7.842696189880371,
                     "lineOffset": 0.0,
@@ -1023,7 +1023,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 3.200000047683716,
                     "accTime": 8.41026496887207,
                     "lineOffset": 0.0,
@@ -1034,7 +1034,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -1.399999976158142,
                     "accTime": 6.302158832550049,
                     "lineOffset": 0.0,
@@ -1045,18 +1045,18 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -1.399999976158142,
                     "accTime": 6.626482009887695,
                     "lineOffset": 0.0,
                     "beatNumerator": 1.0,
                     "beatDenominator": 1.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -1.399999976158142,
                     "accTime": 6.950806140899658,
                     "lineOffset": 0.0,
@@ -1067,7 +1067,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -1.399999976158142,
                     "accTime": 7.275129795074463,
                     "lineOffset": 0.0,
@@ -1078,7 +1078,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -1.399999976158142,
                     "accTime": 5.977835178375244,
                     "lineOffset": 0.0,
@@ -1089,7 +1089,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 0.4000000059604645,
                     "accTime": 5.977835178375244,
                     "lineOffset": 0.0,
@@ -1100,7 +1100,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -1.399999976158142,
                     "accTime": 7.599400043487549,
                     "lineOffset": 0.0,
@@ -1111,7 +1111,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -1.399999976158142,
                     "accTime": 7.923777103424072,
                     "lineOffset": 0.0,
@@ -1122,7 +1122,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -1.399999976158142,
                     "accTime": 8.248102188110352,
                     "lineOffset": 0.0,
@@ -1133,7 +1133,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 0.4000000059604645,
                     "accTime": 6.302158832550049,
                     "lineOffset": 0.0,
@@ -1144,18 +1144,18 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 0.4000000059604645,
                     "accTime": 6.626482009887695,
                     "lineOffset": 0.0,
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 0.4000000059604645,
                     "accTime": 6.950806140899658,
                     "lineOffset": 0.0,
@@ -1166,7 +1166,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 0.4000000059604645,
                     "accTime": 7.275129795074463,
                     "lineOffset": 0.0,
@@ -1177,7 +1177,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 0.4000000059604645,
                     "accTime": 7.599400043487549,
                     "lineOffset": 0.0,
@@ -1188,7 +1188,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 0.4000000059604645,
                     "accTime": 7.923777103424072,
                     "lineOffset": 0.0,
@@ -1199,7 +1199,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 0.4000000059604645,
                     "accTime": 8.248102188110352,
                     "lineOffset": 0.0,
@@ -1210,7 +1210,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -1.399999976158142,
                     "accTime": 8.572427749633789,
                     "lineOffset": 0.0,
@@ -1221,7 +1221,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 0.4000000059604645,
                     "accTime": 8.572427749633789,
                     "lineOffset": 0.0,
@@ -1232,7 +1232,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -1.399999976158142,
                     "accTime": 8.977834701538086,
                     "lineOffset": 0.0,
@@ -1243,7 +1243,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 0.4000000059604645,
                     "accTime": 8.977834701538086,
                     "lineOffset": 0.0,
@@ -1254,7 +1254,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -1.399999976158142,
                     "accTime": 9.302160263061524,
                     "lineOffset": 0.0,
@@ -1265,7 +1265,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 0.4000000059604645,
                     "accTime": 9.302160263061524,
                     "lineOffset": 0.0,
@@ -1276,7 +1276,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 4.0,
                     "accTime": 9.058916091918946,
                     "lineOffset": 0.0,
@@ -1287,7 +1287,7 @@
                     "multiSweepCount": 2
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -1.399999976158142,
                     "accTime": 9.869729995727539,
                     "lineOffset": 0.0,
@@ -1298,7 +1298,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -1.399999976158142,
                     "accTime": 10.356200218200684,
                     "lineOffset": 0.0,
@@ -1309,7 +1309,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -1.399999976158142,
                     "accTime": 10.842700004577637,
                     "lineOffset": 0.0,
@@ -1320,7 +1320,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -1.399999976158142,
                     "accTime": 11.32919979095459,
                     "lineOffset": 0.0,
@@ -1331,7 +1331,7 @@
                     "multiSweepCount": 4
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": -0.4000000059604645,
                     "accTime": 11.815699577331543,
                     "lineOffset": 0.0,
@@ -1342,7 +1342,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 0,
+                    "size": 1.600000023841858,
                     "globalX": 1.399999976158142,
                     "accTime": 11.815699577331543,
                     "lineOffset": 0.0,
