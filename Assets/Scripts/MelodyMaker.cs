@@ -361,7 +361,7 @@ public class MelodyMaker : MonoBehaviour
                 }
             }
             dropdownSize.interactable = true;
-            print("Selected Single size = " + selectedMomentus[0].momentusData.size);
+            //print("Selected Single size = " + selectedMomentus[0].momentusData.size);
             for(int i=0;i < dropdownSize.options.Count;i++)
             {
                 if(selectedMomentus[0].momentusData.size == float.Parse(dropdownSize.options[i].text))

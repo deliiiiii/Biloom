@@ -11,7 +11,7 @@
             "outcome": 0,
             "momentus": [
                 {
-                    "size": 1.0,
+                    "size": 1.600000023841858,
                     "globalX": -3.0,
                     "accTime": 2.734600067138672,
                     "lineOffset": 0.0,
@@ -22,7 +22,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 1.0,
+                    "size": 1.600000023841858,
                     "globalX": 3.0,
                     "accTime": 2.734600067138672,
                     "lineOffset": 0.0,
@@ -319,7 +319,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 1.0,
+                    "size": 1.600000023841858,
                     "globalX": -1.0,
                     "accTime": 2.734600067138672,
                     "lineOffset": 0.0,
@@ -330,7 +330,7 @@
                     "multiSweepCount": 6
                 },
                 {
-                    "size": 1.0,
+                    "size": 1.600000023841858,
                     "globalX": 1.0,
                     "accTime": 2.734600067138672,
                     "lineOffset": 0.0,
@@ -997,7 +997,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 1.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -1019,7 +1019,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -1052,7 +1052,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 1.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 4
                 },
                 {
@@ -1085,7 +1085,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 6
                 },
                 {
@@ -1096,7 +1096,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 6
                 },
                 {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Internal;
@@ -138,13 +139,13 @@ public class Momentus : MonoBehaviour
         momentusData.beatDenominator = float.Parse(MelodyMaker.instance.inputDenominator.text);
         momentusData.type = (MomentusData.Type)MelodyMaker.instance.dropdownType.value;
         OnNoteAppear();
-        //SetColliderInPlay();
+        SetColliderInPlay(x);
     }
     public void SetXTime_WhenReadData(float x, float time)
     {
         transform.position = new Vector3(x, 0.87f, transform.position.z);
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, time * MomentusManager.instance.speedUni * MomentusManager.instance.speedMulti);
-        //SetColliderInPlay();
+        SetColliderInPlay(x);
     }
     public void SetSize(float size = 0f)
     {
@@ -154,10 +155,11 @@ public class Momentus : MonoBehaviour
         if(size != 0f)
             momentusData.size = size;
     }
-    //void SetColliderInPlay()
-    //{
-    //    colInPlay.size = new(colInPlay.size.x, colInPlay.size.y, MomentusManager.instance.speedUni * MomentusManager.instance.speedMulti * 0.5f);
-    //}
+    void SetColliderInPlay(float x)
+    {
+        colInPlay.size = new(1.2f + Mathf.Abs(x)/10f, colInPlay.size.y, colInPlay.size.z);
+        print(colInPlay.size);
+    }
     public void OnNoteLeave()
     {
         Collider[] hitsBefore = Physics.OverlapBox(transform.position, new Vector3(10, 1, 1)*2, Quaternion.identity);

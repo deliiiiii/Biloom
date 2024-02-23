@@ -1,13 +1,7 @@
-using NUnit.Framework.Internal.Commands;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Burst.Intrinsics;
-using Unity.Mathematics;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
-using static Unity.Collections.AllocatorManager;
 
 public class Rehearser : MonoBehaviour
 {
@@ -19,10 +13,15 @@ public class Rehearser : MonoBehaviour
     [Header("Reverse")]
     //public bool isWhite;
     public Slider sliderWhiteRate;
-    [Range(0f,1f)]
+    [SerializeField][Range(0f,1f)]
     private float whiteRate = 1f;
-
-   [Header("Panel Info")]
+    private bool haveBeenBlack = false;
+    [SerializeField]
+    private float descendCountThreshold = 10;
+    private float descendRateThreshold = 0.8f;
+    [SerializeField]
+    private float descendTime = 0.5f;
+    [Header("Panel Info")]
     public Slider sliderTime;
     public Image infoCover;
     public Text textInfoTitle;
@@ -46,6 +45,7 @@ public class Rehearser : MonoBehaviour
     private int countByWhite = 0;
     private int countGrossBlack = 0;
     private int countGrossWhite = 0;
+    
 
     public GameObject panelSummary;
     public Text textSumTitle;
@@ -129,7 +129,7 @@ public class Rehearser : MonoBehaviour
     #region Reverse
     public void RefreshReverse()
     {
-        whiteRate = sliderWhiteRate.value;//TODO
+        //whiteRate = sliderWhiteRate.value;//TODO
         foreach (ReversableObject obj in reversableObjects)
             obj.SetReverse(whiteRate);
         for(int i = 0;i<melodyMaker.p_Momentus.childCount;i++)
@@ -211,6 +211,7 @@ public class Rehearser : MonoBehaviour
         maxCombo = countGrossBlack = countGrossWhite = countBenignBlack = countBenignWhite =
             countBareBlack = countBareWhite = countByBlack = countByWhite = 0;
         curWhiteAcc = curWhiteAcc = 0f;
+        haveBeenBlack = false;
         AddCombo(null, 2);
     }
     public void AddCombo(MomentusData data,int sweepId)
@@ -239,6 +240,7 @@ public class Rehearser : MonoBehaviour
         }
         CalculateAcc();
         RefreshTextAcc();
+        CalculateWhiteRate();
     }
     void CalculateAcc()
     {
@@ -262,6 +264,33 @@ public class Rehearser : MonoBehaviour
         textCurAcc.text = textSumAcc.text = (whiteRate >= 0.5f) ? textAccWhite.text : textAccBlack.text;
         textCurAcc.color = textNewRecord.color = textSumAcc.color = (whiteRate >= 0.5f) ? UIManager.instance.aWhite : UIManager.instance.aBlack;
         textCurAcc.GetComponent<Shadow>().effectColor = textNewRecord.GetComponent<Shadow>().effectColor = textSumAcc.GetComponent<Shadow>().effectColor = (whiteRate >= 0.5f) ? Color.black : Color.white;
+    }
+    void CalculateWhiteRate()
+    {
+        if (haveBeenBlack)
+            return;
+        int delta = countBenignBlack + countBareBlack - countGrossWhite;
+        whiteRate = 1 - Mathf.Clamp(delta,0,int.MaxValue)/descendCountThreshold *(1- descendRateThreshold);
+        if (whiteRate <= descendRateThreshold)
+        {
+            haveBeenBlack = true;
+            StartCoroutine(Descend());
+        }
+    }
+    IEnumerator Descend()
+    {
+        float c = whiteRate;
+        float b = Random.Range(-1f * c / descendTime, - 2f / 3f * c / descendTime);
+        float a = -(b * descendTime + c) / descendTime / descendTime;
+        float descendTimer = 0f;
+        while(descendTimer <= descendTime)
+        {
+            descendTimer += Time.deltaTime;
+            whiteRate = a* descendTimer* descendTimer + b* descendTimer + c;
+            whiteRate = Mathf.Clamp(whiteRate, 0, 1);
+            yield return null;
+        }
+        yield break;
     }
     public void Summary()
     {
