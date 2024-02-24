@@ -5,6 +5,7 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
+    public GameObject emptyObject;
     // 整个游戏中，总的音源数量
     private const int AUDIO_CHANNEL_NUM = 8;
     public float fadeDuration = 1.5f;
@@ -18,14 +19,17 @@ public class AudioManager : MonoBehaviour
     private CHANNEL[] m_channels;
     void Awake()
     {
+        if (instance)
+            return;
+
         instance = this;
 
         m_channels = new CHANNEL[AUDIO_CHANNEL_NUM];
         for (int i = 0; i < AUDIO_CHANNEL_NUM; i++)
         {
             //每个频道对应一个音源
-            m_channels[i].channel = gameObject.AddComponent<AudioSource>();
-            m_channels[i].channel.spatialBlend = 1;//3d立体声
+            m_channels[i].channel = Instantiate(emptyObject, gameObject.transform).AddComponent<AudioSource>();
+            m_channels[i].channel.spatialBlend = 0;//3d立体声
             m_channels[i].keyOnTime = 0;
         }
     }
@@ -55,11 +59,11 @@ public class AudioManager : MonoBehaviour
     {
         for (int i = 0; i < m_channels.Length; i++)
         {
-            //如果正在播放同一个片段，而且刚刚才开始，则直接退出函数
-            if (m_channels[i].channel.isPlaying &&
-                 m_channels[i].channel.clip == clip &&
-                 m_channels[i].keyOnTime >= Time.time - 0.03f)
-                return -1;
+            ////如果正在播放同一个片段，而且刚刚才开始，则直接退出函数
+            //if (m_channels[i].channel.isPlaying &&
+            //     m_channels[i].channel.clip == clip &&
+            //     m_channels[i].keyOnTime >= Time.time - 0.03f)
+            //    return -1;
         }
         //遍历所有频道，如果有频道空闲直接播放新音频，并退出
         //如果没有空闲频道，先找到最开始播放的频道（oldest），稍后使用
@@ -67,15 +71,16 @@ public class AudioManager : MonoBehaviour
         float time = 10000000.0f;
         for (int i = 0; i < m_channels.Length; i++)
         {
-            if (m_channels[i].channel.loop == false &&
-               m_channels[i].channel.isPlaying &&
-               m_channels[i].keyOnTime < time)
+            //if (m_channels[i].channel.loop == false &&
+            //   m_channels[i].channel.isPlaying &&
+            //   m_channels[i].keyOnTime < time)
+            //{
+            //    oldest = i;
+            //    time = m_channels[i].keyOnTime;
+            //}
+            if (!m_channels[i].channel.isPlaying || (m_channels[i].channel.clip && m_channels[i].channel.clip.length<=1f))
             {
-                oldest = i;
-                time = m_channels[i].keyOnTime;
-            }
-            if (!m_channels[i].channel.isPlaying)
-            {
+                
                 m_channels[i].channel.clip = clip;
                 m_channels[i].channel.volume = volume;
                 m_channels[i].channel.pitch = pitch;
@@ -85,23 +90,24 @@ public class AudioManager : MonoBehaviour
                 m_channels[i].channel.loop = false;
                 m_channels[i].channel.Play();
                 m_channels[i].keyOnTime = Time.time;
+                print("play2 " + Time.time);
                 return i;
             }
         }
         //运行到这里说明没有空闲频道。让新的音频顶替最早播出的音频
-        if (oldest >= 0)
-        {
-            m_channels[oldest].channel.clip = clip;
-            m_channels[oldest].channel.volume = volume;
-            m_channels[oldest].channel.pitch = pitch;
-            m_channels[oldest].channel.panStereo = pan;
-            m_channels[oldest].startT = m_channels[oldest].channel.time = startT;
-            m_channels[oldest].endT = endT;
-            m_channels[oldest].channel.loop = false;
-            m_channels[oldest].channel.Play();
-            m_channels[oldest].keyOnTime = Time.time;
-            return oldest;
-        }
+        //if (oldest >= 0)
+        //{
+        //    m_channels[oldest].channel.clip = clip;
+        //    m_channels[oldest].channel.volume = volume;
+        //    m_channels[oldest].channel.pitch = pitch;
+        //    m_channels[oldest].channel.panStereo = pan;
+        //    m_channels[oldest].startT = m_channels[oldest].channel.time = startT;
+        //    m_channels[oldest].endT = endT;
+        //    m_channels[oldest].channel.loop = false;
+        //    m_channels[oldest].channel.Play();
+        //    m_channels[oldest].keyOnTime = Time.time;
+        //    return oldest;
+        //}
         return -1;
     }
     //公开方法：循环播放，用于播放长时间的背景音乐，处理方式相对简单一些

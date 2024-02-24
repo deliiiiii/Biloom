@@ -150,10 +150,6 @@ public class Rehearser : MonoBehaviour
             {
                 textCountDown.gameObject.SetActive(false);
                 buttonPause.SetActive(true);
-                for (int i = 0; i < melodyMaker.p_Momentus.childCount; i++)
-                {
-                    melodyMaker.p_Momentus.GetChild(i).GetComponent<Momentus>().isInMaker.Value = false;
-                }
                 melodyMaker.Pause(false);
                 StartCoroutine(CheckSummary());
                 yield break;
@@ -186,6 +182,11 @@ public class Rehearser : MonoBehaviour
     #region Performance
     void ResetPerformance()
     {
+        for (int i = 0; i < melodyMaker.p_Momentus.childCount; i++)
+        {
+            melodyMaker.p_Momentus.GetChild(i).GetComponent<Momentus>().isInMaker.Value = false;
+            melodyMaker.p_Momentus.GetChild(i).GetComponent<Momentus>().havePlayedAudioEffect = false;
+        }
         whiteRate = sliderWhiteRate.value = 1f;
         maxCombo = countGrossBlack = countGrossWhite = countBenignBlack = countBenignWhite =
             countBareBlack = countBareWhite = countByBlack = countByWhite = 0;

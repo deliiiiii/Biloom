@@ -141,8 +141,8 @@ public class MelodyMaker : MonoBehaviour
         //{
         //    WriteCurSheet();
         //}
-        if (panel_Warning.activeSelf)
-            return;
+        //if (panel_Warning.activeSelf)
+        //    return;
         if(Input.GetKeyDown(KeyCode.UpArrow))
         {
             StartCoroutine(MagnetZ(1));
@@ -167,6 +167,9 @@ public class MelodyMaker : MonoBehaviour
         {
             MoveTime(1);
         }
+        //{
+        //    MoveTime((int)(Input.GetAxis("Mouse ScrollWheel") * 10f));
+        //}
         //if (Input.GetMouseButton(0))
         //{
         //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -287,6 +290,7 @@ public class MelodyMaker : MonoBehaviour
         curAudioSource.time = tempTime;
         sliderTimeStamp.value = curAudioSource.time / curAudioClip.length;
     }
+
     public void OnTimePitchChanged_Input()
     {
         curAudioSource.pitch = float.Parse(inputTimePitch.text);
@@ -295,6 +299,7 @@ public class MelodyMaker : MonoBehaviour
     {
         ClearChild(p_HLine);
         float curTimeStamp = 0f;
+        int curCountNumerator = 0, curDenominator = int.Parse(inputDenominator.text);
         while(curTimeStamp < curAudioClip.length)
         {
             float trueTime = curTimeStamp + float.Parse(inputLineOffset.text) / 1000f;
@@ -303,6 +308,10 @@ public class MelodyMaker : MonoBehaviour
             g.transform.localPosition = v;
             g.transform.localRotation = Quaternion.identity;
             g.GetComponent<GridLine>().accTime = trueTime;
+            if (curCountNumerator % curDenominator == 0)
+                g.GetComponent<GridLine>().SetBlue();
+            curCountNumerator += int.Parse(inputNumerator.text);
+
             g.SetActive(true);
             curTimeStamp +=  60f / curMelody.bpm * (float.Parse(inputNumerator.text) / float.Parse(inputDenominator.text));
         }
@@ -640,6 +649,8 @@ public class MelodyMaker : MonoBehaviour
         text_title.text = curMelody.title.ToString();
         text_composer.text = curMelody.composer.ToString();
     }
+
+
     #region float round & UI notice
     public void FloatRound(in float vIn,out float vOut)
     {

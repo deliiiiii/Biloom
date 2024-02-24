@@ -53,6 +53,9 @@ public class Momentus : MonoBehaviour
 
     public float minAlpha;
 
+    public AudioClip touchAudioEffect;
+    public bool havePlayedAudioEffect = false;
+
     private MomentusManager mmi;
     private void Awake()
     {
@@ -66,13 +69,27 @@ public class Momentus : MonoBehaviour
     {
         CheckZ();
     }
+    public void PlayA()
+    {
+        print("play11 "+Time.time);
+        AudioManager.instance.PlayOneShot(touchAudioEffect, 1, 1);
+
+    }
     void CheckZ()
     {
+
         if (isInMaker.Value)
             return;
         if (countSwept > 0)
             return;
         //TODO ???
+        if (transform.position.z <=(mmi.threshold.transform.position.z + mmi.speedMulti * mmi.speedUni * 0.150f) && !havePlayedAudioEffect)
+        {
+            //print("acc =" + momentusData.accTime + " self z =" + transform.position.z + " target =" + mmi.threshold.transform.position.z);
+            print("play1 " + Time.time);
+            havePlayedAudioEffect = true;
+            AudioManager.instance.PlayOneShot(touchAudioEffect, 1, 1);
+        }
         if (transform.position.z < mmi.threshold.transform.position.z - mmi.speedMulti * mmi.speedUni * 0.150f)
         {
             SweepNotEligible();
