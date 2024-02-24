@@ -217,7 +217,17 @@ public class Rehearser : MonoBehaviour
     public void AddCombo(MomentusData data,int sweepId)
     {
         if(sweepId == 2)
-            combo = 0;
+        {
+            if(data != null && !data.isOpposite && !haveBeenBlack)
+            {
+
+            }
+            else
+            {
+                combo = 0;
+            }
+        }
+            
         else
         {
             combo++;
@@ -247,17 +257,17 @@ public class Rehearser : MonoBehaviour
         if (countGrossBlack == 0)
             curBlackAcc = 0f;
         else
-            curBlackAcc = (countBenignBlack * 2f + countBareBlack * 1f) / (countGrossBlack * 2f);
+            curBlackAcc = (countBenignBlack * 1f + countBareBlack * 0.611f) / (countGrossBlack * 1f);
         if (countGrossWhite == 0)
             curWhiteAcc = 0f;
         else
-            curWhiteAcc = (countBenignWhite * 2f + countBareWhite * 1f) / (countGrossWhite * 2f);
+            curWhiteAcc = (countBenignWhite * 1f + countBareWhite * 0.611f) / (countGrossWhite * 1f);
     }
     void RefreshTextAcc()
     {
         float tAcc = Mathf.Round(curBlackAcc * 1e4f)/1e2f;
         textAccBlack.text = (tAcc == 100 ? "100.00" : tAcc.ToString("#00.00")) + "%";
-        tAcc = Mathf.RoundToInt(curWhiteAcc * 1e2f);
+        tAcc = Mathf.Round(curWhiteAcc * 1e4f) / 1e2f;
         textAccWhite.text = (tAcc == 100 ? "100.00" : tAcc.ToString("#00.00")) + "%";
         //print("whiteRate (when RefreshTextAcc) = " + whiteRate);
 
@@ -280,7 +290,7 @@ public class Rehearser : MonoBehaviour
     IEnumerator Descend()
     {
         float c = whiteRate;
-        float b = Random.Range(-1f * c / descendTime, - 2f / 3f * c / descendTime);
+        float b = Random.Range(-2f * c / descendTime, - 1f * c / descendTime);
         float a = -(b * descendTime + c) / descendTime / descendTime;
         float descendTimer = 0f;
         while(descendTimer <= descendTime)

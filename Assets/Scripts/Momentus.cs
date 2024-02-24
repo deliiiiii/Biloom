@@ -203,8 +203,20 @@ public class Momentus : MonoBehaviour
     }
     public void SetReverse(float whiteRate)
     {
-        float tarAlpha = ((whiteRate >= 0.5f) ^ (momentusData.isOpposite)) ? minAlpha : 1f;
-        bool canMulti = !((whiteRate >= 0.5f) ^ (momentusData.isOpposite));
+        float tarAlpha;
+        bool canMulti;
+        if (whiteRate >= 0.5f)
+        {
+            tarAlpha = ((whiteRate >= 0.5f) ^ (momentusData.isOpposite)) ? minAlpha : 1f;
+            canMulti = !((whiteRate >= 0.5f) ^ (momentusData.isOpposite));
+        }
+        else
+        {
+            tarAlpha = 1f;
+            canMulti = true;
+            momentusData.isOpposite = false;
+            visage.sprite = visage_type_to_BoolSprite[momentusData.type][false];
+        }
         visage.color = SetAlpha(visage.color ,tarAlpha);
         multiSweep.SetActive(canMulti && (momentusData.multiSweepCount > 1));
         multiSweep.GetComponent<SpriteRenderer>().color = SetAlpha(multiSweep.GetComponent<SpriteRenderer>().color,tarAlpha);

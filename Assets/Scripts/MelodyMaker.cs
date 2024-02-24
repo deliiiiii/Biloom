@@ -213,14 +213,14 @@ public class MelodyMaker : MonoBehaviour
         OnConfigurationChanged();
         Pause(false);
     }
-    public void OnWakeUp()
+    public void OnWakeUp(bool write = true)
     {
         ClearSelectedNote();
         AudioManager.instance.Stop(curAudioClip);
         if(Rehearser.instance)
             Rehearser.instance.StopAllCoroutines();
-
-        WriteCurSheet();
+        if(write)
+            WriteCurSheet();
 
         UIManager.instance.panel_SelectMelody.SetActive(true);
         UIManager.instance.melodyMaker.SetActive(false);

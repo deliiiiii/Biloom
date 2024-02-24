@@ -257,25 +257,37 @@ PPPPS：添加新歌需要重新发个新版本
 
 #### v0.0.38（PC+Android端） 2024.2.22
 
-更新：
+##### 更新：
 
 ​	Weave-Configuraion中可通过下拉框更改note大小
 
-修改：
+##### 修改：
 
 ​	note碰撞体大小，手感未知
 
 ​	部分UI
 
+#### v0.0.39（没打包） 2024.2.23
+
+##### 更新：
+
+​	黑白切换逻辑
+
+#### v0.0.40（？） 2024.2.24
+
+##### 更新：
+
 ——————————————
 
 ##### remaining bugs：
 
-​	没有
+​	whiteRate在0.2~0.8时，所有运动着的物体会变模糊（感觉可以不修）
+
+​	制谱器多选音符后修改type和size的逻辑略有bug
 
 ##### 咕咕：
 
-​	！滑键Slash
+​	滑键Slash
 
 ​	[Obsolute]~~自动保存~~
 
@@ -358,19 +370,23 @@ PPPPS：添加新歌需要重新发个新版本
 
 ##### <u>黑白切换逻辑</u>
 
+白note难度时：不打黑note不影响连击数，打黑note会额外加连击数
+
+黑note难度时：所有白note变为黑note，结算时白note数会很少（其实从头到尾都影响连击数）
+
 记：
 
-b = 黑色已击打的个数
+black = 黑色已击打的个数
 
-w = 白色已判定的个数
+white = 白色已判定的个数
 
-(b - w)的阈值countThreshold = 10（个），达到这个值会自动变为纯黑，变化时长T = 2（秒），在自动变纯黑之前whiteRate的最小值rateThreshold = 0.8
+(black  - white)的阈值countThreshold = 10（个），达到这个值会自动变为纯黑，变化时长T = 2（秒），在自动变纯黑之前whiteRate的最小值rateThreshold = 0.8
 
-| 条件                      |                                                              |
-| ------------------------- | ------------------------------------------------------------ |
-| (b - w) < 0               | whiteRate = 1                                                |
-| 0 <=  (b - w) < threshold | whiteRate = 1 - (b - w) / countThreshold * (1 - rateThreshold) |
-| (b - w) >= threshold      | whiteRate逐渐变为0（二次函数衰减），持续时长为T              |
+| 条件                               |                                                              |
+| ---------------------------------- | ------------------------------------------------------------ |
+| (black  - white) < 0               | whiteRate = 1                                                |
+| 0 <=  (black  - white) < threshold | whiteRate = 1 - (black  - white) / countThreshold * (1 - rateThreshold) |
+| (black  - white) >= threshold      | whiteRate逐渐变为0（二次函数衰减），持续时长为T              |
 
 e.g.1：黑比白（省略一点描述）多4个，whiteRate = 1 - 4/10 * 0.2 = 0.92
 
