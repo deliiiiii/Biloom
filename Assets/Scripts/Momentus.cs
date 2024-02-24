@@ -131,7 +131,7 @@ public class Momentus : MonoBehaviour
     public void SetXTime(float x,float time)
     {
         transform.position = new Vector3(x, 0.87f, transform.position.z);
-        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, time * MomentusManager.instance.speedUni * MomentusManager.instance.speedMulti);
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, (time + GlobalSetting.instance.globalSettingData.playerOffset / 1e3f) * MomentusManager.instance.speedUni * MomentusManager.instance.speedMulti );
         momentusData.globalX = x;
         momentusData.accTime = time;
         momentusData.lineOffset = float.Parse(MelodyMaker.instance.inputLineOffset.text);
@@ -144,7 +144,11 @@ public class Momentus : MonoBehaviour
     public void SetXTime_WhenReadData(float x, float time)
     {
         transform.position = new Vector3(x, 0.87f, transform.position.z);
-        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, time * MomentusManager.instance.speedUni * MomentusManager.instance.speedMulti);
+        
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, (time)  * MomentusManager.instance.speedUni * MomentusManager.instance.speedMulti);
+        print("old = " + transform.localPosition);
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, (time + GlobalSetting.instance.globalSettingData.playerOffset / 1e3f)  * MomentusManager.instance.speedUni * MomentusManager.instance.speedMulti);
+        print("new = " + transform.localPosition);
         SetColliderInPlay(x);
     }
     public void SetSize(float size = 0f)
@@ -158,7 +162,7 @@ public class Momentus : MonoBehaviour
     void SetColliderInPlay(float x)
     {
         colInPlay.size = new(1.2f + Mathf.Abs(x)/10f, colInPlay.size.y, colInPlay.size.z);
-        print(colInPlay.size);
+        //print(colInPlay.size);
     }
     public void OnNoteLeave()
     {

@@ -72,29 +72,12 @@ public class MelodyMaker : MonoBehaviour
     public List<Momentus> selectedMomentus = new();
     private bool paused = false;
     
-    public static string PathURL;
+    
     private void Awake()
     {
         instance = this;
         floatRoundDiv = Mathf.Pow(10, floatRoundExponent);
-        //android
-        if (Application.platform == RuntimePlatform.Android)
-        {
-            PathURL = Application.persistentDataPath + "/";
-        }
-        else
-        {
-            //iPhone
-            if (Application.platform == RuntimePlatform.IPhonePlayer)
-            {
-                PathURL = Application.persistentDataPath + "/Raw/";
-            }
-            else
-            { 
-                //edit&pc
-                PathURL = Application.streamingAssetsPath + "/";
-            }
-        }
+        
     }
     private void Update()
     {
@@ -140,6 +123,11 @@ public class MelodyMaker : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
         {
             GenerateNote(0);
+        }
+        
+        if(Input.GetKeyDown(KeyCode.Z) && selectedMomentus.Count == 1)
+        {
+            GenerateNote(0, selectedMomentus[0].momentusData.accTime);
         }
         if(Input.GetKeyDown(KeyCode.D))
         {
@@ -204,9 +192,15 @@ public class MelodyMaker : MonoBehaviour
         curMelody = MelodyManager.instance.list_melody[id];
         ReadCurSheet();
         curAudioClip = MelodyManager.instance.melodySources[id].audio;
-        curAudioSource = AudioManager.instance.GetSource(AudioManager.instance.PlayOneShot(curAudioClip, 1, 1,float.Parse(inputTimePitch.text.ToString())));
+        curAudioSource = AudioManager.instance.GetSource(AudioManager.instance.PlayOneShot(curAudioClip, 1, 1, float.Parse(inputTimePitch.text.ToString())));
         curAudioSource.time = 0f;
         textEndStamp.text = curAudioClip.length.ToString();
+
+        //TODO ?? where
+        {
+            mmi.speedMulti = GlobalSetting.instance.globalSettingData.playerSpeed;
+            inputNoteSpeed.text = mmi.speedMulti.ToString();
+        }
         SetCamera();
         OnLineOffsetChanged_Input();
         OnSelectNote();
@@ -317,12 +311,13 @@ public class MelodyMaker : MonoBehaviour
             p_Momentus.GetChild(i).transform.localPosition
                 = new(p_Momentus.GetChild(i).transform.localPosition.x
                     , p_Momentus.GetChild(i).transform.localPosition.y
-                    , p_Momentus.GetChild(i).GetComponent<Momentus>().momentusData.accTime * mmi.speedUni * mmi.speedMulti);
+                    ,(p_Momentus.GetChild(i).GetComponent<Momentus>().momentusData.accTime+ GlobalSetting.instance.globalSettingData.playerOffset / 1e3f) * mmi.speedUni * mmi.speedMulti);
         }
     }
     public void OnNoteSpeedChanged_Input()
     {
-        mmi.speedMulti = float.Parse(inputNoteSpeed.text);
+        GlobalSetting.instance.globalSettingData.playerSpeed = mmi.speedMulti = float.Parse(inputNoteSpeed.text);
+        GlobalSetting.instance.WriteSetting();
         OnLineOffsetChanged_Input();
     }
 
@@ -572,13 +567,13 @@ public class MelodyMaker : MonoBehaviour
         OnSelectNote();
     }
     
-    public void GenerateNote(int x)
+    public void GenerateNote(int x,float time = -1f)
     {
         GameObject t = Instantiate(MomentusManager.instance.stab.gameObject, Vector3.zero, Quaternion.identity);
         curMelody.sheets[^1].momentus.Add(t.GetComponent<Momentus>().momentusData);
         t.SetActive(true);
         t.transform.parent = p_Momentus;
-        t.GetComponent<Momentus>().SetXTime(x, curAudioSource.time);
+        t.GetComponent<Momentus>().SetXTime(x, time == -1f?curAudioSource.time:time);
         t.GetComponent<Momentus>().SetSize();
         t.GetComponent<Momentus>().isInMaker.Value = true;
 
@@ -610,19 +605,19 @@ public class MelodyMaker : MonoBehaviour
     public void WriteCurSheet()
     {
         //curMelody.sheets[^1] => json
-        string path = PathURL + "Sheet/" + curMelody.id + " - " + curMelody.title + " - " + curMelody.composer + ".json";
-        string pathShort = PathURL + "Sheet";
-        if (!Directory.Exists(pathShort))
-        {
-            Directory.CreateDirectory(pathShort);
-        }
+        string path = GlobalSetting.PathURL + "Sheet/" + curMelody.id + " - " + curMelody.title + " - " + curMelody.composer + ".json";
+        //string pathShort = PathURL + "Sheet";
+        //if (!Directory.Exists(pathShort))
+        //{
+        //    Directory.CreateDirectory(pathShort);
+        //}
         string str = JsonUtility.ToJson(curMelody, true);
         File.WriteAllText(path, str);
     }
     public void ReadCurSheet()
     {
         //json => curMelody.sheets[^1]
-        string path = PathURL + "Sheet/" + curMelody.id + " - " + curMelody.title + " - " + curMelody.composer + ".json";
+        string path = GlobalSetting.PathURL + "Sheet/" + curMelody.id + " - " + curMelody.title + " - " + curMelody.composer + ".json";
         if (!File.Exists(path))
         {
             curMelody.sheets.Add(new());

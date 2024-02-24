@@ -273,9 +273,13 @@ PPPPS：添加新歌需要重新发个新版本
 
 ​	黑白切换逻辑
 
-#### v0.0.40（？） 2024.2.24
+#### v0.0.41（PC+Android端） 2024.2.24
 
 ##### 更新：
+
+​	设置面板里调整偏移、速度
+
+​	制谱器快捷键Z
 
 ——————————————
 
@@ -346,7 +350,8 @@ PPPPS：添加新歌需要重新发个新版本
 | 鼠标左键              | 选中1个note，先前选中的会取消。疯狂点同一个也不会取消这一个  |
 | 按住左Ctrl + 鼠标左键 | 多选note，类似于windows的多选文件。第二次点击取消选中        |
 | X                     | 不知道哪个单词，C被复制占了:(   取消所有选中note             |
-| S                     | Stab，在当前时间的判定线正中间（X = 0，Z = 当前时间）生成一个单点note |
+| S                     | Stab，在当前时间的判定线正中间（X = 0，Z = 当前时间）生成一个单点note，大小1.6 |
+| Z                     | 如果当前只选中了1个note，则以X = 0，Z = 那个note的时间生成一个单点note，大小1.6（即复制Z轴note） |
 | D                     | Delete，删除所有选中note                                     |
 | ~~R~~                 | ~~Reverse，切换黑/白色UI~~                                   |
 | ~~R~~                 | ~~Read，读取谱面文件~~                                       |
@@ -368,6 +373,18 @@ PPPPS：添加新歌需要重新发个新版本
 | Skip Night                   | 直接跳转到歌曲结束。结束后有3s延迟才显示结算界面             |
 | 右上角的\|\|                 | 点击弹出暂停面板：选歌、继续、重开。淡入0.3s，淡出3s         |
 
+##### <u>Settings设置</u>
+
+speed：音符下落速度，和制谱器里note speed等价，**<u>那个输入框的值会这里同步</u>**
+
+offset：玩家将note的Z值额外加上的偏移，单位ms，**<u>请确保电脑制谱时这个值为0（好像电脑端打包不让调就好了）</u>**
+
+​	e.g.1：制谱时offset=0，note的Z=0.3，则游玩时offset设为-300后note的准确判定时刻为0s
+
+​	e.g.2：制谱器中offset=200时note的Z=0.3，则游玩时特地offset设为-300后note的准确判定时刻为-0.2s
+
+
+
 ##### <u>黑白切换逻辑</u>
 
 白note难度时：不打黑note不影响连击数，打黑note会额外加连击数
@@ -382,11 +399,11 @@ white = 白色已判定的个数
 
 (black  - white)的阈值countThreshold = 10（个），达到这个值会自动变为纯黑，变化时长T = 2（秒），在自动变纯黑之前whiteRate的最小值rateThreshold = 0.8
 
-| 条件                               |                                                              |
-| ---------------------------------- | ------------------------------------------------------------ |
-| (black  - white) < 0               | whiteRate = 1                                                |
-| 0 <=  (black  - white) < threshold | whiteRate = 1 - (black  - white) / countThreshold * (1 - rateThreshold) |
-| (black  - white) >= threshold      | whiteRate逐渐变为0（二次函数衰减），持续时长为T              |
+| 条件                                    |                                                              |
+| --------------------------------------- | ------------------------------------------------------------ |
+| (black  - white) < 0                    | whiteRate = 1                                                |
+| 0 <=  (black  - white) < countThreshold | whiteRate = 1 - (black  - white) / countThreshold * (1 - rateThreshold) |
+| (black  - white) >= countThreshold      | whiteRate逐渐变为0（二次函数衰减），持续时长为T              |
 
 e.g.1：黑比白（省略一点描述）多4个，whiteRate = 1 - 4/10 * 0.2 = 0.92
 

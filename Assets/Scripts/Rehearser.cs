@@ -66,11 +66,8 @@ public class Rehearser : MonoBehaviour
 
 
     [Header("Panel Pause")]
-    public GameObject panelPauseButtons;
     public GameObject buttonPause;
-    public Image pauseBack;
-    public float pauseInDuration = 0.3f;
-    public float pauseOutDuration = 3f;
+    public GameObject panelPauseP;
     private void Awake()
     {
         instance = this;
@@ -118,7 +115,8 @@ public class Rehearser : MonoBehaviour
     #region Pause
     public void Pause()
     {
-        StartCoroutine(Fade(pauseInDuration, pauseBack,panelPauseButtons));
+        panelPauseP.GetComponent<Fadable>().StartFade(true);
+        //StartCoroutine(Fade(pauseInDuration, pauseBack,panelPauseButtons));
         melodyMaker.Pause(true);
     }
     public void UnPause()
@@ -137,33 +135,14 @@ public class Rehearser : MonoBehaviour
     }
     #endregion
     #region Coroutine
-    IEnumerator Fade(float inTime,Image image,GameObject g)
-    {
-        bool isIn = inTime >= 0;
-        if (!isIn)
-            g.SetActive(false);
-        image.gameObject.SetActive(true);
-        float initTime = inTime = Mathf.Abs(inTime);
-        while (inTime > 0)
-        {
-            image.color = new Color(image.color.r, image.color.g, image.color.b,(isIn?(initTime - inTime) : inTime) /initTime);
-            inTime -= Time.deltaTime;
-            yield return null;
-        }
-        if (!isIn)
-            image.gameObject.SetActive(false);
-        if(isIn)
-            g.SetActive(true);
-        yield break;
-    }
+    
     IEnumerator CountDown()
     {
         melodyMaker.Pause(true);
-        StopCoroutine(Fade(pauseInDuration, pauseBack, panelPauseButtons));
-        StartCoroutine(Fade(-pauseOutDuration, pauseBack, panelPauseButtons));
+        panelPauseP.GetComponent<Fadable>().StartFade(false);
         textCountDown.gameObject.SetActive(true);
         buttonPause.SetActive(false);
-        int countSec = (int)pauseOutDuration;
+        int countSec = (int)panelPauseP.GetComponent<Fadable>().outDuration;
         while (true)
         {
             textCountDown.text = countSec.ToString();
