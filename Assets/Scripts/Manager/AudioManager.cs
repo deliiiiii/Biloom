@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
     public GameObject emptyObject;
     // 整个游戏中，总的音源数量
-    private const int AUDIO_CHANNEL_NUM = 8;
+    private const int AUDIO_CHANNEL_NUM = 32;
     public float fadeDuration = 1.5f;
     private struct CHANNEL
     {
@@ -78,9 +78,10 @@ public class AudioManager : MonoBehaviour
             //    oldest = i;
             //    time = m_channels[i].keyOnTime;
             //}
-            if (!m_channels[i].channel.isPlaying || (m_channels[i].channel.clip && m_channels[i].channel.clip.length<=1f))
+            if (!m_channels[i].channel.isPlaying)
             {
-                
+                if (m_channels[i].channel.clip && m_channels[i].channel.clip.length >= 1f)
+                    continue;
                 m_channels[i].channel.clip = clip;
                 m_channels[i].channel.volume = volume;
                 m_channels[i].channel.pitch = pitch;

@@ -82,17 +82,20 @@ public class Momentus : MonoBehaviour
             return;
         if (countSwept > 0)
             return;
+        if (MelodyMaker.instance.IsPaused())
+            return;
         //TODO ???
+        if (transform.position.z < mmi.threshold.transform.position.z - mmi.speedMulti * mmi.speedUni * 0.150f)
+        {
+            SweepNotEligible();
+            return;
+        }
         if (transform.position.z <=(mmi.threshold.transform.position.z + mmi.speedMulti * mmi.speedUni * 0.150f) && !havePlayedAudioEffect)
         {
             //print("acc =" + momentusData.accTime + " self z =" + transform.position.z + " target =" + mmi.threshold.transform.position.z);
             print("play1 " + Time.time);
             havePlayedAudioEffect = true;
             AudioManager.instance.PlayOneShot(touchAudioEffect, 1, 1);
-        }
-        if (transform.position.z < mmi.threshold.transform.position.z - mmi.speedMulti * mmi.speedUni * 0.150f)
-        {
-            SweepNotEligible();
         }
     }
     int countSwept = 0;
@@ -163,9 +166,9 @@ public class Momentus : MonoBehaviour
         transform.position = new Vector3(x, 0.87f, transform.position.z);
         
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, (time)  * MomentusManager.instance.speedUni * MomentusManager.instance.speedMulti);
-        print("old = " + transform.localPosition);
+        //print("old = " + transform.localPosition);
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, (time + GlobalSetting.instance.globalSettingData.playerOffset / 1e3f)  * MomentusManager.instance.speedUni * MomentusManager.instance.speedMulti);
-        print("new = " + transform.localPosition);
+        //print("new = " + transform.localPosition);
         SetColliderInPlay(x);
     }
     public void SetSize(float size = 0f)

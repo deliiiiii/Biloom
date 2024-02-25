@@ -167,9 +167,9 @@ public class MelodyMaker : MonoBehaviour
         {
             MoveTime(1);
         }
-        //{
-        //    MoveTime((int)(Input.GetAxis("Mouse ScrollWheel") * 10f));
-        //}
+        {
+            MoveTime((int)(Input.GetAxis("Mouse ScrollWheel") * 10f));
+        }
         //if (Input.GetMouseButton(0))
         //{
         //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
