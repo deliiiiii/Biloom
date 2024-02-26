@@ -29,7 +29,7 @@ public class AudioManager : MonoBehaviour
         {
             //每个频道对应一个音源
             m_channels[i].channel = Instantiate(emptyObject, gameObject.transform).AddComponent<AudioSource>();
-            m_channels[i].channel.spatialBlend = 0;//3d立体声
+            m_channels[i].channel.spatialBlend = 1;//3d立体声
             m_channels[i].keyOnTime = 0;
         }
     }
