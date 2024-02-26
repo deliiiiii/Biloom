@@ -207,7 +207,6 @@ public class Rehearser : MonoBehaviour
                 combo = 0;
             }
         }
-            
         else
         {
             combo++;

@@ -69,12 +69,6 @@ public class Momentus : MonoBehaviour
     {
         CheckZ();
     }
-    public void PlayA()
-    {
-        print("play11 "+Time.time);
-        AudioManager.instance.PlayOneShot(touchAudioEffect, 1, 1);
-
-    }
     void CheckZ()
     {
 
@@ -164,11 +158,7 @@ public class Momentus : MonoBehaviour
     public void SetXTime_WhenReadData(float x, float time)
     {
         transform.position = new Vector3(x, 0.87f, transform.position.z);
-        
-        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, (time)  * MomentusManager.instance.speedUni * MomentusManager.instance.speedMulti);
-        //print("old = " + transform.localPosition);
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, (time + GlobalSetting.instance.globalSettingData.playerOffset / 1e3f)  * MomentusManager.instance.speedUni * MomentusManager.instance.speedMulti);
-        //print("new = " + transform.localPosition);
         SetColliderInPlay(x);
     }
     public void SetSize(float size = 0f)
@@ -194,7 +184,7 @@ public class Momentus : MonoBehaviour
             if (it.gameObject == gameObject)
                 continue;
             //print("before" + it.GetComponent<Momentus>().momentusData.accTime);
-            if (momentusData.accTime == it.GetComponent<Momentus>().momentusData.accTime)
+            if (IsNearZ(momentusData.accTime,it.GetComponent<Momentus>().momentusData.accTime))
             {
                 //print("b");
                 it.GetComponent<Momentus>().momentusData.multiSweepCount--;
@@ -215,7 +205,7 @@ public class Momentus : MonoBehaviour
             if (it.gameObject == gameObject)
                 continue;
             //print("after" + it.GetComponent<Momentus>().momentusData.accTime);
-            if (momentusData.accTime == it.GetComponent<Momentus>().momentusData.accTime)
+            if (IsNearZ(momentusData.accTime,it.GetComponent<Momentus>().momentusData.accTime))
             {
                 //print("a");
                 momentusData.multiSweepCount++;
@@ -280,5 +270,11 @@ public class Momentus : MonoBehaviour
     {
         colInMaker.enabled = isInMaker.Value;
         colInPlay.enabled = !isInMaker.Value;
+    }
+    public bool IsNearZ(float z1,float z2)
+    {
+        if(Mathf.Abs(z1-z2) <=1.5e-4)
+            return true;
+        return false;
     }
 }
