@@ -91,7 +91,7 @@ public class Momentus : MonoBehaviour
             Application.platform == RuntimePlatform.OSXPlayer))
         {
             //print("acc =" + momentusData.accTime + " self z =" + transform.position.z + " target =" + mmi.threshold.transform.position.z);
-            print("play1 " + Time.time);
+            //print("play1 " + Time.time);
             havePlayedAudioEffect = true;
             AudioManager.instance.PlayOneShot(touchAudioEffect, 1, 1);
         }

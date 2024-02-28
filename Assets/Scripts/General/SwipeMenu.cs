@@ -122,7 +122,7 @@ public class SwipeMenu : MonoBehaviour
             return;
         UIManager.instance.curCover.sprite = MelodyManager.instance.melodySources[curId.Value].cover;
         StopCurAudio();
-        curAudioPreview = AudioManager.instance.GetSource(AudioManager.instance.PlayLoop(MelodyManager.instance.melodySources[curId.Value].audio, 1, 1, 1,
+        curAudioPreview = AudioManager.instance.GetSource(AudioManager.instance.PlayFadeLoop(MelodyManager.instance.melodySources[curId.Value].audio, 1, 1, 1,
             MelodyManager.instance.list_melody[curId.Value].startOnExtract, MelodyManager.instance.list_melody[curId.Value].endOnExtract));
     }
     bool NearTarget()
