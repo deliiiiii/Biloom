@@ -84,7 +84,11 @@ public class Momentus : MonoBehaviour
             SweepNotEligible();
             return;
         }
-        if (transform.position.z <=(mmi.threshold.transform.position.z + mmi.speedMulti * mmi.speedUni * 0.150f) && !havePlayedAudioEffect)
+        if (transform.position.z <=(mmi.threshold.transform.position.z + mmi.speedMulti * mmi.speedUni * 0.150f) && !havePlayedAudioEffect 
+            && (Application.platform == RuntimePlatform.WindowsPlayer || 
+            Application.platform == RuntimePlatform.WindowsEditor|| 
+            Application.platform == RuntimePlatform.OSXEditor|| 
+            Application.platform == RuntimePlatform.OSXPlayer))
         {
             //print("acc =" + momentusData.accTime + " self z =" + transform.position.z + " target =" + mmi.threshold.transform.position.z);
             print("play1 " + Time.time);
@@ -171,7 +175,7 @@ public class Momentus : MonoBehaviour
     }
     void SetColliderInPlay(float x)
     {
-        colInPlay.size = new(1.2f + Mathf.Abs(x)/10f, colInPlay.size.y, colInPlay.size.z);
+        colInPlay.size = new(1.35f + Mathf.Abs(x)/10f, colInPlay.size.y, colInPlay.size.z);
         //print(colInPlay.size);
     }
     public void OnNoteLeave()

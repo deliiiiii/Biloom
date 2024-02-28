@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DeliiiiStud
-  productName: Biloomer v0.0.41.2
+  productName: Biloomer v0.0.42
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.37254903, g: 0.37254903, b: 0.37254903, a: 1}
@@ -140,7 +140,7 @@ PlayerSettings:
   vulkanEnableLateAcquireNextImage: 0
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
-  bundleVersion: 0.0.41.2
+  bundleVersion: 0.0.42
   preloadedAssets:
   - {fileID: 0}
   metroInputSource: 0

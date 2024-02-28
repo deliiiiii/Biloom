@@ -106,7 +106,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 1.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 2
                 },
                 {
@@ -161,7 +161,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 2
                 },
                 {
@@ -293,7 +293,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 1
                 },
                 {
@@ -326,7 +326,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 6
                 },
                 {
@@ -337,7 +337,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 6
                 },
                 {
@@ -381,7 +381,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 2
                 },
                 {
@@ -447,7 +447,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 1
                 },
                 {
@@ -491,7 +491,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 1
                 },
                 {
@@ -546,7 +546,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 1.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 4
                 },
                 {
@@ -568,7 +568,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 4
                 },
                 {
@@ -590,7 +590,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 1
                 },
                 {
@@ -678,7 +678,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 1
                 },
                 {
@@ -777,7 +777,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 2
                 },
                 {
@@ -799,7 +799,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 2
                 },
                 {
@@ -931,7 +931,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 2
                 },
                 {
@@ -997,7 +997,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 1.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 2
                 },
                 {
@@ -1019,7 +1019,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 2
                 },
                 {
@@ -1030,7 +1030,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 2
                 },
                 {
@@ -1151,7 +1151,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 4
                 },
                 {
@@ -1162,7 +1162,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 4
                 },
                 {
@@ -1261,7 +1261,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 6
                 },
                 {
@@ -1272,7 +1272,7 @@
                     "beatNumerator": 0.0,
                     "beatDenominator": 0.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 6
                 },
                 {
@@ -1338,7 +1338,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 1.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 6
                 },
                 {
@@ -1349,7 +1349,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 1.0,
                     "type": 0,
-                    "isOpposite": true,
+                    "isOpposite": false,
                     "multiSweepCount": 6
                 }
             ]

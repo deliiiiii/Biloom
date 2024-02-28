@@ -82,7 +82,7 @@ public class TouchManager : MonoBehaviour
             RaycastHit rayHit = rayHits[i];
             if (!rayHit.collider.GetComponent<Momentus>())
                 continue;
-            float deltaT = MathF.Abs(rayHit.collider.GetComponent<Momentus>().momentusData.accTime - MelodyMaker.instance.curAudioSource.time);
+            float deltaT = rayHit.collider.GetComponent<Momentus>().momentusData.accTime - MelodyMaker.instance.curAudioSource.time;
             //print(rayHit.collider.GetComponent<Momentus>().momentusData.accTime + " " + MelodyMaker.instance.curAudioSource.time);
             //print("find " + rayHit.collider.GetComponent<Momentus>().momentusData.globalX + " , " + rayHit.collider.GetComponent<Momentus>().momentusData.accTime);
             if (deltaT < minDeltaT)
@@ -101,7 +101,7 @@ public class TouchManager : MonoBehaviour
                 foreach (var rayHit_sameZ in raycastMinDeltaZ)
                 {
                     Vector3 tarScreenPos = Camera.main.WorldToScreenPoint(rayHit_sameZ.transform.position);
-                Vector3 touchWorldPos = Camera.main.ScreenToWorldPoint(
+                    Vector3 touchWorldPos = Camera.main.ScreenToWorldPoint(
                         new Vector3
                         (touch.screenPosition.x,
                         touch.screenPosition.y,
