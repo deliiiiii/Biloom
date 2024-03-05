@@ -615,11 +615,11 @@ public class MelodyMaker : MonoBehaviour
     {
         //curMelody.sheets[^1] => json
         string path = GlobalSetting.PathURL + "Sheet/" + curMelody.id + " - " + curMelody.title + " - " + curMelody.composer + ".json";
-        //string pathShort = PathURL + "Sheet";
-        //if (!Directory.Exists(pathShort))
-        //{
-        //    Directory.CreateDirectory(pathShort);
-        //}
+        string pathShort = GlobalSetting.PathURL + "Sheet";
+        if (!Directory.Exists(pathShort))
+        {
+            Directory.CreateDirectory(pathShort);
+        }
         string str = JsonUtility.ToJson(curMelody, true);
         File.WriteAllText(path, str);
     }
