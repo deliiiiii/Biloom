@@ -141,8 +141,19 @@ public class MelodyMaker : MonoBehaviour
         //{
         //    WriteCurSheet();
         //}
-        //if (panel_Warning.activeSelf)
-        //    return;
+        if (Input.GetKeyDown(KeyCode.Comma))
+        {
+            MoveTime(-1);
+        }
+        if (Input.GetKeyDown(KeyCode.Period))
+        {
+            MoveTime(1);
+        }
+        {
+            MoveTime((int)(Input.GetAxis("Mouse ScrollWheel") * 10f));
+        }
+        if (panel_Warning.activeSelf)
+            return;
         if(Input.GetKeyDown(KeyCode.UpArrow))
         {
             StartCoroutine(MagnetZ(1));
@@ -159,17 +170,7 @@ public class MelodyMaker : MonoBehaviour
         {
             MagnetX(1f);
         }
-        if(Input.GetKeyDown(KeyCode.Comma))
-        {
-            MoveTime(-1);
-        }
-        if (Input.GetKeyDown(KeyCode.Period))
-        {
-            MoveTime(1);
-        }
-        {
-            MoveTime((int)(Input.GetAxis("Mouse ScrollWheel") * 10f));
-        }
+        
         //if (Input.GetMouseButton(0))
         //{
         //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
