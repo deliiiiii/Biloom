@@ -656,27 +656,27 @@ public class MelodyMaker : MonoBehaviour
     {
         vOut = Mathf.Round(vIn * floatRoundDiv) / floatRoundDiv;
     }
-    public void UI_Read(bool succeed)
-    {
-        panel_Notification.SetActive(true);
-        if(succeed)
-        {
-            text_Notification.text = "读取成功!";
-        }
-        else
-        {
-            text_Notification.text = "读取失败!";
-        }
-    }
-    public void UI_Write()
-    {
-        panel_Notification.SetActive(true);
-        text_Notification.text = "保存成功!";
-    }
+    //public void UI_Read(bool succeed)
+    //{
+    //    panel_Notification.SetActive(true);
+    //    if(succeed)
+    //    {
+    //        text_Notification.text = "读取成功!";
+    //    }
+    //    else
+    //    {
+    //        text_Notification.text = "读取失败!";
+    //    }
+    //}
+    //public void UI_Write()
+    //{
+    //    panel_Notification.SetActive(true);
+    //    text_Notification.text = "保存成功!";
+    //}
     public void UI_Move(bool isMoving)
     {
         panel_Warning.SetActive(isMoving);
-        text_Warning.text = "移动中";
+        text_Warning.text = "Moving";
     }
     #endregion
     public void ClearALLNote()

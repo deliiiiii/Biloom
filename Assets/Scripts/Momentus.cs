@@ -85,10 +85,7 @@ public class Momentus : MonoBehaviour
             return;
         }
         if (transform.position.z <=(mmi.threshold.transform.position.z + mmi.speedMulti * mmi.speedUni * 0.150f) && !havePlayedAudioEffect 
-            && (Application.platform == RuntimePlatform.WindowsPlayer || 
-            Application.platform == RuntimePlatform.WindowsEditor|| 
-            Application.platform == RuntimePlatform.OSXEditor|| 
-            Application.platform == RuntimePlatform.OSXPlayer))
+            && PlatformManager.Instance.isPC())
         {
             //print("acc =" + momentusData.accTime + " self z =" + transform.position.z + " target =" + mmi.threshold.transform.position.z);
             //print("play1 " + Time.time);

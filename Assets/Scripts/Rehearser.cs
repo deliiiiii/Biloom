@@ -127,7 +127,7 @@ public class Rehearser : MonoBehaviour
     #region Reverse
     public void RefreshReverse()
     {
-        if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.OSXPlayer)
+        if (PlatformManager.Instance.isPC())
             whiteRate = sliderWhiteRate.value;//TODO
         foreach (ReversableObject obj in reversableObjects)
             obj.SetReverse(whiteRate);
@@ -188,7 +188,7 @@ public class Rehearser : MonoBehaviour
             melodyMaker.p_Momentus.GetChild(i).GetComponent<Momentus>().isInMaker.Value = false;
             melodyMaker.p_Momentus.GetChild(i).GetComponent<Momentus>().havePlayedAudioEffect = false;
         }
-        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+        if (PlatformManager.Instance.IsMobile())
             whiteRate = sliderWhiteRate.value = 1f;
         maxCombo = countGrossBlack = countGrossWhite = countBenignBlack = countBenignWhite =
             countBareBlack = countBareWhite = countByBlack = countByWhite = 0;
