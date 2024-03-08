@@ -532,12 +532,15 @@ public class MelodyMaker : MonoBehaviour
                 //{
                 //    note.transform.Translate(0, 0, -1e-5f);
                 //}
+                //print("THIS Z = " + note.transform.position.z);
                 foreach (var hit in hits)
                 {
                     if (!hit.GetComponent<GridLine>())
                         continue;
+                    
                     float deltaZ = Mathf.Abs(hit.transform.position.z - note.transform.position.z);
-                    if (deltaZ < 20 / floatRoundDiv)
+                    //print("tarZ = " + hit.transform.position.z + " deltaZ = " + deltaZ);
+                    if (deltaZ < 50 / floatRoundDiv)
                         continue;
                     if (dirZ == 1 && hit.transform.position.z < note.transform.position.z)
                         continue;
@@ -546,6 +549,7 @@ public class MelodyMaker : MonoBehaviour
                     if (minDeltaZ > deltaZ)
                     {
                         minDeltaZ = deltaZ;
+                        //print("refreshedZ , minDeltaZ = " + minDeltaZ);
                         targetZ = hit.GetComponent<GridLine>().accTime;
                     }
                 }

@@ -8358,6 +8358,20 @@ MonoBehaviour:
     startOnExtract: 5
     endOnExtract: 28
     sheets: []
+  - id: 3
+    title: "\u590F\u5F71 (\u539F\u66F2\uFF1A\u5915\u6DBC\u307F)"
+    composer: "\u9EBB\u679D\u51C6 (\u307E\u3048\u3060 \u3058\u3085\u3093)"
+    bpm: 150
+    startOnExtract: 2
+    endOnExtract: 25
+    sheets: []
+  - id: 4
+    title: you
+    composer: M.Graveyard
+    bpm: 87
+    startOnExtract: 2
+    endOnExtract: 25
+    sheets: []
   melodySources:
   - audio: {fileID: 8300000, guid: ba6136c7c0b8d124eae51a0e4a46ee8d, type: 3}
     cover: {fileID: 21300000, guid: e780bb8b640aaa247869bd420fee914a, type: 3}
@@ -8365,6 +8379,10 @@ MonoBehaviour:
     cover: {fileID: 21300000, guid: 36cac36f5cfdafa4193237a781bbf9a2, type: 3}
   - audio: {fileID: 8300000, guid: 50f4593fd61fc924ebb2a2242147c5f8, type: 3}
     cover: {fileID: 21300000, guid: b17f0d68b751bb6468e398c2de0e7925, type: 3}
+  - audio: {fileID: 8300000, guid: d541c6c44ac763e48938a279e1038333, type: 3}
+    cover: {fileID: 21300000, guid: df127faf953c69d49ba5d8ad96bf43da, type: 3}
+  - audio: {fileID: 8300000, guid: b3beb841787f2834bbe6b895d71378b3, type: 3}
+    cover: {fileID: 21300000, guid: be10ec61cccedba46911896d224c39a2, type: 3}
 --- !u!1 &631813985
 GameObject:
   m_ObjectHideFlags: 0
