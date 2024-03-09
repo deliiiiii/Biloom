@@ -91,6 +91,7 @@ public class Rehearser : MonoBehaviour
     }
     public void OnSkipMelody()
     {
+        melodyMaker.ClearALLNote();
         melodyMaker.curAudioSource.time = melodyMaker.curAudioClip.length - 0.1f;
     }
     public void OnRehearse()

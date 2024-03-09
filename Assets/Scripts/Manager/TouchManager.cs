@@ -82,7 +82,7 @@ public class TouchManager : MonoBehaviour
             RaycastHit rayHit = rayHits[i];
             if (!rayHit.collider.GetComponent<Momentus>())
                 continue;
-            float deltaT = rayHit.collider.GetComponent<Momentus>().momentusData.accTime - MelodyMaker.instance.curAudioSource.time;
+            float deltaT = Mathf.Abs(rayHit.collider.GetComponent<Momentus>().momentusData.accTime - MelodyMaker.instance.curAudioSource.time);
             //print(rayHit.collider.GetComponent<Momentus>().momentusData.accTime + " " + MelodyMaker.instance.curAudioSource.time);
             //print("find " + rayHit.collider.GetComponent<Momentus>().momentusData.globalX + " , " + rayHit.collider.GetComponent<Momentus>().momentusData.accTime);
             if (deltaT < minDeltaT)

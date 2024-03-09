@@ -1,0 +1,82 @@
+{
+    "id": 2,
+    "title": "Silentphobia",
+    "composer": "t+pazolite VS 削除",
+    "bpm": 145.0,
+    "startOnExtract": 5.0,
+    "endOnExtract": 25.0,
+    "sheets": [
+        {
+            "itensity": 0.0,
+            "outcome": 0,
+            "momentus": [
+                {
+                    "size": 1.600000023841858,
+                    "globalX": 3.0,
+                    "accTime": 3.724100112915039,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 4.0,
+                    "type": 0,
+                    "isOpposite": true,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 1.600000023841858,
+                    "globalX": 2.0,
+                    "accTime": 3.31030011177063,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 4.0,
+                    "type": 0,
+                    "isOpposite": true,
+                    "multiSweepCount": 1
+                },
+                {
+                    "size": 1.600000023841858,
+                    "globalX": 5.0,
+                    "accTime": 3.413800001144409,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 4.0,
+                    "type": 0,
+                    "isOpposite": true,
+                    "multiSweepCount": 1
+                },
+                {
+                    "size": 1.600000023841858,
+                    "globalX": -4.0,
+                    "accTime": 3.517199993133545,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 4.0,
+                    "type": 0,
+                    "isOpposite": true,
+                    "multiSweepCount": 1
+                },
+                {
+                    "size": 1.600000023841858,
+                    "globalX": -2.0,
+                    "accTime": 3.620699882507324,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 4.0,
+                    "type": 0,
+                    "isOpposite": true,
+                    "multiSweepCount": 1
+                },
+                {
+                    "size": 1.600000023841858,
+                    "globalX": 0.0,
+                    "accTime": 3.724100112915039,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 4.0,
+                    "type": 0,
+                    "isOpposite": true,
+                    "multiSweepCount": 2
+                }
+            ]
+        }
+    ]
+}
