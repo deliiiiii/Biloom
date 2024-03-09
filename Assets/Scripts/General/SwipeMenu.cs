@@ -137,7 +137,7 @@ public class SwipeMenu : MonoBehaviour
     public void CallOnStartMake()
     {
         StopCurAudio();
-        UIManager.instance.melodyMaker.GetComponent<MelodyMaker>().OnStartWeave(curId.Value);
+        MelodyMaker.instance.OnStartWeave(curId.Value);
     }
     public void StopCurAudio()
     {

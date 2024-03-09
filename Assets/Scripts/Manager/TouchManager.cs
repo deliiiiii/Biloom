@@ -50,7 +50,7 @@ public class TouchManager : MonoBehaviour
         }
         thisIllicitTouch.Clear();
 
-        if (MelodyMaker.instance)
+        if(MelodyMaker.instance)
             if (MelodyMaker.instance.IsPaused())
                 return;
         //if(lastIllicitTouch.Count != 0)

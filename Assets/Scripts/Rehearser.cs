@@ -7,7 +7,6 @@ public class Rehearser : MonoBehaviour
 {
     public static Rehearser instance;
     [Header("Making")]
-    public MelodyMaker melodyMaker;
     public Text textCountDown;
     public Button retWeave;
     [Header("Reverse")]
@@ -71,11 +70,11 @@ public class Rehearser : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        gameObject.SetActive(false);
     }
-
     private void Update()
     {
-        if (melodyMaker.gameObject.activeSelf)
+        if (MelodyMaker.instance.gameObject.activeSelf)
             return;
         //if(Input.GetKeyDown(KeyCode.R))
         //{
@@ -83,32 +82,32 @@ public class Rehearser : MonoBehaviour
             RefreshReverse();
         //}
         
-        sliderTime.value = melodyMaker.curAudioSource.time / melodyMaker.curAudioClip.length;
+        sliderTime.value = MelodyMaker.instance.curAudioSource.time / MelodyMaker.instance.curAudioClip.length;
         //if(melodyMaker.curAudioSource.isPlaying)
         {
-            melodyMaker.MoveNote();
+            MelodyMaker.instance.MoveNote();
         }
     }
     public void OnSkipMelody()
     {
-        melodyMaker.ClearALLNote();
-        melodyMaker.curAudioSource.time = melodyMaker.curAudioClip.length - 0.1f;
+        MelodyMaker.instance.ClearALLNote();
+        MelodyMaker.instance.curAudioSource.time = MelodyMaker.instance.curAudioClip.length - 0.1f;
     }
     public void OnRehearse()
     {
-        melodyMaker.WriteCurSheet();
+        MelodyMaker.instance.WriteCurSheet();
 
         gameObject.SetActive(true);
-        melodyMaker.p_HLine.gameObject.SetActive(false);
-        melodyMaker.ClearSelectedNote();
-        melodyMaker.gameObject.SetActive(false);
+        MelodyMaker.instance.p_HLine.gameObject.SetActive(false);
+        MelodyMaker.instance.ClearSelectedNote();
+        MelodyMaker.instance.gameObject.SetActive(false);
         textCountDown.gameObject.SetActive(true);
         retWeave.gameObject.SetActive(true);
         
 
 
-        infoCover.sprite = MelodyManager.instance.melodySources[melodyMaker.curMelody.id].cover;
-        textInfoTitle.text = melodyMaker.curMelody.title;
+        infoCover.sprite = MelodyManager.instance.melodySources[MelodyMaker.instance.curMelody.id].cover;
+        textInfoTitle.text = MelodyMaker.instance.curMelody.title;
         sliderTime.gameObject.SetActive(true);
         ResetPerformance();
         StartCoroutine(CountDown());
@@ -118,7 +117,7 @@ public class Rehearser : MonoBehaviour
     {
         panelPauseP.GetComponent<Fadable>().StartFade(true);
         //StartCoroutine(Fade(pauseInDuration, pauseBack,panelPauseButtons));
-        melodyMaker.Pause(true);
+        MelodyMaker.instance.Pause(true);
     }
     public void UnPause()
     {
@@ -132,15 +131,15 @@ public class Rehearser : MonoBehaviour
             whiteRate = sliderWhiteRate.value;//TODO
         foreach (ReversableObject obj in reversableObjects)
             obj.SetReverse(whiteRate);
-        for(int i = 0;i<melodyMaker.p_Momentus.childCount;i++)
-            melodyMaker.p_Momentus.GetChild(i).GetComponent<Momentus>().SetReverse(whiteRate);
+        for(int i = 0;i<MelodyMaker.instance.p_Momentus.childCount;i++)
+            MelodyMaker.instance.p_Momentus.GetChild(i).GetComponent<Momentus>().SetReverse(whiteRate);
     }
     #endregion
     #region Coroutine
     
     IEnumerator CountDown()
     {
-        melodyMaker.Pause(true);
+        MelodyMaker.instance.Pause(true);
         panelPauseP.GetComponent<Fadable>().StartFade(false);
         textCountDown.gameObject.SetActive(true);
         buttonPause.SetActive(false);
@@ -152,7 +151,7 @@ public class Rehearser : MonoBehaviour
             {
                 textCountDown.gameObject.SetActive(false);
                 buttonPause.SetActive(true);
-                melodyMaker.Pause(false);
+                MelodyMaker.instance.Pause(false);
                 StartCoroutine(CheckSummary());
                 yield break;
             }
@@ -162,7 +161,7 @@ public class Rehearser : MonoBehaviour
     }
     public IEnumerator CheckSummary()
     {
-        while(melodyMaker.curAudioSource.isPlaying || melodyMaker.IsPaused())
+        while(MelodyMaker.instance.curAudioSource.isPlaying || MelodyMaker.instance.IsPaused())
         {
             print("playing");
             yield return new WaitForSeconds(0.02f);
@@ -184,10 +183,10 @@ public class Rehearser : MonoBehaviour
     #region Performance
     void ResetPerformance()
     {
-        for (int i = 0; i < melodyMaker.p_Momentus.childCount; i++)
+        for (int i = 0; i < MelodyMaker.instance.p_Momentus.childCount; i++)
         {
-            melodyMaker.p_Momentus.GetChild(i).GetComponent<Momentus>().isInMaker.Value = false;
-            melodyMaker.p_Momentus.GetChild(i).GetComponent<Momentus>().havePlayedAudioEffect = false;
+            MelodyMaker.instance.p_Momentus.GetChild(i).GetComponent<Momentus>().isInMaker.Value = false;
+            MelodyMaker.instance.p_Momentus.GetChild(i).GetComponent<Momentus>().havePlayedAudioEffect = false;
         }
         if (PlatformManager.Instance.IsMobile())
             whiteRate = sliderWhiteRate.value = 1f;
@@ -286,8 +285,8 @@ public class Rehearser : MonoBehaviour
     }
     public void Summary()
     {
-        textSumTitle.text = melodyMaker.curMelody.title;
-        summaryCover.sprite = MelodyManager.instance.melodySources[melodyMaker.curMelody.id].cover;
+        textSumTitle.text = MelodyMaker.instance.curMelody.title;
+        summaryCover.sprite = MelodyManager.instance.melodySources[MelodyMaker.instance.curMelody.id].cover;
 
         textCountBenignBlack.text = countBenignBlack.ToString();
         textCountBareBlack.text = countBareBlack.ToString();

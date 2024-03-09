@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Security.Policy;
 using Unity.Mathematics;
@@ -10,6 +11,7 @@ using UnityEngine.UI;
 public class MelodyMaker : MonoBehaviour
 {
     public static MelodyMaker instance;
+
     public MomentusManager mmi;
     [Header("FloatRound")]
     public int floatRoundExponent = 4;
@@ -69,7 +71,7 @@ public class MelodyMaker : MonoBehaviour
     public Transform p_Momentus;
     public GameObject horizontalLine;
 
-    public List<Momentus> selectedMomentus = new();
+    public List<Momentus> selectedMomentus;
     private bool paused = false;
     
     
@@ -77,7 +79,7 @@ public class MelodyMaker : MonoBehaviour
     {
         instance = this;
         floatRoundDiv = Mathf.Pow(10, floatRoundExponent);
-        
+        gameObject.SetActive(false);
     }
     private void Update()
     {
@@ -194,7 +196,7 @@ public class MelodyMaker : MonoBehaviour
         p_HLine.gameObject.SetActive(true);
 
         curMelody = MelodyManager.instance.list_melody[id];
-        ReadCurSheet();
+        
         curAudioClip = MelodyManager.instance.melodySources[id].audio;
         curAudioSource = AudioManager.instance.GetSource(AudioManager.instance.PlayOneShot(curAudioClip, 1, 1, float.Parse(inputTimePitch.text.ToString())));
         curAudioSource.time = 0f;
@@ -209,14 +211,15 @@ public class MelodyMaker : MonoBehaviour
         OnLineOffsetChanged_Input();
         OnSelectNote();
         OnConfigurationChanged();
-        Pause(false);
+        Pause(true);
+        ReadCurSheet();
+       
     }
     public void OnWakeUp(bool write = true)
     {
         ClearSelectedNote();
         AudioManager.instance.Stop(curAudioClip);
-        if(Rehearser.instance)
-            Rehearser.instance.StopAllCoroutines();
+        Rehearser.instance.StopAllCoroutines();
         if(write)
             WriteCurSheet();
 
@@ -618,6 +621,7 @@ public class MelodyMaker : MonoBehaviour
 
     public void WriteCurSheet()
     {
+        print("write");
         //curMelody.sheets[^1] => json
         string path = GlobalSetting.PathURL + "Sheet/" + curMelody.id + " - " + curMelody.title + " - " + curMelody.composer + ".json";
         string pathShort = GlobalSetting.PathURL + "Sheet";
@@ -631,20 +635,48 @@ public class MelodyMaker : MonoBehaviour
     public void ReadCurSheet()
     {
         //json => curMelody.sheets[^1]
-        string path = GlobalSetting.PathURL + "Sheet/" + curMelody.id + " - " + curMelody.title + " - " + curMelody.composer + ".json";
-        if (!File.Exists(path))
+        if(PlatformManager.Instance.isPC())
         {
-            curMelody.sheets.Add(new());
-            WriteCurSheet();
+            string path = GlobalSetting.PathURL + "Sheet/" + curMelody.id + " - " + curMelody.title + " - " + curMelody.composer + ".json";
+            if (!File.Exists(path))
+            {
+                curMelody.sheets.Add(new());
+                WriteCurSheet();
+            }else
+            {
+                string str = File.ReadAllText(path);
+                curMelody = JsonUtility.FromJson<Melody>(str);
+            }
         }
-        ClearALLNote();
+        else if (PlatformManager.Instance.IsMobile())
+        {
+            string path = "Sheet/" + curMelody.id + " - " + curMelody.title + " - " + curMelody.composer + ".json";
+            path = path.Replace(".json", "");
+            TextAsset textAsset = Resources.Load<TextAsset>(path);
+            if (!textAsset)
+            {
+                gameObject.SetActive(false);
+                curMelody.sheets.Add(new());
+                WriteCurSheet();
+            }
+            else
+            {
+                //print("exist : " + textAsset.text);
+                curMelody = JsonUtility.FromJson<Melody>(textAsset.text);
+            }
+        }
         
-        string str =  File.ReadAllText(path);
-        curMelody = JsonUtility.FromJson<Melody>(str);
+        
+            
+        ClearALLNote();
         RefreshMelodyInfo();
         for (int i= 0;i < curMelody.sheets[^1].momentus.Count;i++)
         {
             GenerateNoteByData(curMelody.sheets[^1].momentus[i]);
+        }
+        if (PlatformManager.Instance.IsMobile())
+        {
+            Rehearser.instance.OnRehearse();
         }
     }
     void RefreshMelodyInfo()
