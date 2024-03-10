@@ -71,7 +71,7 @@ public class MelodyMaker : MonoBehaviour
     public Transform p_Momentus;
     public GameObject horizontalLine;
 
-    public List<Momentus> selectedMomentus;
+    public List<Momentus> selectedMomentus = new();
     private bool paused = false;
     
     
