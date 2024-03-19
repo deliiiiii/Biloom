@@ -40,9 +40,9 @@ public class Momentus : MonoBehaviour
 {
     public MomentusData momentusData;
 
-    public ObservableValue<bool,Momentus> isInMaker;
+    //public ObservableValue<bool,Momentus> isInMaker;
     public BoxCollider colInMaker;
-    public BoxCollider colInPlay;
+    //public BoxCollider colInPlay;
     
     //public List<int> sweeper = new();//valid finger
     public List<GameObject> sweepEffect;
@@ -57,10 +57,10 @@ public class Momentus : MonoBehaviour
     public bool havePlayedAudioEffect = false;
 
     private MomentusManager mmi;
-    private void Awake()
-    {
-        isInMaker = new(false, this);
-    }
+    //private void Awake()
+    //{
+    //    isInMaker = new(false, this);
+    //}
     private void Start()
     {
         mmi = MomentusManager.instance;
@@ -72,11 +72,11 @@ public class Momentus : MonoBehaviour
     void CheckZ()
     {
 
-        if (isInMaker.Value)
-            return;
+        //if (isInMaker.Value)
+        //    return;
         if (countSwept > 0)
             return;
-        if (MelodyMaker.instance.IsPaused())
+        if (MelodyMaker.instance.gameObject.activeSelf || MelodyMaker.instance.IsPaused())
             return;
         //TODO ???
         if (transform.position.z < mmi.threshold.transform.position.z - mmi.speedMulti * mmi.speedUni * 0.150f)
@@ -84,6 +84,7 @@ public class Momentus : MonoBehaviour
             SweepNotEligible();
             return;
         }
+        return;
         if (transform.position.z <=(mmi.threshold.transform.position.z + mmi.speedMulti * mmi.speedUni * 0.150f) && !havePlayedAudioEffect 
             && PlatformManager.Instance.isPC())
         {
@@ -97,25 +98,30 @@ public class Momentus : MonoBehaviour
     public int SweepStab()
     {
         //print("Sweep time" + Time.time);
-        if (isInMaker.Value)
+        if (MelodyMaker.instance.gameObject.activeSelf)
             return -1;
         if (countSwept > 0)
             return 2;
+        MelodyMaker.instance.existingMomentus.Remove(this); 
         //Debug.Log(nameof(SweepStab));
         float sweepTruth = (mmi.threshold.transform.position.z - transform.position.z)
                             /
                             (mmi.speedMulti * mmi.speedUni) * 1000;
-        
+       
         if(sweepTruth >= mmi.benignTime.x && sweepTruth <= mmi.benignTime.y)
         {
+            //print(sweepTruth);
             //TODO 2 by finger
             SetSweepStabEffect(0);
+            return 1;
         }
         else if(sweepTruth >= mmi.bareTime.x && sweepTruth <= mmi.bareTime.y)
         {
+            //print(sweepTruth);
             SetSweepStabEffect(1);
+            return 1;
         }
-        return 1;
+        return 0;
     }
     public void SweepLinger(int touchId)
     {
@@ -154,13 +160,13 @@ public class Momentus : MonoBehaviour
         momentusData.beatDenominator = float.Parse(MelodyMaker.instance.inputDenominator.text);
         momentusData.type = (MomentusData.Type)MelodyMaker.instance.dropdownType.value;
         OnNoteAppear();
-        SetColliderInPlay(x);
+        //SetColliderInPlay(x);
     }
     public void SetXTime_WhenReadData(float x, float time)
     {
         transform.position = new Vector3(x, 0.87f, transform.position.z);
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, (time + GlobalSetting.instance.globalSettingData.playerOffset / 1e3f)  * MomentusManager.instance.speedUni * MomentusManager.instance.speedMulti);
-        SetColliderInPlay(x);
+        //SetColliderInPlay(x);
     }
     public void SetSize(float size = 0f)
     {
@@ -170,11 +176,11 @@ public class Momentus : MonoBehaviour
         if(size != 0f)
             momentusData.size = size;
     }
-    void SetColliderInPlay(float x)
-    {
-        colInPlay.size = new(1.35f + Mathf.Abs(x)/10f, colInPlay.size.y, colInPlay.size.z);
-        //print(colInPlay.size);
-    }
+    //void SetColliderInPlay(float x)
+    //{
+    //    colInPlay.size = new(1.35f + Mathf.Abs(x)/10f, colInPlay.size.y, colInPlay.size.z);
+    //    //print(colInPlay.size);
+    //}
     public void OnNoteLeave()
     {
         Collider[] hitsBefore = Physics.OverlapBox(transform.position, new Vector3(10, 1, 1)*2, Quaternion.identity);
@@ -266,11 +272,6 @@ public class Momentus : MonoBehaviour
         }
         //print("Stab clicked");
         MelodyMaker.instance.OnSelectNote();
-    }
-    public void OnIsInMakerChange()
-    {
-        colInMaker.enabled = isInMaker.Value;
-        colInPlay.enabled = !isInMaker.Value;
     }
     public bool IsNearZ(float z1,float z2)
     {

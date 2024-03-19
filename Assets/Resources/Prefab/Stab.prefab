@@ -550,7 +550,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.2, y: 3.53, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.8, z: 0}
 --- !u!65 &5285466380185554470
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -594,10 +594,7 @@ MonoBehaviour:
     type: 0
     isOpposite: 0
     multiSweepCount: 1
-  isInMaker:
-    value: 0
   colInMaker: {fileID: 938939518468880681}
-  colInPlay: {fileID: 5285466380185554470}
   sweepEffect:
   - {fileID: 351079537251048866}
   - {fileID: 2543891913188615095}

@@ -31553,9 +31553,8 @@ MonoBehaviour:
   popper: {fileID: 1875132098}
   threshold: {fileID: 2041563573}
   pMomentus: {fileID: 0}
-  benignTime: {x: -100, y: 100}
-  bareTime: {x: -300, y: 300}
-  badTime: {x: -114514, y: 114514}
+  benignTime: {x: -45, y: 45}
+  bareTime: {x: -100, y: 100}
 --- !u!1 &2128419591
 GameObject:
   m_ObjectHideFlags: 0

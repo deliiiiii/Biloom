@@ -598,7 +598,6 @@ public class MelodyMaker : MonoBehaviour
         t.transform.parent = p_Momentus;
         m.SetXTime(x, time == -1f?curAudioSource.time:time);
         m.SetSize();
-        m.isInMaker.Value = true;
 
         ClearSelectedNote();
         selectedMomentus.Add(m);
@@ -617,7 +616,6 @@ public class MelodyMaker : MonoBehaviour
             data.size = 1.6f;
         else
             m.SetSize(data.size);
-        m.isInMaker.Value = true;
         if (data.multiSweepCount > 1)
             m.multiSweep.SetActive(true);
         else

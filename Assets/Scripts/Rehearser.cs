@@ -70,6 +70,7 @@ public class Rehearser : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        
         gameObject.SetActive(false);
     }
     private void Update()
@@ -165,11 +166,11 @@ public class Rehearser : MonoBehaviour
     {
         while(MelodyMaker.instance.curAudioSource.isPlaying || MelodyMaker.instance.IsPaused())
         {
-            print("playing");
+            //print("playing");
             yield return new WaitForSeconds(0.02f);
         }
         int countSec = 4;
-        print("summary");
+        //print("summary");
         sliderTime.gameObject.SetActive(false);
         buttonPause.SetActive(false);
         while (countSec > 0)
@@ -191,8 +192,6 @@ public class Rehearser : MonoBehaviour
         foreach(Momentus it in MelodyMaker.instance.existingMomentus)
         {
             countPerFrame++;
-            it.isInMaker.Value = false;
-            it.havePlayedAudioEffect = false;
             if(countPerFrame >= maxPerFrame)
             {
                 countPerFrame = 0;

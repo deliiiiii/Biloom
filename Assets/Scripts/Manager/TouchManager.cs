@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.UI;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
@@ -78,49 +79,54 @@ public class TouchManager : MonoBehaviour
             (touch.screenPosition.x,
             touch.screenPosition.y,
             touchScreenPos.z));
-        print(touchWorldPos2);
-        // Physics.OverlapBox(touchWorldPos2, new Vector3(1, 1, 50f));
-        RaycastHit[] rayHits = Physics.RaycastAll(ray);
-        RaycastHit? tarRayHit = null;
+        //print(touchWorldPos2);
+        giz1 = touchWorldPos2;
+        giz2 = new Vector3(1, 1, 50f);
+        Collider[] colliders = Physics.OverlapBox(touchWorldPos2, new Vector3(1, 1, 50f));
+        Collider tarCollider = null;
+        //RaycastHit[] rayHits = Physics.RaycastAll(ray);
+        //RaycastHit? tarRayHit = null;
         float minDeltaT = float.MaxValue;
         float minDeltaX = float.MaxValue;
-        List<RaycastHit> raycastMinDeltaZ = new();
-        for (int i = 0; i < rayHits.Length; i++)
+        //List<RaycastHit> raycastMinDeltaZ = new();
+        List<Collider> colliderMinDeltaZ = new();
+        for (int i = 0; i < colliders.Length; i++)
         {
-            RaycastHit rayHit = rayHits[i];
-            if (!rayHit.collider.GetComponent<Momentus>())
+            Collider collider = colliders[i];
+            if (!collider.GetComponent<Momentus>())
                 continue;
-            float deltaT = Mathf.Abs(rayHit.collider.GetComponent<Momentus>().momentusData.accTime - MelodyMaker.instance.curAudioSource.time);
+            float deltaT = Mathf.Abs(collider.GetComponent<Momentus>().momentusData.accTime - MelodyMaker.instance.curAudioSource.time);
             //print(rayHit.collider.GetComponent<Momentus>().momentusData.accTime + " " + MelodyMaker.instance.curAudioSource.time);
             //print("find " + rayHit.collider.GetComponent<Momentus>().momentusData.globalX + " , " + rayHit.collider.GetComponent<Momentus>().momentusData.accTime);
             if (deltaT < minDeltaT)
             {
                 //print("min");
-                tarRayHit = rayHit;
+                tarCollider = collider;
                 minDeltaT = deltaT;
-                raycastMinDeltaZ.Clear();
-                raycastMinDeltaZ.Add(rayHit);
+                colliderMinDeltaZ.Clear();
+                colliderMinDeltaZ.Add(collider);
+                minDeltaX = float.MaxValue;
             }
             else if(deltaT == minDeltaT)
             {
                 //print("same z !");
-                raycastMinDeltaZ.Add(rayHit);
+                colliderMinDeltaZ.Add(collider);
                 //print("add! same Z , count = " + raycastMinDeltaZ.Count);
-                foreach (var rayHit_sameZ in raycastMinDeltaZ)
+                foreach (var rayHit_sameZ in colliderMinDeltaZ)
                 {
-                    Vector3 tarScreenPos = Camera.main.WorldToScreenPoint(rayHit_sameZ.transform.position);
-                    Vector3 touchWorldPos = Camera.main.ScreenToWorldPoint(
-                        new Vector3
-                        (touch.screenPosition.x,
-                        touch.screenPosition.y,
-                        tarScreenPos.z));
+                    //Vector3 tarScreenPos = Camera.main.WorldToScreenPoint(rayHit_sameZ.transform.position);
+                    //Vector3 touchWorldPos = Camera.main.ScreenToWorldPoint(
+                    //    new Vector3
+                    //    (touch.screenPosition.x,
+                    //    touch.screenPosition.y,
+                    //    tarScreenPos.z));
                     //print("touch x = " + touchWorldPos.x);
                     //print("note x = " + rayHit_sameZ.collider.GetComponent<Momentus>().momentusData.globalX);
-                    float deltaX = MathF.Abs(touchWorldPos.x - rayHit_sameZ.collider.GetComponent<Momentus>().momentusData.globalX);
+                    float deltaX = MathF.Abs(touchWorldPos2.x - rayHit_sameZ.GetComponent<Momentus>().momentusData.globalX);
                     
                     if (deltaX < minDeltaX)
                     {
-                        tarRayHit = rayHit_sameZ;
+                        tarCollider = rayHit_sameZ;
                         minDeltaX = deltaX;
                     }
                 }
@@ -128,19 +134,29 @@ public class TouchManager : MonoBehaviour
             
             
         }
-        if (tarRayHit == null)
+        if (tarCollider == null)
         {
+            print("!!!!!!!!!!!!!!!! " + touchWorldPos2.x + " can NOT sweep");
             if (isIllicit)
             {
-                //print("???");
+                print("???");
+                thisIllicitTouch.Add(touch);
             }
             return;
         }
         if (isIllicit || touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
         {
-            //print("trySweep  = " + tarRayHit.Value.transform.GetComponent<Momentus>().momentusData.globalX + " , " + tarRayHit.Value.transform.GetComponent<Momentus>().momentusData.accTime);
-            int ret = tarRayHit.Value.collider.GetComponent<Momentus>().SweepStab();
-            //print("ret "+ret);
+            print("!!!!!! " +touchWorldPos2.x +" can sweep :");
+            int c = 0;
+            foreach (var rayHit_sameZ in colliderMinDeltaZ)
+            {
+                c++;
+                print(c +" " + rayHit_sameZ.GetComponent<Momentus>().momentusData.globalX + " " + rayHit_sameZ.GetComponent<Momentus>().momentusData.accTime);
+            }
+                
+            print( " trySweep  = " + tarCollider.transform.GetComponent<Momentus>().momentusData.globalX + " , " + tarCollider.transform.GetComponent<Momentus>().momentusData.accTime);
+            int ret = tarCollider.GetComponent<Momentus>().SweepStab();
+            print("ret "+ret);
             if(ret == 2)
                 thisIllicitTouch.Add(touch);
             //if(thisIllicitTouch.Count != 0)
@@ -174,9 +190,17 @@ public class TouchManager : MonoBehaviour
         //}
         //TODO 1 finger
     }
+
     void ClearChild(Transform p)
     {
         for(int i = 0;i<p.childCount;i++)
             Destroy(p.GetChild(i).gameObject);
     }
+    Vector3 giz1, giz2;
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(giz1, giz2 * 2);
+    }
+#endif
 }
