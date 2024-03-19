@@ -79,7 +79,7 @@ public class TouchManager : MonoBehaviour
             (touch.screenPosition.x,
             touch.screenPosition.y,
             touchScreenPos.z));
-        //print(touchWorldPos2);
+        print(touchWorldPos2);
         giz1 = touchWorldPos2;
         giz2 = new Vector3(1, 1, 50f);
         Collider[] colliders = Physics.OverlapBox(touchWorldPos2, new Vector3(1, 1, 50f));
@@ -136,27 +136,27 @@ public class TouchManager : MonoBehaviour
         }
         if (tarCollider == null)
         {
-            print("!!!!!!!!!!!!!!!! " + touchWorldPos2.x + " can NOT sweep");
+            //print("!!!!!!!!!!!!!!!! " + touchWorldPos2.x + " can NOT sweep");
             if (isIllicit)
-            {
+            //{
                 print("???");
-                thisIllicitTouch.Add(touch);
-            }
+                //thisIllicitTouch.Add(touch);
+            //}
             return;
         }
         if (isIllicit || touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
         {
-            print("!!!!!! " +touchWorldPos2.x +" can sweep :");
-            int c = 0;
-            foreach (var rayHit_sameZ in colliderMinDeltaZ)
-            {
-                c++;
-                print(c +" " + rayHit_sameZ.GetComponent<Momentus>().momentusData.globalX + " " + rayHit_sameZ.GetComponent<Momentus>().momentusData.accTime);
-            }
-                
-            print( " trySweep  = " + tarCollider.transform.GetComponent<Momentus>().momentusData.globalX + " , " + tarCollider.transform.GetComponent<Momentus>().momentusData.accTime);
+            //print("!!!!!! " +touchWorldPos2.x +" can sweep :");
+            //int c = 0;
+            //foreach (var rayHit_sameZ in colliderMinDeltaZ)
+            ////{
+                //c++;
+               //print(c +" " + rayHit_sameZ.GetComponent<Momentus>().momentusData.globalX + " " + rayHit_sameZ.GetComponent<Momentus>().momentusData.accTime);
+            //}
+               
+            //print( " trySweep  = " + tarCollider.transform.GetComponent<Momentus>().momentusData.globalX + " , " + tarCollider.transform.GetComponent<Momentus>().momentusData.accTime);
             int ret = tarCollider.GetComponent<Momentus>().SweepStab();
-            print("ret "+ret);
+            //print("ret "+ret);
             if(ret == 2)
                 thisIllicitTouch.Add(touch);
             //if(thisIllicitTouch.Count != 0)
