@@ -7067,7 +7067,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 504279261}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8350f69ba397bb244baf9ede23046af1, type: 3}
   m_Name: 
@@ -8544,8 +8544,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1798653229}
+  m_Children: []
   m_Father: {fileID: 1928979443}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -11400,6 +11399,7 @@ MonoBehaviour:
   p_HLine: {fileID: 384503853}
   p_Momentus: {fileID: 1284557739}
   horizontalLine: {fileID: 995985072748498802, guid: c0ec52e8f37086542b57a5dbf21d0c40, type: 3}
+  existingMomentus: []
   selectedMomentus: []
 --- !u!114 &872174686
 MonoBehaviour:
@@ -27339,7 +27339,7 @@ RectTransform:
   m_LocalScale: {x: 0.59999996, y: 0.59999996, z: 0.59999996}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 640928828}
+  m_Father: {fileID: 1928979443}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -28957,6 +28957,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1373312727}
+  - {fileID: 1798653229}
   - {fileID: 640928828}
   m_Father: {fileID: 324802925}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -31552,9 +31553,8 @@ MonoBehaviour:
   popper: {fileID: 1875132098}
   threshold: {fileID: 2041563573}
   pMomentus: {fileID: 0}
-  benignTime: {x: -100, y: 100}
-  bareTime: {x: -300, y: 300}
-  badTime: {x: -114514, y: 114514}
+  benignTime: {x: -45, y: 45}
+  bareTime: {x: -100, y: 100}
 --- !u!1 &2128419591
 GameObject:
   m_ObjectHideFlags: 0

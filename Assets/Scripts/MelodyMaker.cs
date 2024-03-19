@@ -71,6 +71,7 @@ public class MelodyMaker : MonoBehaviour
     public Transform p_Momentus;
     public GameObject horizontalLine;
 
+    public List<Momentus> existingMomentus = new();
     public List<Momentus> selectedMomentus = new();
     private bool paused = false;
     
@@ -199,7 +200,8 @@ public class MelodyMaker : MonoBehaviour
         
         curAudioClip = MelodyManager.instance.melodySources[id].audio;
         curAudioSource = AudioManager.instance.GetSource(AudioManager.instance.PlayOneShot(curAudioClip, 1, 1, float.Parse(inputTimePitch.text.ToString())));
-        curAudioSource.time = 0f;
+        //curAudioSource.time = 0f;
+        //inputTimeStamp.text = "0";
         textEndStamp.text = curAudioClip.length.ToString();
 
         //TODO ?? where
@@ -319,12 +321,14 @@ public class MelodyMaker : MonoBehaviour
             g.SetActive(true);
             curTimeStamp +=  60f / curMelody.bpm * (float.Parse(inputNumerator.text) / float.Parse(inputDenominator.text));
         }
-        for (int i = 0; i < p_Momentus.childCount; i++)
+        
+        //for (int i = 0; i < p_Momentus.childCount; i++)
+        foreach(Momentus it in existingMomentus)
         {
-            p_Momentus.GetChild(i).transform.localPosition
-                = new(p_Momentus.GetChild(i).transform.localPosition.x
-                    , p_Momentus.GetChild(i).transform.localPosition.y
-                    ,(p_Momentus.GetChild(i).GetComponent<Momentus>().momentusData.accTime+ GlobalSetting.instance.globalSettingData.playerOffset / 1e3f) * mmi.speedUni * mmi.speedMulti);
+            it.transform.localPosition
+                = new(it.transform.localPosition.x
+                    , it.transform.localPosition.y
+                    ,(it.momentusData.accTime+ GlobalSetting.instance.globalSettingData.playerOffset / 1e3f) * mmi.speedUni * mmi.speedMulti);
         }
     }
     public void OnNoteSpeedChanged_Input()
@@ -587,40 +591,43 @@ public class MelodyMaker : MonoBehaviour
     public void GenerateNote(int x,float time = -1f)
     {
         GameObject t = Instantiate(MomentusManager.instance.stab.gameObject, Vector3.zero, Quaternion.identity);
-        curMelody.sheets[^1].momentus.Add(t.GetComponent<Momentus>().momentusData);
+        Momentus m = t.GetComponent<Momentus>();
+        existingMomentus.Add(m);
+        curMelody.sheets[^1].momentus.Add(m.momentusData);
         t.SetActive(true);
         t.transform.parent = p_Momentus;
-        t.GetComponent<Momentus>().SetXTime(x, time == -1f?curAudioSource.time:time);
-        t.GetComponent<Momentus>().SetSize();
-        t.GetComponent<Momentus>().isInMaker.Value = true;
+        m.SetXTime(x, time == -1f?curAudioSource.time:time);
+        m.SetSize();
 
         ClearSelectedNote();
-        selectedMomentus.Add(t.GetComponent<Momentus>());
+        selectedMomentus.Add(m);
         selectedMomentus[0].selected.SetActive(true);
         OnSelectNote();
     }
     public void GenerateNoteByData(MomentusData data)
     {
         GameObject t = Instantiate(MomentusManager.instance.stab.gameObject, Vector3.zero, Quaternion.identity);//TODO type
+        Momentus m = t.GetComponent<Momentus>();
+        existingMomentus.Add(m);
         t.SetActive(true);
         t.transform.parent = p_Momentus;
-        t.GetComponent<Momentus>().SetXTime_WhenReadData(data.globalX, data.accTime);
+        m.SetXTime_WhenReadData(data.globalX, data.accTime);
         if (data.size == 0)
             data.size = 1.6f;
         else
-            t.GetComponent<Momentus>().SetSize(data.size);
-        t.GetComponent<Momentus>().isInMaker.Value = true;
+            m.SetSize(data.size);
         if (data.multiSweepCount > 1)
-            t.GetComponent<Momentus>().multiSweep.SetActive(true);
+            m.multiSweep.SetActive(true);
         else
-            t.GetComponent<Momentus>().multiSweep.SetActive(false);
-        t.GetComponent<Momentus>().visage.sprite = t.GetComponent<Momentus>().visage_type_to_BoolSprite[data.type][data.isOpposite];
-        t.GetComponent<Momentus>().momentusData = data;
-
+            m.multiSweep.SetActive(false);
+        m.visage.sprite = m.visage_type_to_BoolSprite[data.type][data.isOpposite];
+        m.momentusData = data;
     }
 
     public void WriteCurSheet()
     {
+        if (!PlatformManager.Instance.isPC())
+            return;
         print("write");
         //curMelody.sheets[^1] => json
         string path = GlobalSetting.PathURL + "Sheet/" + curMelody.id + " - " + curMelody.title + " - " + curMelody.composer + ".json";
@@ -719,10 +726,8 @@ public class MelodyMaker : MonoBehaviour
     public void ClearALLNote()
     {
         DeleteSelectedNote();
-        //foreach (var it in curMelody.sheets[^1].momentus)
-        {
-            ClearChild(p_Momentus);
-        }
+        ClearChild(p_Momentus);
+        existingMomentus.Clear();
     }
     public void ClearChild(Transform p)
     {
