@@ -72,6 +72,14 @@ public class TouchManager : MonoBehaviour
     {
         //Debug.Log(touch.touchId + " " + touch.phase);
         Ray ray = Camera.main.ScreenPointToRay(touch.screenPosition);
+        Vector3 touchScreenPos = Camera.main.WorldToScreenPoint(new Vector3(0,0, -9.162f));
+        Vector3 touchWorldPos2 = Camera.main.ScreenToWorldPoint(
+            new Vector3
+            (touch.screenPosition.x,
+            touch.screenPosition.y,
+            touchScreenPos.z));
+        print(touchWorldPos2);
+        // Physics.OverlapBox(touchWorldPos2, new Vector3(1, 1, 50f));
         RaycastHit[] rayHits = Physics.RaycastAll(ray);
         RaycastHit? tarRayHit = null;
         float minDeltaT = float.MaxValue;

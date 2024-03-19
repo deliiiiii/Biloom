@@ -7067,7 +7067,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 504279261}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8350f69ba397bb244baf9ede23046af1, type: 3}
   m_Name: 
@@ -8544,8 +8544,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1798653229}
+  m_Children: []
   m_Father: {fileID: 1928979443}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -11400,6 +11399,7 @@ MonoBehaviour:
   p_HLine: {fileID: 384503853}
   p_Momentus: {fileID: 1284557739}
   horizontalLine: {fileID: 995985072748498802, guid: c0ec52e8f37086542b57a5dbf21d0c40, type: 3}
+  existingMomentus: []
   selectedMomentus: []
 --- !u!114 &872174686
 MonoBehaviour:
@@ -26795,7 +26795,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 11.451
+  m_Text: 0
 --- !u!222 &1762524112
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -27339,7 +27339,7 @@ RectTransform:
   m_LocalScale: {x: 0.59999996, y: 0.59999996, z: 0.59999996}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 640928828}
+  m_Father: {fileID: 1928979443}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -28957,6 +28957,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1373312727}
+  - {fileID: 1798653229}
   - {fileID: 640928828}
   m_Father: {fileID: 324802925}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -29664,7 +29665,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 11.451
+  m_Text: 0
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0

@@ -953,7 +953,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -964,7 +964,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -1041,7 +1041,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 3
                 },
                 {
@@ -1063,7 +1063,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -1118,7 +1118,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 1.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -1129,7 +1129,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -1162,7 +1162,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -1184,7 +1184,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -1228,7 +1228,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -1272,7 +1272,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -1283,7 +1283,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -1294,7 +1294,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -1305,7 +1305,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -1371,7 +1371,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -1448,7 +1448,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 1.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -1503,7 +1503,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -1525,7 +1525,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 1.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -1569,7 +1569,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 1.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -1679,7 +1679,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 3
                 },
                 {
@@ -1745,7 +1745,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 3
                 },
                 {
@@ -1756,7 +1756,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -1811,7 +1811,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -1888,7 +1888,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -1932,7 +1932,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -1976,7 +1976,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -1987,7 +1987,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -1998,7 +1998,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -2009,7 +2009,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -2020,7 +2020,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -2031,7 +2031,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -2042,7 +2042,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 3
                 },
                 {
@@ -2075,7 +2075,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -2097,7 +2097,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -2130,7 +2130,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -2141,8 +2141,8 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
-                    "multiSweepCount": 3
+                    "isOpposite": true,
+                    "multiSweepCount": 2
                 },
                 {
                     "size": 1.600000023841858,
@@ -2153,7 +2153,7 @@
                     "beatDenominator": 4.0,
                     "type": 0,
                     "isOpposite": false,
-                    "multiSweepCount": 2
+                    "multiSweepCount": 1
                 },
                 {
                     "size": 1.600000023841858,
@@ -2164,7 +2164,7 @@
                     "beatDenominator": 4.0,
                     "type": 0,
                     "isOpposite": false,
-                    "multiSweepCount": 3
+                    "multiSweepCount": 2
                 },
                 {
                     "size": 1.600000023841858,
@@ -2174,7 +2174,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -2185,7 +2185,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -2196,7 +2196,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -2208,7 +2208,7 @@
                     "beatDenominator": 4.0,
                     "type": 0,
                     "isOpposite": false,
-                    "multiSweepCount": 3
+                    "multiSweepCount": 2
                 },
                 {
                     "size": 2.4000000953674318,
@@ -2218,8 +2218,8 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
-                    "multiSweepCount": 3
+                    "isOpposite": true,
+                    "multiSweepCount": 2
                 },
                 {
                     "size": 1.600000023841858,
@@ -2230,7 +2230,7 @@
                     "beatDenominator": 4.0,
                     "type": 0,
                     "isOpposite": false,
-                    "multiSweepCount": 2
+                    "multiSweepCount": 1
                 },
                 {
                     "size": 1.600000023841858,
@@ -2240,8 +2240,8 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
-                    "multiSweepCount": 3
+                    "isOpposite": true,
+                    "multiSweepCount": 2
                 },
                 {
                     "size": 2.4000000953674318,
@@ -2252,7 +2252,7 @@
                     "beatDenominator": 4.0,
                     "type": 0,
                     "isOpposite": false,
-                    "multiSweepCount": 3
+                    "multiSweepCount": 2
                 },
                 {
                     "size": 1.600000023841858,
@@ -2263,7 +2263,7 @@
                     "beatDenominator": 4.0,
                     "type": 0,
                     "isOpposite": false,
-                    "multiSweepCount": 2
+                    "multiSweepCount": 1
                 },
                 {
                     "size": 1.600000023841858,
@@ -2274,7 +2274,7 @@
                     "beatDenominator": 4.0,
                     "type": 0,
                     "isOpposite": false,
-                    "multiSweepCount": 3
+                    "multiSweepCount": 2
                 },
                 {
                     "size": 2.4000000953674318,
@@ -2284,8 +2284,8 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
-                    "multiSweepCount": 3
+                    "isOpposite": true,
+                    "multiSweepCount": 2
                 },
                 {
                     "size": 1.600000023841858,
@@ -2306,7 +2306,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -2383,7 +2383,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -2394,7 +2394,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -2416,7 +2416,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -2427,7 +2427,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -2526,7 +2526,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -2559,7 +2559,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -2603,7 +2603,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -2625,7 +2625,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -2647,7 +2647,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -2669,7 +2669,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -2691,7 +2691,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -2702,7 +2702,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -2713,7 +2713,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -2724,7 +2724,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -2812,7 +2812,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -2834,7 +2834,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -2845,7 +2845,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -2878,7 +2878,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -2911,7 +2911,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -2933,7 +2933,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -2966,7 +2966,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -3054,7 +3054,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -3076,7 +3076,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -3087,7 +3087,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -3120,7 +3120,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -3142,7 +3142,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -3153,7 +3153,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -3208,7 +3208,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -3263,7 +3263,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 3
                 },
                 {
@@ -3274,7 +3274,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 3
                 },
                 {
@@ -3307,7 +3307,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -3329,7 +3329,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -3373,7 +3373,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -3417,7 +3417,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -3461,7 +3461,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -3505,7 +3505,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -3516,7 +3516,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -3538,7 +3538,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -3549,7 +3549,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -3571,7 +3571,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -3604,7 +3604,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -3615,7 +3615,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -3648,7 +3648,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -3659,7 +3659,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -3703,7 +3703,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -3747,7 +3747,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -3791,7 +3791,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -3824,7 +3824,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -3846,7 +3846,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 1.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -3857,7 +3857,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -3879,7 +3879,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 1.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -3901,7 +3901,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -3912,7 +3912,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 1.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -3923,7 +3923,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -3945,7 +3945,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -3956,7 +3956,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -4011,7 +4011,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -4044,7 +4044,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -4066,7 +4066,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -4088,7 +4088,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -4110,7 +4110,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -4165,7 +4165,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -4484,7 +4484,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -4495,7 +4495,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -4506,7 +4506,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -4847,7 +4847,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 3
                 },
                 {
@@ -4880,7 +4880,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -4891,7 +4891,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -5045,7 +5045,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 1
                 },
                 {
@@ -5111,7 +5111,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 1.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -5133,7 +5133,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -5155,7 +5155,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -5595,7 +5595,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 3
                 },
                 {
@@ -5617,7 +5617,7 @@
                     "beatNumerator": 1.0,
                     "beatDenominator": 4.0,
                     "type": 0,
-                    "isOpposite": false,
+                    "isOpposite": true,
                     "multiSweepCount": 2
                 },
                 {
@@ -5674,83 +5674,6 @@
                     "type": 0,
                     "isOpposite": false,
                     "multiSweepCount": 1
-                },
-                {
-                    "size": 1.600000023841858,
-                    "globalX": -3.0,
-                    "accTime": 29.9778995513916,
-                    "lineOffset": 140.0,
-                    "beatNumerator": 1.0,
-                    "beatDenominator": 4.0,
-                    "type": 0,
-                    "isOpposite": false,
-                    "multiSweepCount": 3
-                },
-                {
-                    "size": 1.600000023841858,
-                    "globalX": 2.0,
-                    "accTime": 30.140100479125978,
-                    "lineOffset": 140.0,
-                    "beatNumerator": 1.0,
-                    "beatDenominator": 4.0,
-                    "type": 0,
-                    "isOpposite": false,
-                    "multiSweepCount": 2
-                },
-                {
-                    "size": 1.600000023841858,
-                    "globalX": -3.0,
-                    "accTime": 30.302200317382814,
-                    "lineOffset": 140.0,
-                    "beatNumerator": 1.0,
-                    "beatDenominator": 4.0,
-                    "type": 0,
-                    "isOpposite": false,
-                    "multiSweepCount": 3
-                },
-                {
-                    "size": 1.600000023841858,
-                    "globalX": 2.0,
-                    "accTime": 30.464399337768556,
-                    "lineOffset": 140.0,
-                    "beatNumerator": 1.0,
-                    "beatDenominator": 4.0,
-                    "type": 0,
-                    "isOpposite": false,
-                    "multiSweepCount": 2
-                },
-                {
-                    "size": 1.600000023841858,
-                    "globalX": 2.0,
-                    "accTime": 30.788700103759767,
-                    "lineOffset": 140.0,
-                    "beatNumerator": 1.0,
-                    "beatDenominator": 4.0,
-                    "type": 0,
-                    "isOpposite": false,
-                    "multiSweepCount": 2
-                },
-                {
-                    "size": 1.600000023841858,
-                    "globalX": -3.0,
-                    "accTime": 30.62660026550293,
-                    "lineOffset": 140.0,
-                    "beatNumerator": 1.0,
-                    "beatDenominator": 4.0,
-                    "type": 0,
-                    "isOpposite": false,
-                    "multiSweepCount": 3
-                },
-                {
-                    "size": 1.600000023841858,
-                    "globalX": -3.0,
-                    "accTime": 30.950899124145509,
-                    "lineOffset": 140.0,
-                    "beatNumerator": 1.0,
-                    "beatDenominator": 4.0,
-                    "type": 0,
-                    "isOpposite": false,
-                    "multiSweepCount": 3
                 },
                 {
                     "size": 2.4000000953674318,
@@ -17221,6 +17144,17 @@
                     "lineOffset": 140.0,
                     "beatNumerator": 1.0,
                     "beatDenominator": 8.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 1
+                },
+                {
+                    "size": 1.600000023841858,
+                    "globalX": -2.5,
+                    "accTime": 45.464500427246097,
+                    "lineOffset": 140.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 4.0,
                     "type": 0,
                     "isOpposite": false,
                     "multiSweepCount": 1

@@ -79,7 +79,7 @@ public class Rehearser : MonoBehaviour
         //if(Input.GetKeyDown(KeyCode.R))
         //{
         //    isReverse = !isReverse;
-            RefreshReverse();
+              RefreshReverse();
         //}
         
         sliderTime.value = MelodyMaker.instance.curAudioSource.time / MelodyMaker.instance.curAudioClip.length;
@@ -95,8 +95,8 @@ public class Rehearser : MonoBehaviour
     }
     public void OnRehearse()
     {
-        MelodyMaker.instance.WriteCurSheet();
-
+        if (PlatformManager.Instance.isPC())
+            MelodyMaker.instance.WriteCurSheet();
         gameObject.SetActive(true);
         MelodyMaker.instance.p_HLine.gameObject.SetActive(false);
         MelodyMaker.instance.ClearSelectedNote();
@@ -109,8 +109,9 @@ public class Rehearser : MonoBehaviour
         infoCover.sprite = MelodyManager.instance.melodySources[MelodyMaker.instance.curMelody.id].cover;
         textInfoTitle.text = MelodyMaker.instance.curMelody.title;
         sliderTime.gameObject.SetActive(true);
-        ResetPerformance();
-        StartCoroutine(CountDown());
+        
+        StartCoroutine(ResetPerformance());
+        //StartCoroutine(CountDown());
     }
     #region Pause
     public void Pause()
@@ -131,8 +132,9 @@ public class Rehearser : MonoBehaviour
             whiteRate = sliderWhiteRate.value;//TODO
         foreach (ReversableObject obj in reversableObjects)
             obj.SetReverse(whiteRate);
-        for(int i = 0;i<MelodyMaker.instance.p_Momentus.childCount;i++)
-            MelodyMaker.instance.p_Momentus.GetChild(i).GetComponent<Momentus>().SetReverse(whiteRate);
+        //for(int i = 0;i<MelodyMaker.instance.p_Momentus.childCount;i++)
+        foreach(Momentus it in MelodyMaker.instance.existingMomentus)
+            it.SetReverse(whiteRate);
     }
     #endregion
     #region Coroutine
@@ -181,12 +183,21 @@ public class Rehearser : MonoBehaviour
     }
     #endregion
     #region Performance
-    void ResetPerformance()
+    IEnumerator ResetPerformance()
     {
-        for (int i = 0; i < MelodyMaker.instance.p_Momentus.childCount; i++)
+        //for (int i = 0; i < MelodyMaker.instance.p_Momentus.childCount; i++)
+        
+        int maxPerFrame = 100000, countPerFrame = 0;
+        foreach(Momentus it in MelodyMaker.instance.existingMomentus)
         {
-            MelodyMaker.instance.p_Momentus.GetChild(i).GetComponent<Momentus>().isInMaker.Value = false;
-            MelodyMaker.instance.p_Momentus.GetChild(i).GetComponent<Momentus>().havePlayedAudioEffect = false;
+            countPerFrame++;
+            it.isInMaker.Value = false;
+            it.havePlayedAudioEffect = false;
+            if(countPerFrame >= maxPerFrame)
+            {
+                countPerFrame = 0;
+                yield return 0;
+            }
         }
         if (PlatformManager.Instance.IsMobile())
             whiteRate = sliderWhiteRate.value = 1f;
@@ -195,6 +206,8 @@ public class Rehearser : MonoBehaviour
         curWhiteAcc = curWhiteAcc = 0f;
         haveBeenBlack = false;
         AddCombo(null, 2);
+        StartCoroutine(CountDown());
+        yield break;
     }
     public void AddCombo(MomentusData data,int sweepId)
     {
