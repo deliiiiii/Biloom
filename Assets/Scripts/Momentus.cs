@@ -22,6 +22,7 @@ public class MomentusData
     public enum Type
     {
         stab,               //tap
+        suffer,             //drag
         slash,              //flick
         linger,             //hold
         biloom,             //biloom
@@ -55,6 +56,16 @@ public class Momentus : MonoBehaviour
 
     public AudioClip touchAudioEffect;
     public bool havePlayedAudioEffect = false;
+    private bool haveBeenSuffered = false;
+    //TODO 1 various judgement
+    [SerializeField]
+    Vector2 benignTime_stab = new(-100, 100);     //perfect click
+    [SerializeField]
+    Vector2 benignTime_suffer = new(-150, 150);     //perfect drag
+    [SerializeField]
+    Vector2 bareTime = new(-300, 300);      //good
+    [SerializeField]
+    Vector2 badTime = new(-600, 600);       //miss
 
     private MomentusManager mmi;
     private void Awake()
@@ -92,34 +103,45 @@ public class Momentus : MonoBehaviour
             havePlayedAudioEffect = true;
             AudioManager.instance.PlayOneShot(touchAudioEffect, 1, 1);
         }
+        //TODO -1 gua
+        if(haveBeenSuffered && (transform.position.z <= mmi.threshold.transform.position.z))
+        {
+            SetSweepStabEffect(0);
+        }
     }
     int countSwept = 0;
-    public int SweepStab()
+    public int Sweep(MomentusData.Type type)
     {
         //print("Sweep time" + Time.time);
         if (isInMaker.Value)
-            return -1;
+            return 0;
         if (countSwept > 0)
             return 2;
         //Debug.Log(nameof(SweepStab));
         float sweepTruth = (mmi.threshold.transform.position.z - transform.position.z)
                             /
                             (mmi.speedMulti * mmi.speedUni) * 1000;
-        
-        if(sweepTruth >= mmi.benignTime.x && sweepTruth <= mmi.benignTime.y)
+        switch(type)
         {
-            //TODO 2 by finger
-            SetSweepStabEffect(0);
+            case MomentusData.Type.stab:
+                if (sweepTruth >= benignTime_stab.x && sweepTruth <= benignTime_stab.y)
+                {
+                    SetSweepStabEffect(0); return 1;
+                }
+                else if (sweepTruth >= benignTime_stab.x && sweepTruth <= benignTime_stab.y)
+                {
+                    SetSweepStabEffect(1); return 1;
+                }
+                return 0;
+            case MomentusData.Type.suffer:
+                if (sweepTruth >= benignTime_suffer.x && sweepTruth <= benignTime_suffer.y)
+                {
+                    haveBeenSuffered = true;
+                    return 1;
+                }
+                return 0;
+            default: return 0;
         }
-        else if(sweepTruth >= mmi.bareTime.x && sweepTruth <= mmi.bareTime.y)
-        {
-            SetSweepStabEffect(1);
-        }
-        return 1;
-    }
-    public void SweepLinger(int touchId)
-    {
-
     }
     public void SweepNotEligible()
     {
@@ -131,6 +153,8 @@ public class Momentus : MonoBehaviour
     }
     void SetSweepStabEffect(int sweepId)
     {
+        if (countSwept != 0)
+            return;
         Rehearser.instance.AddCombo(momentusData, sweepId);
         countSwept++;
         //print("one count = " + countSwept);

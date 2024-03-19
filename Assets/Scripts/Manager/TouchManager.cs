@@ -16,8 +16,8 @@ public class TouchManager : MonoBehaviour
     [Tooltip("最大同时点击数")]
     public int maxCountTouch;
     public Text countTouch;
-    private List<Touch> lastIllicitTouch = new();
-    private List<Touch> thisIllicitTouch = new();
+    private List<Touch> lastIllicitStab = new();
+    private List<Touch> thisIllicitStab = new();
     //private List<Touch> list_touch = new();
     //private List<Touch> list_lastTouch = new();
     private List<GameObject> list_touchCircle = new();
@@ -42,34 +42,36 @@ public class TouchManager : MonoBehaviour
     }
     private void Update()
     {
-        lastIllicitTouch.Clear();
+        lastIllicitStab.Clear();
         //countTouch.text = Touch.activeTouches.Count.ToString();
-        foreach(var touch in thisIllicitTouch)
+        foreach(var touch in thisIllicitStab)
         {
-            lastIllicitTouch.Add(touch);
+            lastIllicitStab.Add(touch);
         }
-        thisIllicitTouch.Clear();
+        thisIllicitStab.Clear();
 
-        if(MelodyMaker.instance)
-            if (MelodyMaker.instance.IsPaused())
-                return;
+        if (!Rehearser.instance.gameObject.activeSelf)
+            return;
         //if(lastIllicitTouch.Count != 0)
             //print("last " + lastIllicitTouch.Count);
-        foreach (var touch in lastIllicitTouch)
+        foreach (var touch in lastIllicitStab)
         {
-            DisposeTouch(touch,true);
+            DisposeMomentus(touch, MomentusData.Type.stab,true);
         }
         
         foreach (var touch in Touch.activeTouches)
         {
-            DisposeTouch(touch);
+            DisposeMomentus(touch,MomentusData.Type.stab);
+            DisposeMomentus(touch,MomentusData.Type.suffer);
         }
         //if (thisIllicitTouch.Count != 0)
             //print("this " + thisIllicitTouch.Count);
     }
 
-    void DisposeTouch(Touch touch,bool isIllicit = false)
+    void DisposeMomentus(Touch touch,MomentusData.Type type,bool isIllicit = false)
     {
+        //TODO -1 gua
+        type = MomentusData.Type.suffer;
         //Debug.Log(touch.touchId + " " + touch.phase);
         Ray ray = Camera.main.ScreenPointToRay(touch.screenPosition);
         RaycastHit[] rayHits = Physics.RaycastAll(ray);
@@ -82,62 +84,73 @@ public class TouchManager : MonoBehaviour
             RaycastHit rayHit = rayHits[i];
             if (!rayHit.collider.GetComponent<Momentus>())
                 continue;
-            float deltaT = Mathf.Abs(rayHit.collider.GetComponent<Momentus>().momentusData.accTime - MelodyMaker.instance.curAudioSource.time);
-            //print(rayHit.collider.GetComponent<Momentus>().momentusData.accTime + " " + MelodyMaker.instance.curAudioSource.time);
-            //print("find " + rayHit.collider.GetComponent<Momentus>().momentusData.globalX + " , " + rayHit.collider.GetComponent<Momentus>().momentusData.accTime);
-            if (deltaT < minDeltaT)
+            switch (type)
             {
-                //print("min");
-                tarRayHit = rayHit;
-                minDeltaT = deltaT;
-                raycastMinDeltaZ.Clear();
-                raycastMinDeltaZ.Add(rayHit);
-            }
-            else if(deltaT == minDeltaT)
-            {
-                //print("same z !");
-                raycastMinDeltaZ.Add(rayHit);
-                //print("add! same Z , count = " + raycastMinDeltaZ.Count);
-                foreach (var rayHit_sameZ in raycastMinDeltaZ)
-                {
-                    Vector3 tarScreenPos = Camera.main.WorldToScreenPoint(rayHit_sameZ.transform.position);
-                    Vector3 touchWorldPos = Camera.main.ScreenToWorldPoint(
-                        new Vector3
-                        (touch.screenPosition.x,
-                        touch.screenPosition.y,
-                        tarScreenPos.z));
-                    //print("touch x = " + touchWorldPos.x);
-                    //print("note x = " + rayHit_sameZ.collider.GetComponent<Momentus>().momentusData.globalX);
-                    float deltaX = MathF.Abs(touchWorldPos.x - rayHit_sameZ.collider.GetComponent<Momentus>().momentusData.globalX);
-                    
-                    if (deltaX < minDeltaX)
+                case MomentusData.Type.stab:
+                    if (rayHit.collider.GetComponent<Momentus>().momentusData.type != MomentusData.Type.stab)
+                        continue;
+                    float deltaT = Mathf.Abs(rayHit.collider.GetComponent<Momentus>().momentusData.accTime - MelodyMaker.instance.curAudioSource.time);
+                    if (deltaT < minDeltaT)
                     {
-                        tarRayHit = rayHit_sameZ;
-                        minDeltaX = deltaX;
+                        tarRayHit = rayHit;
+                        minDeltaT = deltaT;
+                        raycastMinDeltaZ.Clear();
+                        raycastMinDeltaZ.Add(rayHit);
                     }
-                }
+                    else if (deltaT == minDeltaT)
+                    {
+                        raycastMinDeltaZ.Add(rayHit);
+                        foreach (var rayHit_sameZ in raycastMinDeltaZ)
+                        {
+                            Vector3 tarScreenPos = Camera.main.WorldToScreenPoint(rayHit_sameZ.transform.position);
+                            Vector3 touchWorldPos = Camera.main.ScreenToWorldPoint(
+                                new Vector3
+                                (touch.screenPosition.x,
+                                touch.screenPosition.y,
+                                tarScreenPos.z));
+                            float deltaX = MathF.Abs(touchWorldPos.x - rayHit_sameZ.collider.GetComponent<Momentus>().momentusData.globalX);
+
+                            if (deltaX < minDeltaX)
+                            {
+                                tarRayHit = rayHit_sameZ;
+                                minDeltaX = deltaX;
+                            }
+                        }
+                    }
+                    if (tarRayHit == null)
+                    {
+                        if (isIllicit)
+                        {
+                            print("???");
+                        }
+                        return;
+                    }
+                    if (isIllicit || touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
+                    {
+                        //print("trySweep  = " + tarRayHit.Value.transform.GetComponent<Momentus>().momentusData.globalX + " , " + tarRayHit.Value.transform.GetComponent<Momentus>().momentusData.accTime);
+                        int ret = tarRayHit.Value.collider.GetComponent<Momentus>().Sweep(type);
+                        //print("ret "+ret);
+                        if (ret == 2)
+                            thisIllicitStab.Add(touch);
+                    }
+                    break;
+                case MomentusData.Type.suffer:
+                    //TODO -1 gua
+                    //if (!
+                    //      (
+                    //        (rayHit.collider.GetComponent<Momentus>().momentusData.type == MomentusData.Type.suffer)
+                    //        ||
+                    //        (!rayHit.collider.GetComponent<Momentus>().momentusData.isOpposite && !Rehearser.instance.haveBeenBlack)
+                    //      )
+                    //   )
+                    //    continue;
+                    rayHit.collider.GetComponent<Momentus>().Sweep(type);
+                    break;
+                default:
+                    break;
             }
-            
-            
         }
-        if (tarRayHit == null)
-        {
-            if (isIllicit)
-            {
-                //print("???");
-            }
-            return;
-        }
-        if (isIllicit || touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
-        {
-            //print("trySweep  = " + tarRayHit.Value.transform.GetComponent<Momentus>().momentusData.globalX + " , " + tarRayHit.Value.transform.GetComponent<Momentus>().momentusData.accTime);
-            int ret = tarRayHit.Value.collider.GetComponent<Momentus>().SweepStab();
-            //print("ret "+ret);
-            if(ret == 2)
-                thisIllicitTouch.Add(touch);
-            //if(thisIllicitTouch.Count != 0)
-            //print("add! thislist = "+thisIllicitTouch.Count);
-        }
+        
         //else if (touch.phase == UnityEngine.InputSystem.TouchPhase.Stationary ||
         //        touch.phase == UnityEngine.InputSystem.TouchPhase.Moved)
         //    rayHits[id].collider.GetComponent<Momentus>().SweepLinger(touch.touchId);
@@ -166,6 +179,7 @@ public class TouchManager : MonoBehaviour
         //}
         //TODO 1 finger
     }
+
     void ClearChild(Transform p)
     {
         for(int i = 0;i<p.childCount;i++)

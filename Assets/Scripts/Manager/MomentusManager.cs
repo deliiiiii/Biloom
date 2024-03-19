@@ -23,10 +23,7 @@ public class MomentusManager : MonoBehaviour
     public Transform threshold;
     public Transform pMomentus;
 
-    //TODO 1 various judgement
-    public Vector2 benignTime = new(-100, 100);     //perfect
-    public Vector2 bareTime = new(-300, 300);      //good
-    public Vector2 badTime = new(-600, 600);       //miss
+    
     private void Awake()
     {
         instance = this;

@@ -14,7 +14,8 @@ public class Rehearser : MonoBehaviour
     public Slider sliderWhiteRate;
     [SerializeField][Range(0f,1f)]
     private float whiteRate = 1f;
-    private bool haveBeenBlack = false;
+    public bool haveBeenBlack = false;
+    private bool isDescending = false;
     [SerializeField]
     private float descendCountThreshold = 10;
     private float descendRateThreshold = 0.8f;
@@ -94,8 +95,9 @@ public class Rehearser : MonoBehaviour
         MelodyMaker.instance.curAudioSource.time = MelodyMaker.instance.curAudioClip.length - 0.1f;
     }
     public void OnRehearse()
-    {
-        MelodyMaker.instance.WriteCurSheet();
+    {   
+        if(PlatformManager.Instance.isPC())
+            MelodyMaker.instance.WriteCurSheet();
 
         gameObject.SetActive(true);
         MelodyMaker.instance.p_HLine.gameObject.SetActive(false);
@@ -193,18 +195,14 @@ public class Rehearser : MonoBehaviour
         maxCombo = countGrossBlack = countGrossWhite = countBenignBlack = countBenignWhite =
             countBareBlack = countBareWhite = countByBlack = countByWhite = 0;
         curWhiteAcc = curWhiteAcc = 0f;
-        haveBeenBlack = false;
+        isDescending = haveBeenBlack = false;
         AddCombo(null, 2);
     }
     public void AddCombo(MomentusData data,int sweepId)
     {
         if(sweepId == 2)
         {
-            if(data != null && !data.isOpposite && !haveBeenBlack)
-            {
-
-            }
-            else
+            if(!(data != null && !data.isOpposite && !haveBeenBlack))
             {
                 combo = 0;
             }
@@ -258,18 +256,18 @@ public class Rehearser : MonoBehaviour
     }
     void CalculateWhiteRate()
     {
-        if (haveBeenBlack)
+        if (isDescending)
             return;
         int delta = countBenignBlack + countBareBlack - countGrossWhite;
         whiteRate = 1 - Mathf.Clamp(delta,0,int.MaxValue)/descendCountThreshold *(1- descendRateThreshold);
         if (whiteRate <= descendRateThreshold)
         {
-            haveBeenBlack = true;
             StartCoroutine(Descend());
         }
     }
     IEnumerator Descend()
     {
+        isDescending = true;
         float c = whiteRate;
         float b = Random.Range(-2f * c / descendTime, - 1f * c / descendTime);
         float a = -(b * descendTime + c) / descendTime / descendTime;
@@ -281,6 +279,7 @@ public class Rehearser : MonoBehaviour
             whiteRate = Mathf.Clamp(whiteRate, 0, 1);
             yield return null;
         }
+        haveBeenBlack = true;
         yield break;
     }
     public void Summary()
