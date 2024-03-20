@@ -8,6 +8,7 @@ using UnityEngine;
 public class PlatformManager:MonoBehaviour
 {
     public static PlatformManager Instance { get; private set; }
+    public bool isTest;
     private void Awake()
     {
         Instance = this;

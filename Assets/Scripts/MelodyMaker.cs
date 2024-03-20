@@ -681,7 +681,7 @@ public class MelodyMaker : MonoBehaviour
         {
             GenerateNoteByData(curMelody.sheets[^1].momentus[i]);
         }
-        if (PlatformManager.Instance.IsMobile())
+        if (PlatformManager.Instance.IsMobile() && !PlatformManager.Instance.isTest)
         {
             Rehearser.instance.OnRehearse();
         }
