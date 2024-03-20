@@ -96,8 +96,7 @@ public class Rehearser : MonoBehaviour
     }
     public void OnRehearse()
     {   
-        if(PlatformManager.Instance.isPC())
-            MelodyMaker.instance.WriteCurSheet();
+        MelodyMaker.instance.WriteCurSheet();
 
         gameObject.SetActive(true);
         MelodyMaker.instance.p_HLine.gameObject.SetActive(false);
@@ -165,7 +164,7 @@ public class Rehearser : MonoBehaviour
     {
         while(MelodyMaker.instance.curAudioSource.isPlaying || MelodyMaker.instance.IsPaused())
         {
-            print("playing");
+            //print("playing");
             yield return new WaitForSeconds(0.02f);
         }
         int countSec = 4;

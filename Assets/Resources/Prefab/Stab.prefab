@@ -569,7 +569,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 1.2, y: 1.2, z: 1.2}
+  m_Size: {x: 1.2, y: 10, z: 50}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5136208265700603637
 MonoBehaviour:
@@ -593,7 +593,10 @@ MonoBehaviour:
     type: 0
     isOpposite: 0
     multiSweepCount: 1
+  isInMaker:
+    value: 1
   colInMaker: {fileID: 938939518468880681}
+  colInPlay: {fileID: 5285466380185554470}
   sweepEffect:
   - {fileID: 351079537251048866}
   - {fileID: 2543891913188615095}
@@ -609,6 +612,17 @@ MonoBehaviour:
           Value: {fileID: 21300000, guid: 1206e07d3a9401f4290c4d02181af779, type: 3}
         - Key: 0
           Value: {fileID: 21300000, guid: 4de81b0d953d8d542906e60c5387ecfd, type: 3}
+    - Key: 1
+      Value:
+        list:
+        - Key: 1
+          Value: {fileID: 21300000, guid: a994f7a3d917698498ec7bdfaa132afc, type: 3}
+        - Key: 0
+          Value: {fileID: 21300000, guid: a994f7a3d917698498ec7bdfaa132afc, type: 3}
   minAlpha: 0.4
   touchAudioEffect: {fileID: 8300000, guid: dba926926cab0954ab88a346160af983, type: 3}
   havePlayedAudioEffect: 0
+  benignTime_stab: {x: -100, y: 100}
+  benignTime_suffer: {x: -150, y: 150}
+  bareTime: {x: -300, y: 300}
+  badTime: {x: -600, y: 600}

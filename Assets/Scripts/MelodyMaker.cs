@@ -71,7 +71,7 @@ public class MelodyMaker : MonoBehaviour
     public Transform p_Momentus;
     public GameObject horizontalLine;
 
-    public List<Momentus> existingMomentus = new();
+    //public List<Momentus> existingMomentus = new();
     public List<Momentus> selectedMomentus = new();
     private bool paused = false;
     
@@ -323,8 +323,9 @@ public class MelodyMaker : MonoBehaviour
         }
         
         //for (int i = 0; i < p_Momentus.childCount; i++)
-        foreach(Momentus it in existingMomentus)
+        for(int i=0;i<p_Momentus.childCount;i++)
         {
+            Momentus it = p_Momentus.GetChild(i).GetComponent<Momentus>();
             it.transform.localPosition
                 = new(it.transform.localPosition.x
                     , it.transform.localPosition.y
@@ -448,27 +449,28 @@ public class MelodyMaker : MonoBehaviour
         if (!toggleLockDeltaZ.isOn)
             inputDeltaZ.text = "";
     }
-    public void OnTypeAndSizeChanged()
+    public void OnTypeChanged()
     {
-        //print("Set typeId :" + dropdownType.value + " sizeId :" + dropdownSize.value);
-        //typeChanged first ,but also call this sizeValueChanged
-        
         foreach (var it in selectedMomentus)
         {
-            if (dropdownType.value >=0)
+            if (dropdownType.value >= 0)
             {
                 it.momentusData.type = (MomentusData.Type)dropdownType.value;
+                it.visage.sprite = it.visage_type_to_BoolSprite[it.momentusData.type][it.momentusData.isOpposite];
                 dropdownType.captionText.text = dropdownType.options[dropdownType.value].text;
             }
+        }
+    }
+    public void OnSizeChanged()
+    {
+        foreach (var it in selectedMomentus)
+        {
             if(dropdownSize.value >=0)
             {
                 it.SetSize(float.Parse(dropdownSize.options[dropdownSize.value].text));
                 dropdownSize.captionText.text = dropdownSize.options[dropdownSize.value].text;
             }
-            
         }
-        
-        
     }
     public void OnOppositeChanged()
     {
@@ -592,7 +594,6 @@ public class MelodyMaker : MonoBehaviour
     {
         GameObject t = Instantiate(MomentusManager.instance.stab.gameObject, Vector3.zero, Quaternion.identity);
         Momentus m = t.GetComponent<Momentus>();
-        existingMomentus.Add(m);
         curMelody.sheets[^1].momentus.Add(m.momentusData);
         t.SetActive(true);
         t.transform.parent = p_Momentus;
@@ -608,7 +609,6 @@ public class MelodyMaker : MonoBehaviour
     {
         GameObject t = Instantiate(MomentusManager.instance.stab.gameObject, Vector3.zero, Quaternion.identity);//TODO type
         Momentus m = t.GetComponent<Momentus>();
-        existingMomentus.Add(m);
         t.SetActive(true);
         t.transform.parent = p_Momentus;
         m.SetXTime_WhenReadData(data.globalX, data.accTime);
@@ -727,7 +727,6 @@ public class MelodyMaker : MonoBehaviour
     {
         DeleteSelectedNote();
         ClearChild(p_Momentus);
-        existingMomentus.Clear();
     }
     public void ClearChild(Transform p)
     {

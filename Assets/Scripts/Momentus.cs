@@ -59,18 +59,18 @@ public class Momentus : MonoBehaviour
     private bool haveBeenSuffered = false;
     //TODO 1 various judgement
     [SerializeField]
-    Vector2 benignTime_stab = new(-100, 100);     //perfect click
+    Vector2 benignTime_stab = new(-60, 60);     //perfect click
     [SerializeField]
     Vector2 benignTime_suffer = new(-150, 150);     //perfect drag
     [SerializeField]
-    Vector2 bareTime = new(-300, 300);      //good
+    Vector2 bareTime = new(-120, 120);      //good
     [SerializeField]
     Vector2 badTime = new(-600, 600);       //miss
 
     private MomentusManager mmi;
     private void Awake()
     {
-        isInMaker = new(false, this);
+        isInMaker = new(true, this);
     }
     private void Start()
     {
@@ -128,7 +128,7 @@ public class Momentus : MonoBehaviour
                 {
                     SetSweepStabEffect(0); return 1;
                 }
-                else if (sweepTruth >= benignTime_stab.x && sweepTruth <= benignTime_stab.y)
+                else if (sweepTruth >= bareTime.x && sweepTruth <= bareTime.y)
                 {
                     SetSweepStabEffect(1); return 1;
                 }
@@ -158,7 +158,7 @@ public class Momentus : MonoBehaviour
         Rehearser.instance.AddCombo(momentusData, sweepId);
         countSwept++;
         //print("one count = " + countSwept);
-        GetComponent<BoxCollider>().enabled = false;
+       // GetComponent<BoxCollider>().enabled = false;
         Vector3 newPos = new(transform.position.x, mmi.threshold.position.y, mmi.threshold.position.z);
         GameObject t = Instantiate(sweepEffect[sweepId], newPos, transform.rotation);
         t.transform.localScale = Vector3.one;
@@ -257,7 +257,7 @@ public class Momentus : MonoBehaviour
             visage.sprite = visage_type_to_BoolSprite[momentusData.type][false];
         }
         visage.color = SetAlpha(visage.color ,tarAlpha);
-        multiSweep.SetActive(canMulti && (momentusData.multiSweepCount > 1));
+        multiSweep.SetActive(canMulti && (momentusData.multiSweepCount > 1) && (momentusData.type != MomentusData.Type.suffer));
         multiSweep.GetComponent<SpriteRenderer>().color = SetAlpha(multiSweep.GetComponent<SpriteRenderer>().color,tarAlpha);
         foreach (var it in sweepEffect)
         {
@@ -266,7 +266,9 @@ public class Momentus : MonoBehaviour
     }
     Color SetAlpha(Color c, float a)
     {
-        return new Color(c.r, c.g, c.b, a);
+        if (momentusData.type != MomentusData.Type.suffer)
+            return new Color(c.r, c.g, c.b, a);
+        return c;
     }
     private void OnMouseDown()
     {

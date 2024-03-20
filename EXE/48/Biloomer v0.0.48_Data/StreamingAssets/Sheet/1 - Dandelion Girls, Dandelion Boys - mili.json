@@ -1,0 +1,192 @@
+{
+    "id": 1,
+    "title": "Dandelion Girls, Dandelion Boys",
+    "composer": "Mili",
+    "bpm": 166.0,
+    "startOnExtract": 0.0,
+    "endOnExtract": 0.0,
+    "sheets": [
+        {
+            "itensity": 0.0,
+            "outcome": 0,
+            "momentus": [
+                {
+                    "size": 1.600000023841858,
+                    "globalX": -3.0,
+                    "accTime": 2.530100107192993,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 1.0,
+                    "globalX": -2.0,
+                    "accTime": 4.698800086975098,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": true,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 1.0,
+                    "globalX": 1.0,
+                    "accTime": 4.698800086975098,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 2
+                },
+                {
+                    "size": 1.600000023841858,
+                    "globalX": 6.0,
+                    "accTime": 1.0,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 6
+                },
+                {
+                    "size": 1.600000023841858,
+                    "globalX": -5.0,
+                    "accTime": 5.4217000007629398,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 1.600000023841858,
+                    "globalX": -2.0,
+                    "accTime": 5.4217000007629398,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 1.600000023841858,
+                    "globalX": 1.0,
+                    "accTime": 5.4217000007629398,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 1.600000023841858,
+                    "globalX": 5.0,
+                    "accTime": 5.4217000007629398,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 1.600000023841858,
+                    "globalX": 2.0,
+                    "accTime": 1.0,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 6
+                },
+                {
+                    "size": 1.600000023841858,
+                    "globalX": 4.0,
+                    "accTime": 1.0,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 6
+                },
+                {
+                    "size": 1.600000023841858,
+                    "globalX": -4.0,
+                    "accTime": 1.0,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 6
+                },
+                {
+                    "size": 1.600000023841858,
+                    "globalX": -6.0,
+                    "accTime": 1.0,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 6
+                },
+                {
+                    "size": 1.600000023841858,
+                    "globalX": -5.0,
+                    "accTime": 2.530100107192993,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 1.600000023841858,
+                    "globalX": 4.0,
+                    "accTime": 2.530100107192993,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 1.600000023841858,
+                    "globalX": 6.0,
+                    "accTime": 2.530100107192993,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 4
+                },
+                {
+                    "size": 1.600000023841858,
+                    "globalX": -2.0,
+                    "accTime": 1.0,
+                    "lineOffset": 0.0,
+                    "beatNumerator": 1.0,
+                    "beatDenominator": 1.0,
+                    "type": 0,
+                    "isOpposite": false,
+                    "multiSweepCount": 6
+                }
+            ]
+        }
+    ]
+}

@@ -57,8 +57,8 @@ public class ObservableValue<T,TCLASS>
         //}
 
 
-        //if(valueClass is Momentus)
-        //    ((Momentus)((object)valueClass)).OnIsInMakerChange();
+        if(valueClass is Momentus)
+            ((Momentus)((object)valueClass)).OnIsInMakerChange();
         if (valueClass is SwipeMenu)
             ((SwipeMenu)((object)valueClass)).OnCurIdChange();
         //refresh
