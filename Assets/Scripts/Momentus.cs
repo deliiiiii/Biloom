@@ -171,11 +171,15 @@ public class Momentus : MonoBehaviour
     {
         transform.position = new Vector3(x, 0.87f, transform.position.z);
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, (time + GlobalSetting.instance.globalSettingData.playerOffset / 1e3f) * MomentusManager.instance.speedUni * MomentusManager.instance.speedMulti );
+        if(momentusData.accTime != time)
+        {
+            momentusData.beatNumerator = float.Parse(MelodyMaker.instance.inputNumerator.text);
+            momentusData.beatDenominator = float.Parse(MelodyMaker.instance.inputDenominator.text);
+            momentusData.lineOffset = float.Parse(MelodyMaker.instance.inputLineOffset.text);
+        }
         momentusData.globalX = x;
         momentusData.accTime = time;
-        momentusData.lineOffset = float.Parse(MelodyMaker.instance.inputLineOffset.text);
-        momentusData.beatNumerator = float.Parse(MelodyMaker.instance.inputNumerator.text);
-        momentusData.beatDenominator = float.Parse(MelodyMaker.instance.inputDenominator.text);
+        
         momentusData.type = (MomentusData.Type)MelodyMaker.instance.dropdownType.value;
         visage.sprite = visage_type_to_BoolSprite[momentusData.type][momentusData.isOpposite];
         OnNoteAppear();
