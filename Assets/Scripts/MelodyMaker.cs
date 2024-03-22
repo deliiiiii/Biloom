@@ -322,7 +322,6 @@ public class MelodyMaker : MonoBehaviour
             curTimeStamp +=  60f / curMelody.bpm * (float.Parse(inputNumerator.text) / float.Parse(inputDenominator.text));
         }
         
-        //for (int i = 0; i < p_Momentus.childCount; i++)
         for(int i=0;i<p_Momentus.childCount;i++)
         {
             Momentus it = p_Momentus.GetChild(i).GetComponent<Momentus>();
@@ -374,7 +373,6 @@ public class MelodyMaker : MonoBehaviour
                 }
             }
             dropdownSize.interactable = true;
-            //print("Selected Single size = " + selectedMomentus[0].momentusData.size);
             for(int i=0;i < dropdownSize.options.Count;i++)
             {
                 if(selectedMomentus[0].momentusData.size == float.Parse(dropdownSize.options[i].text))

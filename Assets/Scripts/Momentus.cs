@@ -177,6 +177,7 @@ public class Momentus : MonoBehaviour
         momentusData.beatNumerator = float.Parse(MelodyMaker.instance.inputNumerator.text);
         momentusData.beatDenominator = float.Parse(MelodyMaker.instance.inputDenominator.text);
         momentusData.type = (MomentusData.Type)MelodyMaker.instance.dropdownType.value;
+        visage.sprite = visage_type_to_BoolSprite[momentusData.type][momentusData.isOpposite];
         OnNoteAppear();
         SetColliderInPlay(x);
     }
