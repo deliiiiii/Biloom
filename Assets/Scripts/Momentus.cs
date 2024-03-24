@@ -59,11 +59,11 @@ public class Momentus : MonoBehaviour
     private bool haveBeenSuffered = false;
     //TODO 1 various judgement
     [SerializeField]
-    Vector2 benignTime_stab = new(-60, 60);     //perfect click
+    Vector2 benignTime_stab = new(-50, 50);     //perfect click
     [SerializeField]
-    Vector2 benignTime_suffer = new(-150, 150);     //perfect drag
+    Vector2 benignTime_suffer = new(-120, 120);     //perfect drag
     [SerializeField]
-    Vector2 bareTime = new(-120, 120);      //good
+    Vector2 bareTime = new(-100, 100);      //good
     [SerializeField]
     Vector2 badTime = new(-600, 600);       //miss
 
@@ -89,13 +89,7 @@ public class Momentus : MonoBehaviour
             return;
         if (MelodyMaker.instance.IsPaused())
             return;
-        //TODO ???
-        if (transform.position.z < mmi.threshold.transform.position.z - mmi.speedMulti * mmi.speedUni * 0.150f)
-        {
-            SweepNotEligible();
-            return;
-        }
-        if (transform.position.z <=(mmi.threshold.transform.position.z + mmi.speedMulti * mmi.speedUni * 0.150f) && !havePlayedAudioEffect 
+        if (transform.position.z <= (mmi.threshold.transform.position.z + mmi.speedMulti * mmi.speedUni * 0.150f) && !havePlayedAudioEffect
             && PlatformManager.Instance.isPC())
         {
             //print("acc =" + momentusData.accTime + " self z =" + transform.position.z + " target =" + mmi.threshold.transform.position.z);
@@ -103,11 +97,20 @@ public class Momentus : MonoBehaviour
             havePlayedAudioEffect = true;
             AudioManager.instance.PlayOneShot(touchAudioEffect, 1, 1);
         }
-        //TODO -1 gua
-        if(haveBeenSuffered && (transform.position.z <= mmi.threshold.transform.position.z))
+        if (haveBeenSuffered && (transform.position.z <= mmi.threshold.transform.position.z))
         {
             SetSweepStabEffect(0);
+            return;
         }
+        //TODO ???
+        if (transform.position.z < mmi.threshold.transform.position.z - mmi.speedMulti * mmi.speedUni * 0.150f)
+        {
+            SweepNotEligible();
+            return;
+        }
+        
+
+        
     }
     int countSwept = 0;
     public int Sweep(MomentusData.Type type)
@@ -136,6 +139,9 @@ public class Momentus : MonoBehaviour
             case MomentusData.Type.suffer:
                 if (sweepTruth >= benignTime_suffer.x && sweepTruth <= benignTime_suffer.y)
                 {
+                    BoxCollider[] boxColliders= GetComponents<BoxCollider>();
+                    foreach (var it in boxColliders)
+                        it.enabled = false; 
                     haveBeenSuffered = true;
                     return 1;
                 }
@@ -180,7 +186,7 @@ public class Momentus : MonoBehaviour
         momentusData.globalX = x;
         momentusData.accTime = time;
         
-        momentusData.type = (MomentusData.Type)MelodyMaker.instance.dropdownType.value;
+        //momentusData.type = (MomentusData.Type)MelodyMaker.instance.dropdownType.value;
         visage.sprite = visage_type_to_BoolSprite[momentusData.type][momentusData.isOpposite];
         OnNoteAppear();
         SetColliderInPlay(x);
