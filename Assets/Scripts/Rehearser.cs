@@ -43,7 +43,9 @@ public class Rehearser : MonoBehaviour
     private int countBenignWhite = 0;
     private int countBareWhite = 0;
     private int countByWhite = 0;
+    [SerializeField]
     private int countGrossBlack = 0;
+    [SerializeField]
     private int countGrossWhite = 0;
     
 
