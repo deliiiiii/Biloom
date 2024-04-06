@@ -9,16 +9,33 @@ public class Rehearser : MonoBehaviour
     [Header("Making")]
     public Text textCountDown;
     public Button retWeave;
-    [Header("Reverse")]
+    [Header("Reverse and Descend")]
     //public bool isWhite;
     public Slider sliderWhiteRate;
     [SerializeField][Range(0f,1f)]
     private float whiteRate = 1f;
     public bool haveBeenBlack = false;
     private bool isDescending = false;
+    private bool readyToDescend = false;
+
+    //[SerializeField]
+    //private float descendCountThreshold = 10;
+    //private float descendRateThreshold = 0.8f;
     [SerializeField]
-    private float descendCountThreshold = 10;
-    private float descendRateThreshold = 0.8f;
+    private float readyDescendSpeed = 0.05f;
+    [SerializeField]
+    private float descendBlackProportion = 0f;
+    [SerializeField]
+    private float descendBlackProportionThreshold = 0.9f;
+    [SerializeField]
+    private float descendRateRidge = 5f;
+    [SerializeField]
+    private float descendBlackRateThreshold = 0.8f;
+    
+    [SerializeField]
+    private float readyDescendTimer = 0f;
+    [SerializeField]
+    private float readyDescendTime = 3f;
     [SerializeField]
     private float descendTime = 0.5f;
     [Header("Panel Info")]
@@ -30,7 +47,10 @@ public class Rehearser : MonoBehaviour
     [Header("Performance")]
     public Text textCombo;
     public Text textCurAcc;
-    private int combo = 0;
+    [SerializeField]
+    private int blackCombo = 0;
+    [SerializeField]
+    private int grossCombo = 0;
     public int minShownCombo = 3;
     private int maxCombo = 0;
     private float curWhiteAcc = 0;
@@ -79,12 +99,9 @@ public class Rehearser : MonoBehaviour
     {
         if (MelodyMaker.instance.gameObject.activeSelf)
             return;
-        //if(Input.GetKeyDown(KeyCode.R))
-        //{
-        //    isReverse = !isReverse;
-            RefreshReverse();
-        //}
-        
+
+        RefreshReverse();
+        ReadyToDescend();
         sliderTime.value = MelodyMaker.instance.curAudioSource.time / MelodyMaker.instance.curAudioClip.length;
         //if(melodyMaker.curAudioSource.isPlaying)
         {
@@ -130,8 +147,8 @@ public class Rehearser : MonoBehaviour
     #region Reverse
     public void RefreshReverse()
     {
-        if (PlatformManager.Instance.isPC())
-            whiteRate = sliderWhiteRate.value;//TODO
+        //if (PlatformManager.Instance.isPC())
+            //whiteRate = sliderWhiteRate.value;//TODO
         foreach (ReversableObject obj in reversableObjects)
             obj.SetReverse(whiteRate);
         for(int i = 0;i<MelodyMaker.instance.p_Momentus.childCount;i++)
@@ -196,30 +213,38 @@ public class Rehearser : MonoBehaviour
         maxCombo = countGrossBlack = countGrossWhite = countBenignBlack = countBenignWhite =
             countBareBlack = countBareWhite = countByBlack = countByWhite = 0;
         curWhiteAcc = curWhiteAcc = 0f;
-        isDescending = haveBeenBlack = false;
-        AddCombo(null, 2);
+        readyToDescend = isDescending = haveBeenBlack = false;
+        readyDescendTimer = 0f;
+        AddCombo(null, 22);
     }
     public void AddCombo(MomentusData data,int sweepId)
     {
-        if(sweepId == 2)
+        if (sweepId == 22)
+            grossCombo = blackCombo = 0;
+        else if (sweepId == 2)
         {
-            if(!(data != null && !data.isOpposite && !haveBeenBlack))
+            if (!data.isOpposite)
             {
-                combo = 0;
+                blackCombo = 0;
+                if (haveBeenBlack)
+                    grossCombo = 0;
             }
+            else
+                grossCombo = 0;
         }
         else
         {
-            combo++;
+            grossCombo++;
+            if (!data.isOpposite)
+                blackCombo++;
         }
-        textCombo.text = combo.ToString();
-        textCombo.gameObject.SetActive(combo >= minShownCombo);
-        maxCombo = Mathf.Max(maxCombo, combo);
+        textCombo.text = grossCombo.ToString();
+        textCombo.gameObject.SetActive(grossCombo >= minShownCombo);
+        maxCombo = Mathf.Max(maxCombo, grossCombo);
         if (data != null)
         {
             countGrossBlack += (!data.isOpposite) ? 1 : 0;
             countGrossWhite += data.isOpposite ? 1 : 0;
-
             countBenignBlack += ((!data.isOpposite) && (sweepId == 0)) ? 1 : 0;
             countBareBlack += ((!data.isOpposite) && (sweepId == 1)) ? 1 : 0;
             countByBlack += ((!data.isOpposite) && (sweepId == 2)) ? 1 : 0;
@@ -259,12 +284,34 @@ public class Rehearser : MonoBehaviour
     {
         if (isDescending)
             return;
-        int delta = countBenignBlack + countBareBlack - countGrossWhite;
-        whiteRate = 1 - Mathf.Clamp(delta,0,int.MaxValue)/descendCountThreshold *(1- descendRateThreshold);
-        if (whiteRate <= descendRateThreshold)
+        //int delta = countBenignBlack + countBareBlack - countGrossWhite;
+        //whiteRate = 1 - Mathf.Clamp(delta,0,int.MaxValue)/descendCountThreshold *(1- descendRateThreshold);
+        descendBlackProportion = countGrossBlack == 0 ? 0 : (countBenignBlack + countBareBlack) / (float)countGrossBlack * (1 + sliderTime.value * 0.444f);
+    }
+    void ReadyToDescend()
+    {
+        if(isDescending)
+            return;
+        float targetWhiteRate = 1 - (descendBlackProportion - descendBlackProportionThreshold*(1-1/ descendRateRidge)) / (descendBlackProportionThreshold / descendRateRidge) * (1 - descendBlackRateThreshold);
+        if (sliderTime.value >= 0.999f)
+            targetWhiteRate = 1f;
+        if (readyDescendTimer <= readyDescendTime)
         {
-            StartCoroutine(Descend());
+            if (countGrossBlack >= 10 && descendBlackProportion >= descendBlackProportionThreshold)
+            {
+                readyDescendTimer += Time.deltaTime;
+                whiteRate -= readyDescendSpeed * Time.deltaTime;
+            }
+            else
+            {
+                readyDescendTimer = 0;
+                if (countGrossBlack >= 10)
+                    whiteRate += ((targetWhiteRate - whiteRate) > 0 ? 1 : -1) * readyDescendSpeed * Time.deltaTime;
+            }
+            
         }
+        else
+            StartCoroutine(Descend());
     }
     IEnumerator Descend()
     {
@@ -281,6 +328,7 @@ public class Rehearser : MonoBehaviour
             yield return null;
         }
         haveBeenBlack = true;
+        RefreshTextAcc();
         yield break;
     }
     public void Summary()

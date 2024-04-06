@@ -7027,8 +7027,14 @@ MonoBehaviour:
   sliderWhiteRate: {fileID: 541948625}
   whiteRate: 1
   haveBeenBlack: 0
-  descendCountThreshold: 10
-  descendTime: 2
+  readyDescendSpeed: 0.05
+  descendBlackProportion: 0
+  descendBlackProportionThreshold: 0.9
+  descendRateRidge: 5
+  descendBlackRateThreshold: 0.8
+  readyDescendTimer: 0
+  readyDescendTime: 3
+  descendTime: 3.28
   sliderTime: {fileID: 930960047}
   infoCover: {fileID: 892009359}
   textInfoTitle: {fileID: 1108599068}
@@ -7045,7 +7051,11 @@ MonoBehaviour:
   - {fileID: 31993659}
   textCombo: {fileID: 1486146933}
   textCurAcc: {fileID: 1810759064}
+  blackCombo: 0
+  grossCombo: 0
   minShownCombo: 3
+  countGrossBlack: 0
+  countGrossWhite: 0
   panelSummary: {fileID: 13667503}
   textSumTitle: {fileID: 967659979}
   summaryCover: {fileID: 1432412223}

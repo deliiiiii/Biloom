@@ -59,11 +59,11 @@ public class Momentus : MonoBehaviour
     private bool haveBeenSuffered = false;
     //TODO 1 various judgement
     [SerializeField]
-    Vector2 benignTime_stab = new(-45, 45);     //perfect click
+    Vector2 benignTime_stab = new(-53.28f, -53.28f);   //perfect click
     [SerializeField]
     Vector2 benignTime_suffer = new(-120, 120);     //perfect drag
     [SerializeField]
-    Vector2 bareTime = new(-90, 90);      //good
+    Vector2 bareTime = new(-111.5f, 111.5f);      //good
     //[SerializeField]
     //Vector2 badTime = new(-600, 600);       //miss
 

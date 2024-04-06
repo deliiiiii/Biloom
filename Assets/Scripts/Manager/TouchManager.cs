@@ -91,7 +91,7 @@ public class TouchManager : MonoBehaviour
                     float deltaT = Mathf.Abs(rayHit.collider.GetComponent<Momentus>().momentusData.accTime - MelodyMaker.instance.curAudioSource.time);
                     if (deltaT < minDeltaT)
                     {
-                        print("find min dT : tarX,Z: " + rayHit.collider.GetComponent<Momentus>().momentusData.globalX + " , " + rayHit.collider.GetComponent<Momentus>().momentusData.accTime);
+                        //print("find min dT : tarX,Z: " + rayHit.collider.GetComponent<Momentus>().momentusData.globalX + " , " + rayHit.collider.GetComponent<Momentus>().momentusData.accTime);
                         minDeltaX = float.MaxValue;
                         tarRayHit = rayHit;
                         minDeltaT = deltaT;
@@ -142,9 +142,9 @@ public class TouchManager : MonoBehaviour
         }
         if (isIllicit || touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
         {
-            print("try sweep X = " + tarRayHit.Value.collider.GetComponent<Momentus>().momentusData.globalX + " , Z = " + tarRayHit.Value.collider.GetComponent<Momentus>().momentusData.accTime);
+            //print("try sweep X = " + tarRayHit.Value.collider.GetComponent<Momentus>().momentusData.globalX + " , Z = " + tarRayHit.Value.collider.GetComponent<Momentus>().momentusData.accTime);
             int ret = tarRayHit.Value.collider.GetComponent<Momentus>().Sweep(MomentusData.Type.stab);
-            print("ret = " + ret);
+            //print("ret = " + ret);
             if (ret == 2 && !isIllicit)
                 thisIllicitStab.Add(touch);
             return;
