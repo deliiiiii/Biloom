@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+//显现消失UI
+//需要第0个子物体是背景、第1个子物体是内容
 public class Fadable : MonoBehaviour
 {
-    public GameObject panelContent;
-    public Image panelBack;
+    public Image panelBack => transform.GetChild(0).GetComponent<Image>();
+    public GameObject panelContent => transform.GetChild(1).gameObject;
     public float inDuration = 0.3f;
     public float outDuration = 3f;
     public void StartFade(bool isIn)

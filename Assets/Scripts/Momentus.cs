@@ -41,7 +41,7 @@ public class Momentus : MonoBehaviour
 {
     public MomentusData momentusData;
 
-    public ObservableValue<bool,Momentus> isInMaker;
+    public ObservableValue<bool> isInMaker;
     public BoxCollider colInMaker;
     public BoxCollider colInPlay;
     
@@ -70,7 +70,7 @@ public class Momentus : MonoBehaviour
     private MomentusManager mmi;
     private void Awake()
     {
-        isInMaker = new(true, this);
+        isInMaker = new(true, OnIsInMakerChange);
     }
     private void Start()
     {
@@ -304,7 +304,7 @@ public class Momentus : MonoBehaviour
         //print("Stab clicked");
         MelodyMaker.instance.OnSelectNote();
     }
-    public void OnIsInMakerChange()
+    public void OnIsInMakerChange(bool oldV,bool newV)
     {
         colInMaker.enabled = isInMaker.Value;
         colInPlay.enabled = !isInMaker.Value;

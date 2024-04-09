@@ -7,18 +7,22 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 public class MyButton : Button
 {
+    [SerializeField] private UnityEvent onPointerDown = new();
     [SerializeField]
-    private UnityEvent onPointerDown;
-    [SerializeField]
-    private UnityEvent onPointerUp;
+    private UnityEvent onPointerUp = new();
     [SerializeField]
     private float longPressTime = 0.6f;
     private float longPressTimer = 0;
     [SerializeField]
-    private UnityEvent OnStartLongPress;
-
+    private UnityEvent onStartLongPress = new();
+    public ref UnityEvent get_onPointerDown() => ref onPointerDown;
     private bool isDown = false;
     private bool isPress = false;
+    protected override void Awake()
+    {
+        base.Awake();
+        navigation = new() { mode = Navigation.Mode.None };
+    }
     void Update()
     {
         if (isDown)
@@ -31,10 +35,11 @@ public class MyButton : Button
             if (longPressTimer >= longPressTime)
             {
                 isPress = true;
-                OnStartLongPress.Invoke();
+                onStartLongPress.Invoke();
             }
         }
     }
+
     public override void OnPointerDown(PointerEventData eventData)
     {
         base.OnPointerDown(eventData);
